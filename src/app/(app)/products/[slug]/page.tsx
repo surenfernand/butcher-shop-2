@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: Args) {
   if (!product) return notFound()
 
   return (
-    <main className="bg-background pt-32 pb-20 text-foreground">
+    <main className="bg-[#f8f5f4] pt-28 pb-24 text-[#171514]">
       <div className="container">
         <Breadcrumbs
           items={[
@@ -45,6 +45,7 @@ export default async function ProductPage({ params }: Args) {
             { label: product.title || 'Product' },
           ]}
         />
+
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <ProductGallery product={product} />

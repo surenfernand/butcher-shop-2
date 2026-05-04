@@ -117,7 +117,7 @@
 
 html[data-theme='dark'] {
   --text: oklch(98.5% 0 0deg);
-  --background: #0b0b0c;
+  --background: #ffffff;
   --foreground: oklch(98.5% 0 0deg);
   --card: oklch(17% 0 0deg);
   --card-foreground: oklch(98.5% 0 0deg);
@@ -221,7 +221,7 @@ button {
 .cart-toast-progress {
   animation: cart-toast-shrink 4s linear forwards;
 }
-
+/* 
 /* Light-mode fallback for legacy dark-only utility classes used across the app.
    Skip elements inside a dark island ([data-theme='dark']) so header/footer stay dark in light mode. */
 [data-theme='light'] .bg-black:not(:is([data-theme='dark'], [data-theme='dark'] *)),
@@ -269,4 +269,4 @@ button {
 [data-theme='light'] .border-stone-800:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .border-stone-700:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
   border-color: var(--color-border) !important;
-}
+}  

@@ -8,16 +8,30 @@ type Upload = Media | string | null | undefined
 const mediaUrl = (image: Upload) =>
   typeof image === 'object' && image ? image.url : undefined
 
+/** Shown when no media is set in the CMS (e.g. static /about fallback). */
+const ABOUT_FALLBACK_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1600&q=80',
+  heritageOne:
+    'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
+  heritageTwo:
+    'https://images.unsplash.com/photo-1603048297172-c92544798d5a?auto=format&fit=crop&w=800&q=80',
+  butchers:
+    'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1400&q=80',
+} as const
+
 const EditableImage = ({
   image,
   alt,
   className,
+  fallbackSrc,
 }: {
   image?: Upload
   alt: string
   className?: string
+  /** Used when `image` has no URL (static page or unfilled upload). */
+  fallbackSrc?: string
 }) => {
-  const src = mediaUrl(image)
+  const src = mediaUrl(image) ?? fallbackSrc
 
   if (!src) {
     return <div className={['bg-neutral-100', className].filter(Boolean).join(' ')} />
@@ -75,7 +89,11 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
           </blockquote>
         )}
         <div className="relative h-[460px] w-full overflow-hidden">
-          <EditableImage image={heroImage} alt="About hero" />
+          <EditableImage
+            image={heroImage}
+            alt="About hero"
+            fallbackSrc={ABOUT_FALLBACK_IMAGES.hero}
+          />
         </div>
       </div>
 
@@ -98,10 +116,18 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
 
         <div className="flex items-center gap-5">
           <div className="relative h-44 w-44 bg-neutral-100 p-4">
-            <EditableImage image={heritageImageOne} alt="Heritage image one" />
+            <EditableImage
+              image={heritageImageOne}
+              alt="Heritage image one"
+              fallbackSrc={ABOUT_FALLBACK_IMAGES.heritageOne}
+            />
           </div>
           <div className="relative h-36 w-44 overflow-hidden">
-            <EditableImage image={heritageImageTwo} alt="Heritage image two" />
+            <EditableImage
+              image={heritageImageTwo}
+              alt="Heritage image two"
+              fallbackSrc={ABOUT_FALLBACK_IMAGES.heritageTwo}
+            />
           </div>
         </div>
       </div>
@@ -135,7 +161,11 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
       <div className="grid items-center gap-16 md:grid-cols-2">
         <div className="relative">
           <div className="relative h-[430px] overflow-hidden">
-            <EditableImage image={butchersImage} alt="Master butchers" />
+            <EditableImage
+              image={butchersImage}
+              alt="Master butchers"
+              fallbackSrc={ABOUT_FALLBACK_IMAGES.butchers}
+            />
           </div>
           {ageBadge && (
             <div className="absolute bottom-[-25px] right-[-20px] bg-[#b72b1f] px-8 py-5 text-center text-sm font-bold uppercase text-white">
