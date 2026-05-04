@@ -48,9 +48,12 @@ const sorting = [
   { label: 'Price: High to low', value: '-priceInUSD' },
 ]
 
+const inputClassName =
+  'w-full rounded-xl border border-[#e4ded6] bg-[#fbfaf8] px-4 py-3 text-sm text-[#161616] outline-none transition focus:border-[#d84a32] focus:ring-2 focus:ring-[#d84a32]/15'
+
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-4 text-[11px] uppercase tracking-[0.24em] text-[#9f8650]">
+    <h3 className="mb-4 text-[11px] font-black uppercase tracking-[0.24em] text-[#161616]">
       {children}
     </h3>
   )
@@ -92,12 +95,12 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
   }
 
   return (
-    <aside className="w-full max-w-[260px] bg-black text-white">
+    <aside className="w-full max-w-[260px] rounded-2xl border border-[#e4ded6] bg-white p-6 text-[#161616] shadow-sm">
       <div className="space-y-8">
         <div>
           <SectionTitle>{labels?.cutTypeLabel || 'Meat Type'}</SectionTitle>
           <select
-            className="w-full border border-[#2a2a2a] bg-[#111] px-4 py-3 text-sm text-white outline-none"
+            className={inputClassName}
             value={currentMeatType}
             onChange={(e) => updateParam('meatType', e.target.value)}
           >
@@ -122,10 +125,10 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
                   type="button"
                   onClick={() => updateParam('storageType', active ? '' : item.value)}
                   className={clsx(
-                    'border px-4 py-2 text-xs uppercase tracking-[0.2em] transition',
+                    'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition',
                     active
-                      ? 'border-[#c8a24d] bg-[#c8a24d] text-black'
-                      : 'border-[#2a2a2a] text-white hover:border-[#c8a24d]',
+                      ? 'border-[#d84a32] bg-[#d84a32] text-white'
+                      : 'border-[#e4ded6] bg-white text-[#68615b] hover:border-[#d84a32] hover:text-[#d84a32]',
                   )}
                 >
                   {item.label}
@@ -138,7 +141,7 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
         <div>
           <SectionTitle>{labels?.originLabel || 'Preparation Style'}</SectionTitle>
           <select
-            className="w-full border border-[#2a2a2a] bg-[#111] px-4 py-3 text-sm text-white outline-none"
+            className={inputClassName}
             value={currentPreparationStyle}
             onChange={(e) => updateParam('preparationStyle', e.target.value)}
           >
@@ -153,11 +156,11 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
 
         <div>
           <SectionTitle>Availability</SectionTitle>
-          <label className="flex cursor-pointer items-center gap-3 text-sm">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-[#68615b]">
             <input
               type="checkbox"
               checked={currentInStock === 'true'}
-              className="h-4 w-4 accent-[#c8a24d]"
+              className="h-4 w-4 accent-[#d84a32]"
               onChange={(e) => updateParam('inStock', e.target.checked ? 'true' : '')}
             />
             <span>In Stock Only</span>
@@ -168,7 +171,7 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
           <SectionTitle>{labels?.priceRangeLabel || 'Price Range'}</SectionTitle>
           <div className="grid grid-cols-2 gap-3">
             <input
-              className="border border-[#2a2a2a] bg-[#111] px-3 py-2 text-sm text-white outline-none"
+              className={inputClassName}
               value={currentMinPrice}
               placeholder="Min"
               type="number"
@@ -180,7 +183,7 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
               }
             />
             <input
-              className="border border-[#2a2a2a] bg-[#111] px-3 py-2 text-sm text-white outline-none"
+              className={inputClassName}
               value={currentMaxPrice}
               placeholder="Max"
               type="number"
@@ -197,7 +200,7 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
         <div>
           <SectionTitle>{sortLabel || 'Sort by'}</SectionTitle>
           <select
-            className="w-full border border-[#2a2a2a] bg-[#111] px-4 py-3 text-sm text-white outline-none"
+            className={inputClassName}
             value={currentSort}
             onChange={(e) => updateParam('sort', e.target.value)}
           >

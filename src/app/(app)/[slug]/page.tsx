@@ -7,6 +7,8 @@ import { generateMeta } from '@/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
+import { aboutStaticData } from '@/endpoints/seed/about-static'
+import { contactStaticData } from '@/endpoints/seed/contact-static'
 import { homeStaticData } from '@/endpoints/seed/home-static'
 import React from 'react'
 
@@ -45,6 +47,26 @@ type Args = {
   searchParams: Promise<SearchParams>
 }
 
+function isLayoutEmpty(layout: Page['layout'] | null | undefined): boolean {
+  return !layout || !Array.isArray(layout) || layout.length === 0
+}
+
+/** CMS page exists but has no blocks — use seed/static layout so the page is not blank. */
+function mergeStaticLayoutIfEmpty(page: Page | null, slug: string): Page | null {
+  if (!page) return null
+  if (!isLayoutEmpty(page.layout)) return page
+
+  if (slug === 'about') {
+    const fallback = aboutStaticData() as Page
+    return { ...page, layout: fallback.layout }
+  }
+  if (slug === 'contact') {
+    const fallback = contactStaticData() as Page
+    return { ...page, layout: fallback.layout }
+  }
+
+  return page
+}
 
 export default async function Page({ params, searchParams }: Args) {
   const { slug = 'home' } = await params
@@ -60,9 +82,19 @@ export default async function Page({ params, searchParams }: Args) {
     page = homeStaticData() as Page
   }
 
+  if (!page && slug === 'about') {
+    page = aboutStaticData() as Page
+  }
+
+  if (!page && slug === 'contact') {
+    page = contactStaticData() as Page
+  }
+
   if (!page) {
     return notFound()
   }
+
+  page = mergeStaticLayoutIfEmpty(page, slug) ?? page
 
   const headerGlobal = await getCachedGlobal('header', 1)()
   const { hero, layout } = page
@@ -90,6 +122,18 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
 
   if (!page && slug === 'home') {
     page = homeStaticData() as Page
+  }
+
+  if (!page && slug === 'about') {
+    page = aboutStaticData() as Page
+  }
+
+  if (!page && slug === 'contact') {
+    page = contactStaticData() as Page
+  }
+
+  if (page) {
+    page = mergeStaticLayoutIfEmpty(page, slug) ?? page
   }
 
   return generateMeta({ doc: page })

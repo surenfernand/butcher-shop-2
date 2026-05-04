@@ -72,6 +72,7 @@ export default async function ShopPage({ searchParams }: Props) {
       ],
     })
   }
+
   if (meatType) {
     andConditions.push({
       meatType: {
@@ -103,7 +104,6 @@ export default async function ShopPage({ searchParams }: Props) {
       },
     })
   }
- 
 
   if (category) {
     andConditions.push({
@@ -160,20 +160,22 @@ export default async function ShopPage({ searchParams }: Props) {
   return (
     <div>
       {searchValue ? (
-        <p className="mb-6 text-sm text-[#b7b7b7]">
-          {products.docs.length === 0 ? 'There are no products that match ' : `Showing ${products.docs.length} ${resultsText} for `}
-          <span className="font-semibold text-white">&quot;{String(searchValue)}&quot;</span>
+        <p className="mb-6 text-sm text-[#68615b]">
+          {products.docs.length === 0
+            ? 'There are no products that match '
+            : `Showing ${products.docs.length} ${resultsText} for `}
+          <span className="font-semibold text-[#161616]">&quot;{String(searchValue)}&quot;</span>
         </p>
       ) : null}
 
       {!searchValue && products.docs.length === 0 ? (
-        <p className="mb-6 text-sm text-[#b7b7b7]">
+        <p className="mb-6 text-sm text-[#68615b]">
           {shopPage.emptyStateText || 'No products found. Please try different filters.'}
         </p>
       ) : null}
 
       {products.docs.length > 0 ? (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-7 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
           {products.docs.map((product) => {
             return <LuxuryProductCard key={product.id} product={product} />
           })}

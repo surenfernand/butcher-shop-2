@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { useCart } from '@payloadcms/plugin-ecommerce/client/react'
-import { ShoppingCart } from 'lucide-react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -21,6 +21,7 @@ import { CartTimerModal } from './CartTimerModal'
 import { DeleteItemButton } from './DeleteItemButton'
 import { EditItemQuantityButton } from './EditItemQuantityButton'
 import { OpenCartButton } from './OpenCart'
+import { ShoppingCart, Truck } from 'lucide-react'
 
 export function CartModal() {
   const { cart, clearCart } = useCart()
@@ -181,31 +182,25 @@ export function CartModal() {
 
       <SheetContent
         side="right"
-        className="w-full max-w-[410px] border-border bg-card p-0 text-foreground"
+        className="w-full max-w-[480px] border-l border-zinc-200 bg-white p-0 text-zinc-950"
       >
         <div className="flex h-full flex-col">
-          <SheetHeader className="border-b border-border px-7 py-8 text-left">
-            <div className="flex items-start justify-between">
-              <div>
-                <SheetTitle className="text-left text-[2.1rem] font-black uppercase tracking-[-0.02em] text-[#d4a63c]">
-                  Cart
-                </SheetTitle>
-              </div>
-            </div>
+          <SheetHeader className="border-b border-zinc-200 px-8 py-8 text-left">
+            <SheetTitle className="text-[1.45rem] font-black uppercase tracking-[0.28em] text-zinc-950">
+              Your Selection
+            </SheetTitle>
           </SheetHeader>
 
           {!cart || cart?.items?.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-              <ShoppingCart className="h-14 w-14 text-[#d4a63c]" />
-              <p className="text-xl font-bold uppercase tracking-wide text-foreground">
-                Your cart is empty
-              </p>
-              <p className="text-sm text-muted-foreground">Add Items to view in Cart</p>
+              <ShoppingCart className="h-14 w-14 text-[#ef553f]" />
+              <p className="text-xl font-bold uppercase tracking-wide">Your cart is empty</p>
+              <p className="text-sm text-zinc-500">Add items to view them here.</p>
             </div>
           ) : (
             <>
-              <div className="flex-1 overflow-y-auto px-6 py-4">
-                <ul className="space-y-6">
+              <div className="flex-1 overflow-y-auto px-8 py-7">
+                <ul className="space-y-7">
                   {cart?.items?.map((item, i) => {
                     const product = item.product
                     const variant = item.variant
@@ -239,28 +234,6 @@ export function CartModal() {
 
                     if (isVariant) {
                       price = variant?.priceInUSD
-
-                      const imageVariant = product.productGallery?.find(
-                        (galleryItem: NonNullable<Product['productGallery']>[number]) => {
-                          if (!galleryItem.image) return false
-
-                          const variantOptionID =
-                            typeof galleryItem.image === 'object'
-                              ? galleryItem.id
-                              : galleryItem.image
-
-                          return variant?.options?.some(
-                            (option: NonNullable<typeof variant.options>[number]) => {
-                              if (typeof option === 'object') return option.id === variantOptionID
-                              return option === variantOptionID
-                            },
-                          )
-                        },
-                      )
-
-                      if (imageVariant && typeof imageVariant.image === 'object') {
-                        image = imageVariant.image
-                      }
                     }
 
                     price = getPurchasePrice(product, isVariant ? variant : undefined, purchaseType)
@@ -276,12 +249,9 @@ export function CartModal() {
                       : ''
 
                     return (
-                      <li key={i} className="flex items-start gap-4">
-                        <Link
-                          href={`/products/${(item.product as Product)?.slug}`}
-                          className="block shrink-0"
-                        >
-                          <div className="relative h-[104px] w-[104px] overflow-hidden border border-border bg-muted">
+                      <li key={i} className="flex gap-5">
+                        <Link href={`/products/${product.slug}`} className="block shrink-0">
+                          <div className="relative h-[104px] w-[104px] overflow-hidden bg-zinc-100">
                             {image?.url && (
                               <Image
                                 alt={image?.alt || product?.title || ''}
@@ -296,53 +266,42 @@ export function CartModal() {
 
                         <div className="flex min-w-0 flex-1 flex-col">
                           <div className="flex items-start justify-between gap-3">
-                            <div className="min-w-0">
-                              <Link
-                                href={`/products/${(item.product as Product)?.slug}`}
-                                className="block"
-                              >
-                                <h3 className="line-clamp-2 text-[1.05rem] font-extrabold uppercase leading-tight tracking-[0.02em] text-foreground">
-                                  {product?.title}
-                                </h3>
-                              </Link>
+                            <div>
+                              <h3 className="line-clamp-2 text-[0.95rem] font-bold uppercase leading-tight tracking-[0.02em]">
+                                {product?.title}
+                              </h3>
 
-                              {(variantText || item.quantity) && (
-                                <p className="mt-2 text-[0.78rem] uppercase tracking-[0.08em] text-muted-foreground">
-                                  {variantText ? `Weight: ${variantText}` : ''}
-                                </p>
-                              )}
-
-                              <p className="mt-1 text-[0.72rem] uppercase tracking-[0.1em] text-[#d4a63c]">
-                                {getPurchaseTypeLabel(purchaseType)}
+                              <p className="mt-1 text-[0.8rem] text-zinc-500">
+                                {variantText || getPurchaseTypeLabel(purchaseType)}
                               </p>
                             </div>
 
                             <DeleteItemButton item={item} />
                           </div>
 
-                          <div className="mt-5 flex items-end justify-between gap-3">
-                            <div className="flex h-8 items-center border border-border bg-muted/40">
+                          <div className="mt-5 flex items-center justify-between">
+                            <div className="flex h-9 items-center border border-zinc-200">
                               <EditItemQuantityButton
                                 item={item}
                                 type="minus"
-                                className="h-8 w-8 border-r border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+                                className="h-9 w-9 text-zinc-500 hover:bg-zinc-100"
                               />
 
-                              <span className="flex h-8 w-9 items-center justify-center text-sm font-medium text-foreground">
+                              <span className="flex h-9 w-10 items-center justify-center text-sm">
                                 {item.quantity}
                               </span>
 
                               <EditItemQuantityButton
                                 item={item}
                                 type="plus"
-                                className="h-8 w-8 border-l border-border text-muted-foreground hover:bg-muted hover:text-foreground"
+                                className="h-9 w-9 text-zinc-500 hover:bg-zinc-100"
                               />
                             </div>
 
                             {typeof price === 'number' && (
                               <Price
                                 amount={price * (item.quantity || 1)}
-                                className="text-right text-[1.05rem] font-bold text-[#d4a63c]"
+                                className="text-[1rem] font-medium text-zinc-950"
                               />
                             )}
                           </div>
@@ -351,41 +310,24 @@ export function CartModal() {
                     )
                   })}
                 </ul>
+
+               
               </div>
 
-              <div className="border-t border-[#6f5620]/40 bg-zinc-950 px-7 py-6 text-zinc-100">
-                <div className="space-y-3 text-sm uppercase tracking-[0.14em]">
-                  <div className="flex items-center justify-between text-zinc-400">
-                    <span>Subtotal</span>
-                    {typeof cart?.subtotal === 'number' && (
-                      <Price amount={adjustedSubtotal} className="text-base text-zinc-300" />
-                    )}
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-zinc-800 pt-4">
-                    <span className="text-lg font-extrabold tracking-[0.14em] text-zinc-100">
-                      Total
-                    </span>
-                    {typeof cart?.subtotal === 'number' && (
-                      <Price
-                        amount={adjustedSubtotal}
-                        className="text-3xl font-black text-[#d4a63c]"
-                      />
-                    )}
-                  </div>
+              <div className="border-t border-zinc-200 px-8 py-7">
+                <div className="flex items-center justify-between text-sm uppercase tracking-wide">
+                  <span className="text-zinc-600">Subtotal</span>
+                  <Price amount={adjustedSubtotal} className="font-medium text-zinc-950" />
                 </div>
 
-                <div className="mt-7 space-y-5">
-                  <Link
-                    href="/checkout"
-                    className="flex h-14 w-full items-center justify-center rounded-none border border-[#c8a24d] bg-[#c8a24d] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[#c8a24d] hover:scale-[1.03] active:scale-[0.97]"
+                <Link
+                  href="/checkout"
+                  className="mt-8 flex h-16 w-full items-center justify-center bg-[#ef553f] text-sm font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#d94732]"
+                >
+                  Checkout
+                </Link>
 
-                  >
-                    Proceed to Checkout
-                  </Link>
-
-                  <div className="flex items-center justify-center gap-10 border-t border-zinc-800 pt-5 text-[11px] uppercase tracking-[0.14em] text-zinc-500" />
-                </div>
+              
               </div>
             </>
           )}

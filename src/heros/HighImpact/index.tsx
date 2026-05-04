@@ -57,7 +57,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
   return (
     <section
-      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[#1a1a1a] text-neutral-900"
+      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[#1a1a1a] text-neutral-900 "
       data-theme="light"
     >
       <div className="absolute inset-0">
@@ -84,7 +84,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
         aria-hidden
       />
 
-      <div className="relative z-10 flex min-h-[85vh] items-center">
+      <div className="relative z-10 flex min-h-[85vh] items-center mt-5">
         <div className="container w-full px-4 pt-24 pb-16 md:px-8 md:pt-28 md:pb-24">
           <div className="max-w-xl rounded-sm bg-white/90 p-8 shadow-lg backdrop-blur-sm md:p-10 lg:p-12">
             {(eyebrow || heading) && (

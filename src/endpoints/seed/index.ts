@@ -1,5 +1,6 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
 
+import { aboutStaticData } from './about-static'
 import { contactFormData } from './contact-form'
 import { contactPageData } from './contact-page'
 import { productHatData } from './product-hat'
@@ -313,7 +314,7 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
+  const [_, __] = await Promise.all([
     payload.create({
       collection: 'pages',
       depth: 0,
@@ -330,6 +331,12 @@ export const seed = async ({
       }),
     }),
   ])
+
+  await payload.create({
+    collection: 'pages',
+    depth: 0,
+    data: aboutStaticData(),
+  })
 
   payload.logger.info(`— Seeding addresses...`)
 

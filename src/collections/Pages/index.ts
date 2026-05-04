@@ -30,6 +30,8 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { revalidatePage, revalidateDelete } from './hooks/revalidatePage'
 import { ContactPage } from '@/blocks/ContactPage/config'
+import { ArtisansPromise } from '@/blocks/ArtisansPromise/config'
+import { AboutEditable } from '@/blocks/AboutEditable/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -112,8 +114,10 @@ export const Pages: CollectionConfig = {
                 ContactCards,
                 VisitSection,
                 SocialLinks,
-                ProductGrid,
+                ProductGrid, 
+                ArtisansPromise,
                 ContactPage,
+                AboutEditable, 
               ],
               required: true,
             },

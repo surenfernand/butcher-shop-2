@@ -700,7 +700,9 @@ export interface Page {
     | VisitSectionBlock
     | SocialLinksBlock
     | ProductGridBlock
+    | ArtisansPromiseBlock
     | ContactPageBlock
+    | AboutEditableBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1278,35 +1280,122 @@ export interface ProductGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArtisansPromiseBlock".
+ */
+export interface ArtisansPromiseBlock {
+  heading: string;
+  items: {
+    icon: 'utensils' | 'badge' | 'heartHandshake' | 'knife' | 'shoppingBag' | 'truck';
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'artisansPromise';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ContactPageBlock".
  */
 export interface ContactPageBlock {
-  formTitle?: string | null;
-  cards?:
+  heroEyebrow?: string | null;
+  heroTitle?: string | null;
+  heroDescription?: string | null;
+  heroBackgroundImage?: (number | null) | Media;
+  storyEyebrow?: string | null;
+  storyTitle?: string | null;
+  storyBody?: string | null;
+  storyImage?: (number | null) | Media;
+  stats?:
     | {
-        icon?: ('map-pin' | 'phone' | 'mail') | null;
-        title: string;
-        line1: string;
-        line2?: string | null;
+        value: string;
+        label: string;
         id?: string | null;
       }[]
     | null;
+  formTitle?: string | null;
+  formDescription?: string | null;
+  form?: (number | null) | Form;
+  hoursTitle?: string | null;
   storeHours?:
     | {
         day: string;
         time: string;
+        highlight?: boolean | null;
         id?: string | null;
       }[]
     | null;
-  storeNote?: string | null;
-  form: number | Form;
+  visitTitle?: string | null;
+  contactDetails?:
+    | {
+        icon?: ('map-pin' | 'phone' | 'mail') | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
   mapImage?: (number | null) | Media;
-  mapTitle?: string | null;
   mapLabel?: string | null;
-  mapEmbedUrl: string;
+  /**
+   * Leave empty to show the editable uploaded map image instead.
+   */
+  mapEmbedUrl?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactPage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutEditableBlock".
+ */
+export interface AboutEditableBlock {
+  eyebrow?: string | null;
+  quote?: string | null;
+  heroImage?: (number | null) | Media;
+  heritageEyebrow?: string | null;
+  heritageTitle?: string | null;
+  heritageBody?: string | null;
+  heritageImageOne?: (number | null) | Media;
+  heritageImageTwo?: (number | null) | Media;
+  standardsEyebrow?: string | null;
+  standardsTitle?: string | null;
+  standardsBody?: string | null;
+  standards?:
+    | {
+        title?: string | null;
+        body?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  butchersImage?: (number | null) | Media;
+  ageBadge?: string | null;
+  butchersEyebrow?: string | null;
+  butchersTitle?: string | null;
+  butchersBody?: string | null;
+  features?:
+    | {
+        title?: string | null;
+        body?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  partnersEyebrow?: string | null;
+  partnersTitle?: string | null;
+  partners?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  ctaTitle?: string | null;
+  ctaBody?: string | null;
+  primaryButtonLabel?: string | null;
+  primaryButtonUrl?: string | null;
+  secondaryButtonLabel?: string | null;
+  secondaryButtonUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutEditable';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1688,7 +1777,9 @@ export interface PagesSelect<T extends boolean = true> {
         visitSection?: T | VisitSectionBlockSelect<T>;
         socialLinks?: T | SocialLinksBlockSelect<T>;
         productGrid?: T | ProductGridBlockSelect<T>;
+        artisansPromise?: T | ArtisansPromiseBlockSelect<T>;
         contactPage?: T | ContactPageBlockSelect<T>;
+        aboutEditable?: T | AboutEditableBlockSelect<T>;
       };
   meta?:
     | T
@@ -1955,32 +2046,116 @@ export interface ProductGridBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactPageBlock_select".
+ * via the `definition` "ArtisansPromiseBlock_select".
  */
-export interface ContactPageBlockSelect<T extends boolean = true> {
-  formTitle?: T;
-  cards?:
+export interface ArtisansPromiseBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
     | T
     | {
         icon?: T;
         title?: T;
-        line1?: T;
-        line2?: T;
+        description?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactPageBlock_select".
+ */
+export interface ContactPageBlockSelect<T extends boolean = true> {
+  heroEyebrow?: T;
+  heroTitle?: T;
+  heroDescription?: T;
+  heroBackgroundImage?: T;
+  storyEyebrow?: T;
+  storyTitle?: T;
+  storyBody?: T;
+  storyImage?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  formTitle?: T;
+  formDescription?: T;
+  form?: T;
+  hoursTitle?: T;
   storeHours?:
     | T
     | {
         day?: T;
         time?: T;
+        highlight?: T;
         id?: T;
       };
-  storeNote?: T;
-  form?: T;
+  visitTitle?: T;
+  contactDetails?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        id?: T;
+      };
   mapImage?: T;
-  mapTitle?: T;
   mapLabel?: T;
   mapEmbedUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutEditableBlock_select".
+ */
+export interface AboutEditableBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  quote?: T;
+  heroImage?: T;
+  heritageEyebrow?: T;
+  heritageTitle?: T;
+  heritageBody?: T;
+  heritageImageOne?: T;
+  heritageImageTwo?: T;
+  standardsEyebrow?: T;
+  standardsTitle?: T;
+  standardsBody?: T;
+  standards?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  butchersImage?: T;
+  ageBadge?: T;
+  butchersEyebrow?: T;
+  butchersTitle?: T;
+  butchersBody?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  partnersEyebrow?: T;
+  partnersTitle?: T;
+  partners?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  ctaTitle?: T;
+  ctaBody?: T;
+  primaryButtonLabel?: T;
+  primaryButtonUrl?: T;
+  secondaryButtonLabel?: T;
+  secondaryButtonUrl?: T;
   id?: T;
   blockName?: T;
 }

@@ -91,8 +91,33 @@
     font-family: var(--font-filet-serif), ui-serif, Georgia, serif;
   }
 }
+/* Light mode (default): dark text on white — matches body bg-background + text-foreground */
 :root {
-  --background: #ffff;
+  --text: oklch(22% 0 0deg);
+  --background: #ffffff;
+  --foreground: oklch(22% 0 0deg);
+  --card: oklch(99% 0 0deg);
+  --card-foreground: oklch(22% 0 0deg);
+  --popover: #ffffff;
+  --popover-foreground: oklch(22% 0 0deg);
+  --primary: #c6a15b;
+  --primary-foreground: oklch(16% 0 0deg);
+  --secondary: oklch(96% 0 0deg);
+  --secondary-foreground: oklch(22% 0 0deg);
+  --muted: oklch(96% 0 0deg);
+  --muted-foreground: oklch(45% 0 0deg);
+  --accent: oklch(96% 0 0deg);
+  --accent-foreground: oklch(22% 0 0deg);
+  --border: oklch(90% 0 0deg);
+  --input: oklch(90% 0 0deg);
+  --ring: oklch(43.9% 0 0deg);
+  --sidebar: oklch(98% 0 0deg);
+  --sidebar-foreground: oklch(22% 0 0deg);
+}
+
+html[data-theme='dark'] {
+  --text: oklch(98.5% 0 0deg);
+  --background: #0b0b0c;
   --foreground: oklch(98.5% 0 0deg);
   --card: oklch(17% 0 0deg);
   --card-foreground: oklch(98.5% 0 0deg);

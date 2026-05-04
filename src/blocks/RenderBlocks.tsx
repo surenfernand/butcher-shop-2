@@ -22,6 +22,8 @@ import { MonthlyMenuPromo } from '@/components/home/MonthlyMenuPromo'
 
 import type { Page } from '../payload-types'
 import { ContactPageBlock } from './ContactPage/Component'
+import { ArtisansPromiseBlock } from './ArtisansPromise/Component'
+import { AboutEditableBlock } from './AboutEditable/Component'
 
 const blockComponents: Record<string, ComponentType<any>> = {
   aboutStory: AboutStoryBlock,
@@ -41,6 +43,8 @@ const blockComponents: Record<string, ComponentType<any>> = {
   socialLinks: SocialLinksBlock,
   productGrid: ProductGridBlock,
   contactPage: ContactPageBlock,
+  artisansPromise: ArtisansPromiseBlock,
+  aboutEditable: AboutEditableBlock,
 }
 
 
