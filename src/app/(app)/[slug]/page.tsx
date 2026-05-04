@@ -10,6 +10,7 @@ import { draftMode } from 'next/headers'
 import { homeStaticData } from '@/endpoints/seed/home-static'
 import React from 'react'
 
+import { FiletGourmetHome } from '@/components/home/FiletGourmetHome'
 import type { Page } from '@/payload-types'
 import { notFound } from 'next/navigation'
 
@@ -66,11 +67,15 @@ export default async function Page({ params, searchParams }: Args) {
   const headerGlobal = await getCachedGlobal('header', 1)()
   const { hero, layout } = page
 
+  const showFiletHomeSections =
+    slug === 'home' && Array.isArray(layout) && layout.length === 0
+
   return (
     <article>
       <div className="pt-20">
         <RenderHero {...hero} brandLogo={headerGlobal.logo} pageSlug={slug} />
         <RenderBlocks blocks={layout} searchParams={resolvedSearchParams} slug={slug} />
+        {showFiletHomeSections ? <FiletGourmetHome /> : null}
       </div>
     </article>
   )

@@ -3,15 +3,13 @@
 import { Cart } from '@/components/Cart'
 import { OpenCartButton } from '@/components/Cart/OpenCart'
 import { CMSLink } from '@/components/Link'
-import { useTheme } from '@/providers/Theme'
 import { cn } from '@/utilities/cn'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import type { Header } from 'src/payload-types'
 import { MobileMenu } from './MobileMenu'
-// import { LogoIcon } from '@/components/icons/logo'
-import { Moon, Search, Sun, User } from 'lucide-react'
+import { User } from 'lucide-react'
 
 import { Media } from '@/components/Media'
 
@@ -22,103 +20,73 @@ type Props = {
 export function HeaderClient({ header }: Props) {
   const menu = header.navItems || []
   const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Keep initial SSR/CSR markup stable to avoid hydration mismatch.
-  const isDark = mounted ? theme !== 'light' : true
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full">
-      <div
-        data-theme="dark"
-        className="border-b border-border/70 bg-background/85 backdrop-blur-sm transition-all duration-300 ease-out"
-      >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-8">
-        {/* Mobile menu */}
-        <div className="flex items-center md:hidden">
-          <Suspense fallback={null}>
-            <MobileMenu menu={menu} />
-          </Suspense>
-        </div>
+    <header className="fixed left-0 top-0 z-50 w-full" data-theme="light">
+      <div className="border-b border-neutral-200/90 bg-white/95 shadow-sm backdrop-blur-md transition-all duration-300 ease-out">
+        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-8">
+          <div className="flex items-center md:hidden">
+            <Suspense fallback={null}>
+              <MobileMenu menu={menu} />
+            </Suspense>
+          </div>
 
-        {/* Left: Logo */}
-        <div className="flex flex-1 items-center">
-          <Link href="/" className="flex items-center">
+          <div className="flex min-w-0 flex-1 items-center md:max-w-[200px]">
+            <Link href="/" className="flex min-w-0 items-center">
+              {header.logo && typeof header.logo === 'object' ? (
+                <Media
+                  resource={header.logo}
+                  imgClassName="h-12 w-auto max-w-[200px] object-contain object-left md:h-14"
+                />
+              ) : (
+                <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-black">
+                  FILET GOURMET
+                </span>
+              )}
+            </Link>
+          </div>
 
-            <Media
-              resource={header.logo ?? undefined}
-              imgClassName="h-20 w-auto object-contain"
-            />
+          <div className="hidden min-h-0 flex-1 items-center justify-center md:flex">
+            {menu.length ? (
+              <ul className="flex items-center justify-center gap-7 lg:gap-10">
+                {menu.map((item) => (
+                  <li className="flex items-center" key={item.id}>
+                    <CMSLink
+                      {...item.link}
+                      appearance="nav"
+                      size="clear"
+                      className={cn(
+                        'relative text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-800 transition-colors duration-200 hover:text-[#E66D54]',
+                        {
+                          'text-[#E66D54] after:absolute after:left-0 after:top-full after:mt-1.5 after:h-px after:w-full after:bg-[#E66D54]':
+                            item.link?.url === '/'
+                              ? pathname === '/'
+                              : item.link?.url
+                                ? pathname.startsWith(item.link.url)
+                                : false,
+                        },
+                      )}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
 
-            {/* <span className="text-md font-black uppercase tracking-wide text-[#d4a63c]">
-              The Butcher’s Craft
-            </span> */}
+          <div className="flex flex-1 items-center justify-end gap-5 text-neutral-800">
+            <Suspense fallback={<OpenCartButton />}>
+              <Cart />
+            </Suspense>
 
-          </Link>
-        </div>
-
-        {/* Center: Desktop nav */}
-        <div className="hidden flex-1 justify-center md:flex">
-          {menu.length ? (
-            <ul className="flex items-center gap-8">
-              {menu.map((item) => (
-                <li key={item.id}>
-                  <CMSLink
-                    {...item.link}
-                    appearance="nav"
-                    size="clear"
-                    className={cn(
-                      'relative text-[11px] uppercase tracking-[0.18em] text-foreground/85 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:text-[#d4a63c]',
-                      {
-                        'text-[#d4a63c] after:absolute after:left-0 after:-bottom-2 after:h-[1px] after:w-full after:bg-[#d4a63c]':
-                          item.link?.url === '/'
-                            ? pathname === '/'
-                            : item.link?.url
-                              ? pathname.startsWith(item.link.url)
-                              : false,
-                      },
-                    )}
-                  />
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
-
-        {/* Right: icons */}
-        <div className="flex flex-1 items-center justify-end gap-4 text-[#d4a63c] transition-all duration-300 ease-out">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center transition hover:opacity-80"
-            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
-          >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
-
-          <button
-            type="button"
-            className="hidden md:inline-flex transition hover:opacity-80"
-            aria-label="Search"
-          >
-            <Search className="h-4 w-4" />
-          </button>
-
-          <Suspense fallback={<OpenCartButton />}>
-            <Cart />
-
-          </Suspense>
-
-          <Link href="/account" className="hidden md:inline-flex transition hover:opacity-80">
-            <User className="h-4 w-4" />
-          </Link>
-        </div>
-      </nav>
+            <Link
+              href="/account"
+              className="hidden transition-colors hover:text-[#E66D54] md:inline-flex"
+              aria-label="Account"
+            >
+              <User className="h-[18px] w-[18px]" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </nav>
       </div>
     </header>
   )

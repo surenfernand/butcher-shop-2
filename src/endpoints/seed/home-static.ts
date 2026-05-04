@@ -6,16 +6,16 @@ export const homeStaticData: () => RequiredDataFromCollectionSlug<'pages'> = () 
     _status: 'published',
     hero: {
       type: 'highImpact',
-      eyebrow: 'EXCELLENCE IN EVERY CUT.',
-      heading: "The Butcher's Craft",
+      eyebrow: 'Masterfully crafted since 1998',
+      heading: 'Premium Cuts, Delivered to Your Door',
       description:
-        'Discover a rigorous selection of exceptional meats, carefully dry-aged in our atelier.',
+        'Exceptional beef, lamb, and poultry—hand-selected, expertly trimmed, and shipped with the care your table deserves.',
       links: [
         {
           link: {
             type: 'custom',
             appearance: 'default',
-            label: 'EXPLORE THE COLLECTION',
+            label: 'Shop now',
             url: '/shop',
           },
         },
@@ -23,7 +23,7 @@ export const homeStaticData: () => RequiredDataFromCollectionSlug<'pages'> = () 
           link: {
             type: 'custom',
             appearance: 'outline',
-            label: 'OUR SOURCING PHILOSOPHY',
+            label: 'View menu',
             url: '/shop-luxury',
           },
         },
@@ -31,8 +31,9 @@ export const homeStaticData: () => RequiredDataFromCollectionSlug<'pages'> = () 
     },
     layout: [],
     meta: {
-      description: 'An open-source ecommerce site built with Payload and Next.js.',
-      title: 'Payload Ecommerce Template',
+      description:
+        'FILET GOURMET — artisanal butchery and luxury meats delivered to your door.',
+      title: 'FILET GOURMET | Artisanal Butchery',
     },
     title: 'Home',
   }

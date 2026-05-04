@@ -7,7 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 
-const HERO_FALLBACK_IMAGE = '/images/hero-butcher-craft.png'
+const HERO_FALLBACK_IMAGE =
+  'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=2000&q=80'
 
 type HeroLink = NonNullable<NonNullable<Page['hero']['links']>[number]['link']>
 
@@ -43,7 +44,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
-    setHeaderTheme('dark')
+    setHeaderTheme('light')
   }, [setHeaderTheme])
 
   const mediaUrl = media && typeof media === 'object' && media.url ? media.url : null
@@ -52,15 +53,15 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
   const imageSrc = mediaUrl || HERO_FALLBACK_IMAGE
   const imageAlt =
-    (media && typeof media === 'object' && media.alt) || 'Butcher preparing exceptional cuts'
+    (media && typeof media === 'object' && media.alt) || 'Premium marbled steak on a dark surface'
 
   return (
     <section
-      className="relative -mt-[10.4rem] min-h-screen overflow-hidden bg-black text-white"
-      data-theme="dark"
+      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[#1a1a1a] text-neutral-900"
+      data-theme="light"
     >
       <div className="absolute inset-0">
-        <div className="relative h-full min-h-screen w-full">
+        <div className="relative h-full min-h-[85vh] w-full">
           {mediaUrl && isVideo ? (
             <video autoPlay muted loop playsInline className="h-full w-full object-cover">
               <source src={mediaUrl} type={media.mimeType || 'video/mp4'} />
@@ -79,18 +80,17 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.35)_38%,rgba(0,0,0,0.4)_62%,rgba(0,0,0,0.92)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent md:from-black/45"
         aria-hidden
       />
 
-      <div className="relative z-10 flex min-h-screen items-center">
-        <div className="container w-full px-4 md:px-8">
-          <div className="mx-auto flex max-w-4xl flex-col items-center pt-24 text-center md:pt-32">
+      <div className="relative z-10 flex min-h-[85vh] items-center">
+        <div className="container w-full px-4 pt-24 pb-16 md:px-8 md:pt-28 md:pb-24">
+          <div className="max-w-xl rounded-sm bg-white/90 p-8 shadow-lg backdrop-blur-sm md:p-10 lg:p-12">
             {(eyebrow || heading) && (
-              <div className="mb-8 flex w-full flex-col items-center">
-                <div className="mb-5 h-px w-14 bg-[#d4af5f] md:w-16" aria-hidden />
+              <div className="mb-6">
                 {eyebrow && (
-                  <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-[#d4af5f]">
+                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#E66D54]">
                     {eyebrow}
                   </p>
                 )}
@@ -98,19 +98,19 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
             )}
 
             {heading && (
-              <h1 className="text-4xl font-semibold leading-[1.15] tracking-tight text-white md:text-5xl lg:text-6xl">
+              <h1 className="font-filet-serif text-3xl font-semibold leading-[1.15] tracking-tight text-black md:text-4xl lg:text-[2.75rem]">
                 {heading}
               </h1>
             )}
 
             {description && (
-              <p className="mt-6 max-w-2xl text-pretty font-serif text-lg italic leading-relaxed text-white md:text-xl md:leading-relaxed">
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-600 md:text-base">
                 {description}
               </p>
             )}
 
             {Array.isArray(links) && links.length > 0 && (
-              <ul className="mt-10 flex w-full max-w-2xl flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center sm:justify-center">
+              <ul className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:gap-4">
                 {links.map(({ link }, i) => {
                   if (!link) return null
                   const href = heroLinkHref(link as HeroLink)
@@ -122,15 +122,15 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                     : {}
 
                   return (
-                    <li key={i} className="flex w-full justify-center sm:w-auto">
+                    <li key={i} className="flex w-full sm:w-auto">
                       <Link
                         href={href}
                         {...newTabProps}
                         className={cn(
-                          'inline-flex min-h-[48px] min-w-[min(100%,280px)] items-center justify-center px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] transition sm:min-w-[240px]',
+                          'inline-flex min-h-11 w-full items-center justify-center rounded-sm px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] transition sm:min-w-[140px]',
                           isOutline
-                            ? 'border border-white bg-transparent text-white hover:bg-white/10'
-                            : 'border border-[#d4af5f] bg-[#d4af5f] text-[#1a1a1a] hover:brightness-105',
+                            ? 'border border-neutral-300 bg-transparent text-neutral-900 hover:border-neutral-400'
+                            : 'border border-[#E66D54] bg-[#E66D54] text-white hover:bg-[#d85e42]',
                         )}
                       >
                         {link.label}

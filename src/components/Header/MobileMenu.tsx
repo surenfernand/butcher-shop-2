@@ -47,13 +47,15 @@ export function MobileMenu({ menu }: Props) {
 
   return (
     <Sheet onOpenChange={setIsOpen} open={isOpen}>
-      <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
+      <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-sm border border-neutral-200 text-neutral-800 transition-colors hover:border-neutral-300 hover:text-[#E66D54]">
         <MenuIcon className="h-4" />
       </SheetTrigger>
 
       <SheetContent side="left" className="px-4">
         <SheetHeader className="px-0 pt-4 pb-0">
-          <SheetTitle>My Store</SheetTitle>
+          <SheetTitle className="text-sm font-bold uppercase tracking-[0.2em]">
+            FILET GOURMET
+          </SheetTitle>
 
           <SheetDescription />
         </SheetHeader>

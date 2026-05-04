@@ -97,7 +97,7 @@ export function FooterSocialLink({ link, className }: Props) {
     <Link
       href={href}
       className={cn(
-        'flex h-10 w-10 items-center justify-center border border-[#2a2a2a] text-[#bdbdbd] transition-all hover:border-[#d4a63c] hover:text-[#d4a63c]',
+        'flex h-10 w-10 items-center justify-center rounded-sm border border-neutral-200 text-neutral-600 transition-all hover:border-[#E66D54] hover:text-[#E66D54]',
         className,
       )}
       aria-label={link.label || 'Social profile'}

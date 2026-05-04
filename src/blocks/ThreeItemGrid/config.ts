@@ -11,7 +11,7 @@ export const ThreeItemGrid: Block = {
       },
       hasMany: true,
       label: 'Products to show',
-      maxRows: 2,
+      maxRows: 3,
       minRows: 2,
       relationTo: 'products',
     },
