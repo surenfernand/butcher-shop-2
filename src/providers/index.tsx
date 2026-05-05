@@ -4,49 +4,46 @@ import { stripeAdapterClient } from '@payloadcms/plugin-ecommerce/payments/strip
 import React from 'react'
 
 import { HeaderThemeProvider } from './HeaderTheme'
-import { ThemeProvider } from './Theme'
 import { SonnerProvider } from '@/providers/Sonner'
 
 export const Providers: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <HeaderThemeProvider>
-          <SonnerProvider />
-          <EcommerceProvider
-            enableVariants={true}
-            api={{
-              cartsFetchQuery: {
-                depth: 2,
-                populate: {
-                  products: {
-                    slug: true,
-                    title: true,
-                    priceInUSD: true,
-                    purchaseFrequencies: true,
-                    productGallery: true,
-                    // inventory: true,
-                  },
-                  variants: {
-                    title: true,
-                    priceInUSD: true,
-                    inventory: true,
-                  },
+    <AuthProvider>
+      <HeaderThemeProvider>
+        <SonnerProvider />
+        <EcommerceProvider
+          enableVariants={true}
+          api={{
+            cartsFetchQuery: {
+              depth: 2,
+              populate: {
+                products: {
+                  slug: true,
+                  title: true,
+                  priceInUSD: true,
+                  purchaseFrequencies: true,
+                  productGallery: true,
+                  // inventory: true,
+                },
+                variants: {
+                  title: true,
+                  priceInUSD: true,
+                  inventory: true,
                 },
               },
-            }}
-            paymentMethods={[
-              stripeAdapterClient({
-                publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
-              }),
-            ]}
-          >
-            {children}
-          </EcommerceProvider>
-        </HeaderThemeProvider>
-      </AuthProvider>
-    </ThemeProvider>
+            },
+          }}
+          paymentMethods={[
+            stripeAdapterClient({
+              publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
+            }),
+          ]}
+        >
+          {children}
+        </EcommerceProvider>
+      </HeaderThemeProvider>
+    </AuthProvider>
   )
 }

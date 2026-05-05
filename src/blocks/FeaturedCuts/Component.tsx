@@ -19,11 +19,11 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
   if (!items || !items.length) return null
 
   return (
-    <section className={['bg-black py-20', className].filter(Boolean).join(' ')}>
+    <section className={['bg-[#f8f5f4] py-20', className].filter(Boolean).join(' ')}>
       <div className="container">
         <div className="mb-14 text-center md:mb-16">
           {eyebrow && (
-            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.35em] text-[#c4a457]">
+            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.35em] text-[#e66d54]">
               {eyebrow}
             </p>
           )}
@@ -34,7 +34,7 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
             </h2>
           )}
 
-          <div className="mx-auto mt-6 h-px w-14 bg-[#c4a457] md:w-16" aria-hidden />
+          <div className="mx-auto mt-6 h-px w-14 bg-[#e66d54] md:w-16" aria-hidden />
 
           {intro && (
             <p className="mx-auto mt-8 max-w-2xl text-sm leading-relaxed text-[#a0a0a0] md:text-base">
@@ -104,7 +104,7 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
                     <Link
                       href={viewHref}
                       aria-label="View product in shop page"
-                      className="inline-block w-full max-w-[240px] border border-white bg-transparent px-6 py-3 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-[background-color,color,border-color] duration-300 ease-out group-hover:bg-white group-hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c4a457]"
+                      className="inline-block w-full max-w-[240px] border border-white bg-transparent px-6 py-3 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-[background-color,color,border-color] duration-600 ease-out group-hover:bg-white group-hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c4a457]"
                     >
                       View product
                     </Link>

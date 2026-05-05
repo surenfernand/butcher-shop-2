@@ -50,18 +50,23 @@ export const CreateAddressModal: React.FC<Props> = ({
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}  >
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild disabled={disabled}>
-        <Button variant={'outline'}>{buttonText}</Button>
+        <Button
+          variant={'outline'}
+          className="rounded-none border-[#d9d9d9] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#333] hover:bg-[#f2f2f2]"
+        >
+          {buttonText}
+        </Button>
       </DialogTrigger>
- 
-      <DialogContent className="box-border w-[calc(100vw-2rem)] max-w-3xl overflow-x-hidden border border-[#4b4235] bg-[#080b0a] p-0 text-[#efe4cf] shadow-2xl sm:max-w-3xl">
-        <div className="box-border px-6 py-8 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
-          <DialogHeader className="mb-10">
-            <DialogTitle className="text-4xl font-semibold tracking-tight text-[#f5c85b]">
+
+      <DialogContent className="box-border w-[calc(100vw-2rem)] max-w-[760px] overflow-x-hidden border border-[#dedede] bg-white p-0 text-[#1f1f1f] shadow-2xl sm:max-w-[760px]">
+        <div className="box-border px-6 py-6 sm:px-10 sm:py-8">
+          <DialogHeader className="mb-6 border-b border-[#ededed] pb-5 pr-10">
+            <DialogTitle className="text-[40px] font-semibold tracking-tight text-[#181818]">
               {modalTitle}
             </DialogTitle>
-            <DialogDescription className="mt-3 text-base text-[#d8cbb7]">
+            <DialogDescription className="mt-1 text-base text-[#707070]">
               This address will be connected to your account.
             </DialogDescription>
           </DialogHeader>
@@ -71,6 +76,7 @@ export const CreateAddressModal: React.FC<Props> = ({
             initialData={initialData}
             callback={handleCallback}
             skipSubmission={skipSubmission}
+            onCancel={closeModal}
           />
         </div>
       </DialogContent>

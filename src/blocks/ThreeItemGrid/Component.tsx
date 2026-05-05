@@ -137,7 +137,7 @@ export const ThreeItemGridBlock: React.FC<
   const thirdImage = img2 ?? { src: SUBSCRIPTION_IMAGE, alt: thirdTitle }
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="bg-[#f8f5f4] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-10 flex flex-col justify-between gap-6 md:mb-12 md:flex-row md:items-end">
           <div>

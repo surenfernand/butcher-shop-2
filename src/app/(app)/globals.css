@@ -94,13 +94,13 @@
 /* Light mode (default): dark text on white — matches body bg-background + text-foreground */
 :root {
   --text: oklch(22% 0 0deg);
-  --background: #ffffff;
+  --background: #f8f5f4;
   --foreground: oklch(22% 0 0deg);
   --card: oklch(99% 0 0deg);
   --card-foreground: oklch(22% 0 0deg);
   --popover: #ffffff;
   --popover-foreground: oklch(22% 0 0deg);
-  --primary: #c6a15b;
+  --primary: #E66D54;
   --primary-foreground: oklch(16% 0 0deg);
   --secondary: oklch(96% 0 0deg);
   --secondary-foreground: oklch(22% 0 0deg);
@@ -117,7 +117,7 @@
 
 html[data-theme='dark'] {
   --text: oklch(98.5% 0 0deg);
-  --background: #ffffff;
+  --background: #f8f5f4;
   --foreground: oklch(98.5% 0 0deg);
   --card: oklch(17% 0 0deg);
   --card-foreground: oklch(98.5% 0 0deg);
@@ -194,7 +194,7 @@ html[data-theme='dark'] {
 
 html {
   opacity: 0;
-  background-color: #ffffff;
+  background-color: #f8f5f4;
 }
 
 html[data-theme='dark'],
@@ -270,3 +270,86 @@ button {
 [data-theme='light'] .border-stone-700:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
   border-color: var(--color-border) !important;
 }  
+
+
+.checkout-luxury {
+  background: #fbfaf9;
+  color: #15110f;
+  font-family: "Montserrat", "Inter", sans-serif;
+}
+
+.checkout-luxury h1,
+.checkout-luxury h2,
+.checkout-luxury h3 {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.checkout-luxury section,
+.checkout-luxury aside {
+  background: #fff;
+}
+
+.checkout-luxury label,
+.checkout-luxury .uppercase {
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+.checkout-luxury input,
+.checkout-luxury textarea,
+.checkout-luxury select {
+  border-radius: 0 !important;
+  border-color: #ead0cc !important;
+  background: #fff !important;
+  color: #15110f !important;
+}
+
+.checkout-luxury input:focus,
+.checkout-luxury textarea:focus,
+.checkout-luxury select:focus {
+  outline: none !important;
+  border-color: #b93426 !important;
+  box-shadow: 0 0 0 1px #b93426 !important;
+}
+
+.checkout-luxury button {
+  border-radius: 0 !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.checkout-luxury button[type="submit"],
+.checkout-luxury .bg-primary,
+.checkout-luxury button.bg-\[\#b93426\] {
+  background: #b93426 !important;
+  color: white !important;
+}
+
+.checkout-luxury button[type="submit"]:hover,
+.checkout-luxury .bg-primary:hover,
+.checkout-luxury button.bg-\[\#b93426\]:hover {
+  background: #a82d21 !important;
+}
+
+.checkout-luxury aside {
+  border: 1px solid #ead0cc;
+  box-shadow: 0 24px 80px rgba(21, 17, 15, 0.06);
+}
+
+.checkout-luxury img {
+  object-fit: cover;
+}
+
+.checkout-luxury .text-primary,
+.checkout-luxury .text-red-500,
+.checkout-luxury .text-red-600 {
+  color: #b93426 !important;
+}
+
+.checkout-luxury .border-primary,
+.checkout-luxury .border-red-500,
+.checkout-luxury .border-red-600 {
+  border-color: #b93426 !important;
+}

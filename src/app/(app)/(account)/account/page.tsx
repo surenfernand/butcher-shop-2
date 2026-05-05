@@ -33,7 +33,7 @@ export default async function AccountPage() {
 
       {/* SECURITY */}
       <section className="space-y-6">
-        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E2B84F]">
+        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E66D54]">
           Security
         </h2>
 
@@ -44,7 +44,7 @@ export default async function AccountPage() {
 
       {/* NOTIFICATIONS */}
       <section className="space-y-6">
-        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E2B84F]">
+        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E66D54]">
           Notifications
         </h2>
 
@@ -64,7 +64,7 @@ export default async function AccountPage() {
                 defaultChecked
                 className="peer sr-only"
               />
-              <span className="h-5 w-10 rounded-full border border-border bg-muted transition peer-checked:border-[#E2B84F] peer-checked:bg-[#E2B84F]" />
+              <span className="h-5 w-10 rounded-full border border-border bg-muted transition peer-checked:border-[#E66D54] peer-checked:bg-[#E66D54]" />
               <span className="absolute left-1 top-1 h-3 w-3 rounded-full bg-background transition peer-checked:translate-x-5" />
             </label>
           </div>
@@ -85,7 +85,7 @@ export default async function AccountPage() {
                 name="smsNotifications"
                 className="peer sr-only"
               />
-              <span className="h-5 w-10 rounded-full border border-border bg-muted transition peer-checked:border-[#E2B84F] peer-checked:bg-[#E2B84F]" />
+              <span className="h-5 w-10 rounded-full border border-border bg-muted transition peer-checked:border-[#E66D54] peer-checked:bg-[#E66D54]" />
               <span className="absolute left-1 top-1 h-3 w-3 rounded-full bg-background transition peer-checked:translate-x-5" />
             </label>
           </div>

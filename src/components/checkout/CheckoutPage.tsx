@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/providers/Auth'
-import { useTheme } from '@/providers/Theme'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import Link from 'next/link'
@@ -58,8 +57,6 @@ export const CheckoutPage: React.FC = () => {
   const router = useRouter()
   const { cart } = useCart()
   const [error, setError] = useState<null | string>(null)
-  const { theme } = useTheme()
-  const isDark = theme !== 'light'
   const [email, setEmail] = useState('')
   const [emailEditable, setEmailEditable] = useState(true)
   const [paymentData, setPaymentData] = useState<null | Record<string, unknown>>(null)
@@ -401,7 +398,7 @@ export const CheckoutPage: React.FC = () => {
   if (cartIsEmpty && isProcessingPayment) {
     return (
       <div className="min-h-[60vh] bg-background py-20 text-center text-foreground">
-        <p className="mb-8 font-sans text-lg tracking-[0.2em] text-amber-400">Processing your payment...</p>
+        <p className="mb-8 font-sans text-lg tracking-[0.2em] text-[#e66d54]">Processing your payment...</p>
         <LoadingSpinner />
       </div>
     )
@@ -410,7 +407,7 @@ export const CheckoutPage: React.FC = () => {
   if (cartIsEmpty) {
     return (
       <div className="min-h-[60vh] bg-background px-6 py-20 text-center text-foreground">
-        <p className="mb-4 font-sans text-xl uppercase tracking-[0.2em] text-amber-400">Your cart is empty.</p>
+        <p className="mb-4 font-sans text-xl uppercase tracking-[0.2em] text-[#e66d54]">Your cart is empty.</p>
         <Link className="underline underline-offset-4" href="/shop">
           Continue shopping?
         </Link>
@@ -419,31 +416,34 @@ export const CheckoutPage: React.FC = () => {
   }
 
   return (
-    <div className="mt-5 min-h-screen bg-background text-foreground">
+    <div className="checkout-luxury min-h-screen bg-[#f3f3f3] text-[#1f1f1f] mt-5">
 
 
-      <main className="mx-auto grid max-w-7xl gap-12 px-6 py-14 md:px-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.85fr)]">
-        <section className="space-y-12">
-          <p className="font-sans text-sm uppercase tracking-wider text-amber-400">Checkout</p>
+      <main className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:px-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.85fr)]">
+        <section className="space-y-6">
+          <h1 className="text-5xl font-bold tracking-tight text-[#151515]">Secure Checkout</h1>
 
-          <section>
-            <div className="mb-8 flex items-center gap-4 border-b  pb-6">
-              <span className="font-sans text-2xl font-black text-amber-400">01</span>
-              <h1 className="text-2xl font-black uppercase tracking-tight text-foreground">Shipping Information</h1>
+          <section className="border border-[#dfdfdf] bg-white p-6 md:p-8">
+            <div className="mb-8 flex items-center justify-between border-b border-[#ececec] pb-6">
+              <div className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-xs font-semibold text-white">1</span>
+                <h2 className="text-[30px] font-semibold tracking-tight text-[#1e1e1e]">Contact Information</h2>
+              </div>
+              <span className="text-[#992d20]">◌</span>
             </div>
 
             <div className="space-y-8">
               {!user && (
-                <div className="border border-border bg-card p-6">
-                  <p className="mb-4 font-sans text-sm uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="border border-[#e4e4e4] bg-white p-6">
+                  <p className="mb-4 font-sans text-xs uppercase tracking-[0.18em] text-[#777]">
                     Checkout as guest
                   </p>
                   <FormItem>
-                    <Label className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground" htmlFor="email">
+                    <Label className="font-sans text-xs uppercase tracking-[0.18em] text-[#777]" htmlFor="email">
                       Email Address
                     </Label>
                     <Input
-                      className="mt-2 h-14 rounded-none border border-input bg-background px-4 text-foreground placeholder:text-muted-foreground focus-visible:ring-amber-500"
+                      className="mt-2 h-12 rounded-none border border-[#dfdfdf] bg-white px-4 text-[#1f1f1f] placeholder:text-[#9a9a9a] focus-visible:ring-[#992d20]"
                       disabled={!emailEditable}
                       id="email"
                       name="email"
@@ -454,7 +454,7 @@ export const CheckoutPage: React.FC = () => {
                   </FormItem>
                   <div className="mt-5 flex flex-wrap items-center gap-4">
                     <Button
-                      className="rounded-none bg-amber-400 px-8 font-sans font-black uppercase tracking-[0.18em] text-black hover:bg-amber-300"
+                      className="rounded-none bg-[#992d20] px-8 font-sans font-black uppercase tracking-[0.18em] text-white hover:bg-[#842518]"
                       disabled={!email || !emailEditable}
                       onClick={(e) => {
                         e.preventDefault()
@@ -463,7 +463,7 @@ export const CheckoutPage: React.FC = () => {
                     >
                       Continue as guest
                     </Button>
-                    <Link className="text-sm text-muted-foreground underline underline-offset-4" href="/login">
+                    <Link className="text-sm text-[#666] underline underline-offset-4" href="/login">
                       Log in instead
                     </Link>
                   </div>
@@ -473,15 +473,15 @@ export const CheckoutPage: React.FC = () => {
 
 
               <div>
-                <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-[#777]">
                   Signed in as
                 </p>
                 {user && (
 
-                  <div className="border border-border bg-card p-6">
+                  <div className="border border-[#e4e4e4] bg-white p-6">
                     {/* <p className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground">Signed in as</p> */}
                     <p className="mt-2 text-foreground">{user.email}</p>
-                    <Link className="mt-2 inline-block text-sm text-amber-400 underline underline-offset-4" href="/logout">
+                    <Link className="mt-2 inline-block text-sm text-[#992d20] underline underline-offset-4" href="/logout">
                       Not you? Log out
                     </Link>
                   </div>
@@ -489,15 +489,15 @@ export const CheckoutPage: React.FC = () => {
               </div>
 
               <div>
-                <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-[#777]">
                   Billing Address
                 </p>
                 {billingAddress ? (
-                  <div className="border border-border bg-card p-5">
+                  <div className="border border-[#e4e4e4] bg-white p-5">
                     <AddressItem
                       actions={
                         <Button
-                          className="rounded-none  text-amber-400 hover:bg-amber-400 hover:text-black"
+                          className="rounded-none border-[#d9d9d9] text-[#992d20] hover:bg-[#992d20] hover:text-white"
                           variant="outline"
                           disabled={Boolean(paymentData)}
                           onClick={(e) => {
@@ -533,22 +533,22 @@ export const CheckoutPage: React.FC = () => {
                     setBillingAddressSameAsShipping(state as boolean)
                   }}
                 />
-                <Label className="font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground" htmlFor="shippingTheSameAsBilling">
+                <Label className="font-sans text-xs uppercase tracking-[0.18em] text-[#777]" htmlFor="shippingTheSameAsBilling">
                   Shipping is the same as billing
                 </Label>
               </div>
 
               {!billingAddressSameAsShipping && (
                 <div>
-                  <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="mb-3 font-sans text-xs uppercase tracking-[0.18em] text-[#777]">
                     Shipping Address
                   </p>
                   {shippingAddress ? (
-                    <div className="border border-border bg-card p-5">
+                    <div className="border border-[#e4e4e4] bg-white p-5">
                       <AddressItem
                         actions={
                           <Button
-                            className="rounded-none  text-amber-400 hover:bg-amber-400 hover:text-black"
+                            className="rounded-none border-[#d9d9d9] text-[#992d20] hover:bg-[#992d20] hover:text-white"
                             variant="outline"
                             disabled={Boolean(paymentData)}
                             onClick={(e) => {
@@ -582,16 +582,16 @@ export const CheckoutPage: React.FC = () => {
             </div>
           </section>
 
-          <section>
-            <div className="mb-8 flex items-center gap-4 border-b  pb-6">
-              <span className="font-sans text-2xl font-black text-amber-400">02</span>
-              <h2 className="text-2xl font-black uppercase tracking-tight text-foreground">Payment Details</h2>
+          <section className="border border-[#dfdfdf] bg-white p-6 md:p-8">
+            <div className="mb-8 flex items-center gap-3 border-b border-[#ececec] pb-6">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#992d20] text-xs font-semibold text-white">2</span>
+              <h2 className="text-[30px] font-semibold tracking-tight text-[#1e1e1e]">Payment</h2>
             </div>
 
-            <div className="border border-border bg-card p-6">
+            <div className="border border-[#e4e4e4] bg-white p-6">
               {!paymentData && (
                 <Button
-                  className="rounded-none bg-amber-400 px-10 py-6 font-sans font-black uppercase tracking-[0.18em] text-black hover:bg-amber-300 disabled:opacity-40"
+                  className="rounded-none bg-[#992d20] px-10 py-6 font-sans font-black uppercase tracking-[0.18em] text-white hover:bg-[#842518] disabled:opacity-40"
                   disabled={!canGoToPayment}
                   onClick={(e) => {
                     e.preventDefault()
@@ -606,7 +606,7 @@ export const CheckoutPage: React.FC = () => {
                 <div className="mt-8">
                   <Message error={error} />
                   <Button
-                    className="mt-5 rounded-none bg-amber-400 font-sans font-black uppercase tracking-[0.18em] text-black hover:bg-amber-300"
+                    className="mt-5 rounded-none bg-[#992d20] font-sans font-black uppercase tracking-[0.18em] text-white hover:bg-[#842518]"
                     onClick={(e) => {
                       e.preventDefault()
                       router.refresh()
@@ -622,53 +622,32 @@ export const CheckoutPage: React.FC = () => {
                 {/* @ts-ignore */}
                 {paymentData && paymentData?.['clientSecret'] && (
                   <div>
-                    <p className="mb-6 font-sans text-sm uppercase tracking-[0.18em] text-muted-foreground">
+                    <p className="mb-6 font-sans text-sm uppercase tracking-[0.18em] text-[#777]">
                       Secure card payment
                     </p>
                     {error && <p className="mb-4 text-red-400">{`Error: ${error}`}</p>}
                     <Elements
                       options={{
-                        appearance: isDark
-                          ? {
-                              theme: 'night',
-                              variables: {
-                                borderRadius: '0px',
-                                colorPrimary: '#d8ad45',
-                                gridColumnSpacing: '20px',
-                                gridRowSpacing: '20px',
-                                colorBackground: '#000000',
-                                colorDanger: cssVariables.colors.error500,
-                                colorDangerText: cssVariables.colors.error500,
-                                colorIcon: '#a8a29e',
-                                colorText: '#f5f5f4',
-                                colorTextPlaceholder: '#64748b',
-                                fontFamily: 'GeistSans, sans-serif',
-                                fontSizeBase: '16px',
-                                fontWeightBold: '700',
-                                fontWeightNormal: '500',
-                                spacingUnit: '4px',
-                              },
-                            }
-                          : {
-                              theme: 'stripe',
-                              variables: {
-                                borderRadius: '0px',
-                                colorPrimary: '#d8ad45',
-                                gridColumnSpacing: '20px',
-                                gridRowSpacing: '20px',
-                                colorBackground: '#ffffff',
-                                colorDanger: cssVariables.colors.error500,
-                                colorDangerText: cssVariables.colors.error500,
-                                colorIcon: '#57534e',
-                                colorText: '#0c0a09',
-                                colorTextPlaceholder: '#78716c',
-                                fontFamily: 'GeistSans, sans-serif',
-                                fontSizeBase: '16px',
-                                fontWeightBold: '700',
-                                fontWeightNormal: '500',
-                                spacingUnit: '4px',
-                              },
-                            },
+                        appearance: {
+                          theme: 'stripe',
+                          variables: {
+                            borderRadius: '0px',
+                            colorPrimary: '#d8ad45',
+                            gridColumnSpacing: '20px',
+                            gridRowSpacing: '20px',
+                            colorBackground: '#ffffff',
+                            colorDanger: cssVariables.colors.error500,
+                            colorDangerText: cssVariables.colors.error500,
+                            colorIcon: '#57534e',
+                            colorText: '#0c0a09',
+                            colorTextPlaceholder: '#78716c',
+                            fontFamily: 'GeistSans, sans-serif',
+                            fontSizeBase: '16px',
+                            fontWeightBold: '700',
+                            fontWeightNormal: '500',
+                            spacingUnit: '4px',
+                          },
+                        },
                         clientSecret: paymentData['clientSecret'] as string,
                       }}
                       stripe={stripe}
@@ -690,9 +669,9 @@ export const CheckoutPage: React.FC = () => {
           </section>
         </section>
 
-        <aside className="h-fit border border-border bg-card p-8 lg:sticky lg:top-8">
-          <h2 className="font-sans text-sm uppercase tracking-wider text-amber-400">Order Summary</h2>
-          <div className="my-6 h-px bg-amber-500/30" />
+        <aside className="h-fit border border-[#dfdfdf] bg-white p-8 lg:sticky lg:top-8">
+          <h2 className="text-[34px] font-semibold tracking-tight text-[#1f1f1f]">Order Summary</h2>
+          <div className="my-6 h-px bg-[#efefef]" />
 
           <div className="space-y-6">
             {cart?.items?.map((item, index) => {
@@ -757,16 +736,16 @@ export const CheckoutPage: React.FC = () => {
 
                 return (
                   <div className="grid grid-cols-[80px_1fr_auto] items-center gap-4" key={index}>
-                    <div className="relative h-20 w-20 border border-border bg-muted">
+                    <div className="relative h-20 w-20 border border-[#e4e4e4] bg-[#f7f7f7]">
                       {image && typeof image !== 'string' && (
                         <Media className="" fill imgClassName="object-cover" resource={image} />
                       )}
 
                     </div>
                     <div>
-                      <p className="font-sans text-base font-black uppercase text-foreground">{title}</p>
+                      <p className="font-sans text-base font-semibold text-[#1f1f1f]">{title}</p>
                       {variant && typeof variant === 'object' && (
-                        <p className="mt-1 font-sans text-xs italic text-muted-foreground">
+                        <p className="mt-1 font-sans text-xs italic text-[#777]">
                           {variant.options
                             ?.map((option: NonNullable<typeof variant.options>[number]) => {
                               if (typeof option === 'object') return option.label
@@ -775,13 +754,13 @@ export const CheckoutPage: React.FC = () => {
                             .join(', ')}
                         </p>
                       )}
-                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">Qty {quantity}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-amber-400">
+                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#777]">Qty {quantity}</p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#992d20]">
                         {getPurchaseTypeLabel(purchaseType)}
                       </p>
                     </div>
                     {typeof price === 'number' && (
-                      <Price className="font-sans font-black text-amber-400" amount={price} />
+                      <Price className="font-sans font-semibold text-[#1f1f1f]" amount={price} />
                     )}
                   </div>
                 )
@@ -790,52 +769,52 @@ export const CheckoutPage: React.FC = () => {
             })}
           </div>
 
-          <div className="my-8 h-px bg-amber-500/30" />
+          <div className="my-8 h-px bg-[#efefef]" />
 
-          <div className="space-y-5 font-sans text-sm uppercase tracking-wide">
-            <div className="flex justify-between text-muted-foreground">
+          <div className="space-y-4 font-sans text-sm">
+            <div className="flex justify-between text-[#6f6f6f]">
               <span>Subtotal</span>
-              <span className="text-foreground">{formatMoney(subtotal)}</span>
+              <span className="text-[#1f1f1f]">{formatMoney(subtotal)}</span>
             </div>
             {fulfillmentMethod === 'delivery' && (
-              <div className="flex justify-between text-muted-foreground">
-                <span>Delivery</span>
-                <span className="text-foreground">
+              <div className="flex justify-between text-[#6f6f6f]">
+                <span>Shipping</span>
+                <span className="text-[#1f1f1f]">
                   {shipping ? formatMoney(shipping) : '0.00'}
                 </span>
               </div>
             )}
-            <div className="flex justify-between text-muted-foreground">
+            <div className="flex justify-between text-[#6f6f6f]">
               <span>Estimated Tax</span>
-              <span className="text-foreground">{formatMoney(estimatedTax)}</span>
+              <span className="text-[#1f1f1f]">{formatMoney(estimatedTax)}</span>
             </div>
-            <div className="h-px bg-amber-500/30" />
-            <div className="flex justify-between text-base text-amber-400">
-              <span>Total</span>
+            <div className="h-px bg-[#efefef]" />
+            <div className="flex justify-between text-[32px] font-semibold text-[#992d20]">
+              <span className="text-[#1f1f1f]">Total</span>
               <span>{formatMoney(displayTotal)}</span>
             </div>
           </div>
 
           <div className="mt-10 text-center">
             <div className="mb-4 flex items-center justify-between">
-              <p className="font-sans text-xs font-black uppercase tracking-[0.28em] text-amber-400 text-left">
+              <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-[#555] text-left">
                 Date: {selectedDate ? formatDisplayDate(formatDateForInput(selectedDate)) : 'Not selected'}
               </p>
 
               <button
                 onClick={() => setIsDateModalOpen(true)}
-                className="ml-4 border border-amber-400 px-3 py-1 text-xs font-sans uppercase tracking-[0.2em] text-amber-400 hover:bg-amber-400 hover:text-black"
+                className="ml-4 border border-[#992d20] px-3 py-1 text-xs font-sans uppercase tracking-[0.2em] text-[#992d20] hover:bg-[#992d20] hover:text-white"
               >
                 Change
               </button>
             </div >
 
-            <div className="grid grid-cols-2 border-2 border-border">
+            <div className="grid grid-cols-2 border border-[#dfdfdf]">
               <button
                 type="button"
                 className={`py-3 font-sans text-sm font-black uppercase tracking-[0.24em] ${fulfillmentMethod === 'pickup'
-                  ? 'bg-amber-400 text-black'
-                  : 'bg-muted text-muted-foreground hover:text-foreground'
+                  ? 'bg-[#992d20] text-white'
+                  : 'bg-[#f3f3f3] text-[#767676] hover:text-[#1f1f1f]'
                   }`}
                 onClick={() => {
                   setFulfillmentMethod('pickup')
@@ -850,8 +829,8 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 className={`py-3 font-sans text-sm font-black uppercase tracking-[0.24em] ${fulfillmentMethod === 'delivery'
-                  ? 'bg-amber-400 text-black'
-                  : 'bg-muted text-muted-foreground hover:text-foreground'
+                  ? 'bg-[#992d20] text-white'
+                  : 'bg-[#f3f3f3] text-[#767676] hover:text-[#1f1f1f]'
                   }`}
                 onClick={() => {
                   setFulfillmentMethod('delivery')
@@ -864,7 +843,7 @@ export const CheckoutPage: React.FC = () => {
           </div>
 
           <Button
-            className="mt-8 w-full rounded-none bg-amber-400 py-6 font-sans font-black uppercase tracking-[0.2em] text-black hover:bg-amber-300 disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-8 w-full rounded-none bg-[#992d20] py-6 font-sans font-black uppercase tracking-[0.2em] text-white hover:bg-[#842518] disabled:cursor-not-allowed disabled:opacity-40"
             disabled={
               !canGoToPayment ||
               isProcessingPayment ||
@@ -894,7 +873,7 @@ export const CheckoutPage: React.FC = () => {
           <div className="w-[420px] border border-border bg-card p-6 text-card-foreground shadow-xl animate-[modalScaleIn_240ms_cubic-bezier(0.16,1,0.3,1)]">
 
             {/* Header */}
-            <p className="mb-2 text-center font-sans text-xs uppercase tracking-[0.3em] text-amber-400">
+            <p className="mb-2 text-center font-sans text-xs uppercase tracking-[0.3em] text-[#e66d54]">
               The Butcher’s Craft
             </p>
 
@@ -960,7 +939,7 @@ export const CheckoutPage: React.FC = () => {
                       : 'border-amber-500/30'
                       }`}
                   >
-                    <p className="text-amber-400">{branch.name}</p>
+                    <p className="text-[#e66d54]">{branch.name}</p>
                     <p className="text-xs text-muted-foreground">{branch.address}</p>
                   </button>
                 ))}

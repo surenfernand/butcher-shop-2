@@ -38,7 +38,7 @@ export const ArtisansPromiseBlock: React.FC<
   if (!items?.length) return null
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="bg-[#f8f5f4] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-14 text-center">
           <h2 className="text-sm font-semibold tracking-tight text-neutral-700 md:text-base">

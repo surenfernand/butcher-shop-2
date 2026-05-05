@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
-import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { headers as getHeaders } from 'next/headers.js'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { redirect } from 'next/navigation'
 import { AddressListing } from '@/components/addresses/AddressListing'
 import { CreateAddressModal } from '@/components/addresses/CreateAddressModal'
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import configPromise from '@payload-config'
+import { headers as getHeaders } from 'next/headers.js'
+import { redirect } from 'next/navigation'
+import { getPayload } from 'payload'
 
 export default async function AddressesPage() {
   const headers = await getHeaders()
@@ -36,13 +36,13 @@ export default async function AddressesPage() {
       {/* GRID */}
       <div className="grid">
 
-        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E2B84F] mb-5">
+        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E66D54] mb-5">
            Shipping Address
         </h2>
 
         {/* LEFT - FORM / LIST */}
         <div className="rounded-xl border border-border bg-card p-8">
-          {/* <h2 className="mb-8 text-xl font-bold uppercase tracking-[0.18em] text-[#E2B84F]">
+          {/* <h2 className="mb-8 text-xl font-bold uppercase tracking-[0.18em] text-[#E66D54]">
             Shipping Address
           </h2> */}
 

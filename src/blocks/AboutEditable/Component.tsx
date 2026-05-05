@@ -80,7 +80,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
   } = props
 
   return (
-    <section className="mx-auto max-w-[1100px] px-6 py-8 text-[#2d2a26]">
+    <section className="mx-auto px-6 py-8 text-[#2d2a26]">
       <div className="mb-10">
         {eyebrow && <p className="mb-4 text-sm">{eyebrow}</p>}
         {quote && (

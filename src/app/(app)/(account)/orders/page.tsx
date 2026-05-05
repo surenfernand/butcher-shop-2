@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import configPromise from '@payload-config'
 import { headers as getHeaders } from 'next/headers'
-import { Truck, ShoppingBasket, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPayload } from 'payload'
@@ -78,14 +77,22 @@ function StatusBadge({ status }: { status: Order['status'] }) {
 
   if (s === 'completed') {
     return (
-      <span className="inline-block border border-[#d4af5f] bg-black px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#d4af5f]">
+      <span className="inline-block rounded-full bg-[#e6f6ea] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#2e7d4d]">
+        {label.toUpperCase()}
+      </span>
+    )
+  }
+
+  if (s === 'processing') {
+    return (
+      <span className="inline-block rounded-full bg-[#e7eefb] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#3056a8]">
         {label.toUpperCase()}
       </span>
     )
   }
 
   return (
-    <span className="inline-block bg-[#2c2c2c] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a3a3a3]">
+    <span className="inline-block rounded-full bg-[#f3f3f3] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#666]">
       {label.toUpperCase()}
     </span>
   )
@@ -124,104 +131,77 @@ export default async function Orders() {
   }
 
   return (
-    <div className="w-full space-y-10 text-[#e5e5e5]">
-      <div className="mt-3">
-        <h1 className="text-5xl font-bold tracking-tight text-white">Order History</h1>
-        <p className="mt-3 text-sm text-[#9ca3af]">Manage your order history.</p>
+    <div className="w-full space-y-10 text-[#1f1f1f]">
+      <div className="mt-2">
+        
+        <h1 className="mt-3 text-6xl font-semibold tracking-tight text-[#171717]">Past Orders</h1>
+        <div className="mt-3 h-[3px] w-20 bg-[#d66152]" />
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[#2a2a2a] bg-black">
+      <div className="overflow-hidden border border-[#e8e8e8] bg-white">
         {(!orders || orders.length === 0) && (
-          <div className="px-6 py-14 text-center text-[#9ca3af]">You have no orders.</div>
+          <div className="px-6 py-14 text-center text-[#777]">You have no orders.</div>
         )}
 
         {orders && orders.length > 0 && (
           <div className="w-full overflow-x-auto">
-            <table className="w-full min-w-[920px] border-collapse text-left">
+            <table className="w-full min-w-[820px] border-collapse text-left">
               <thead>
-                <tr className="border-b border-[#2a2a2a] bg-[#161616]">
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:px-7">
-                    Order #
+                <tr className="border-b border-[#ebebeb] bg-[#fafafa]">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-7">
+                    Order ID
                   </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:px-6">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
                     Date
                   </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:px-6">
-                    Delivery method
-                  </th>
-                  <th className="min-w-[220px] px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:min-w-[260px] lg:px-6">
-                    Items
-                  </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:px-6">
-                    Status
-                  </th>
-                  <th className="px-5 py-4 text-right text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d4af5f] lg:px-7">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
                     Total
                   </th>
-                  <th className="w-10 px-2 py-4 lg:w-12" aria-hidden />
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
+                    Status
+                  </th>
+                  <th className="px-5 py-4 text-right text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-7">
+                    Actions
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 {orders.map((order) => {
-                  const fulfillment = order.fulfillment
-                  const isDelivery = fulfillment?.serviceType === 'delivery'
-                  const isPickup = fulfillment?.serviceType === 'pickup'
-                  const { primary, secondary } = getItemsLines(order)
-
                   const href = `/orders/${order.id}`
 
                   return (
                     <tr
                       key={order.id}
-                      className="border-b border-[#2a2a2a] transition-colors hover:bg-[#141414]"
+                      className="border-b border-[#efefef] transition-colors hover:bg-[#fcfcfc]"
                     >
                       <td className="px-5 py-5 align-middle text-sm lg:px-7">
                         <Link
                           href={href}
-                          className="font-medium text-[#c4c4c4] underline-offset-4 hover:text-[#d4af5f]"
+                          className="font-semibold tracking-[0.06em] text-[#202020] underline-offset-4 hover:text-[#992d20]"
                         >
-                          {formatOrderRef(order.id)}
+                          #{formatOrderRef(order.id)}
                         </Link>
                       </td>
-                      <td className="whitespace-nowrap px-5 py-5 align-middle text-sm text-[#e5e5e5] lg:px-6">
+                      <td className="whitespace-nowrap px-5 py-5 align-middle text-sm text-[#353535] lg:px-6">
                         {formatOrderDate(order.createdAt)}
                       </td>
                       <td className="px-5 py-5 align-middle lg:px-6">
-                        {isDelivery && (
-                          <span className="inline-flex items-center gap-2 text-sm text-[#a3a3a3]">
-                            <Truck className="size-4 shrink-0 text-[#737373]" aria-hidden />
-                            Delivery
-                          </span>
-                        )}
-                        {isPickup && (
-                          <span className="inline-flex items-center gap-2 text-sm text-[#a3a3a3]">
-                            <ShoppingBasket className="size-4 shrink-0 text-[#737373]" aria-hidden />
-                            Pickup
-                          </span>
-                        )}
-                        {!isDelivery && !isPickup && (
-                          <span className="text-sm text-[#737373]">—</span>
-                        )}
-                      </td>
-                      <td className="max-w-[280px] px-5 py-5 align-middle lg:max-w-[320px] lg:px-6">
-                        <div className="text-sm font-medium text-[#ececec]">{primary}</div>
-                        <div className="mt-1 text-xs text-[#737373]">{secondary}</div>
+                        <span className="font-semibold text-[#d66152]">{formatMoney(order.amount)}</span>
                       </td>
                       <td className="px-5 py-5 align-middle lg:px-6">
                         <StatusBadge status={order.status} />
                       </td>
-                      <td className="whitespace-nowrap px-5 py-5 text-right align-middle text-base font-semibold text-[#d4af5f] lg:px-7">
-                        {formatMoney(order.amount)}
-                      </td>
-                      <td className="px-2 py-5 align-middle text-[#737373] lg:px-3">
-                        <Link
-                          href={href}
-                          aria-label={`View order ${formatOrderRef(order.id)}`}
-                          className="flex justify-end text-[#737373] transition-colors hover:text-[#d4af5f]"
-                        >
-                          <ChevronRight className="size-5" aria-hidden />
-                        </Link>
+                      <td className="px-5 py-5 align-middle lg:px-7">
+                        <div className="flex justify-end gap-2">
+                          <Link
+                            href={href}
+                            className="inline-flex items-center border border-[#dfdfdf] bg-[#f8f8f8] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#333] hover:bg-[#f0f0f0]"
+                          >
+                            Details
+                          </Link>
+                        
+                        </div>
                       </td>
                     </tr>
                   )
@@ -231,6 +211,8 @@ export default async function Orders() {
           </div>
         )}
       </div>
+
+ 
     </div>
   )
 }

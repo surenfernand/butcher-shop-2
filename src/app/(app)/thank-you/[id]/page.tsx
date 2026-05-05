@@ -168,36 +168,37 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
   const address = typedOrder.shippingAddress
 
   return (
-    <main className="min-h-screen text-[#e2e2e2]">
-      <section className="relative flex h-[520px] items-center justify-center overflow-hidden text-center">
-        <div className="absolute inset-0 bg-dark" />
-
-        <div className="relative z-10 px-6">
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#D3A84B] text-2xl font-black text-black">
+    <main className="min-h-screen bg-[#f5f5f5] text-[#1b1b1b]">
+      <section className="relative flex items-center justify-center overflow-hidden px-6 pb-8 pt-16 text-center md:pt-20">
+        <div className="w-full max-w-3xl">
+          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#992d20] text-2xl font-black text-white">
             ✓
           </div>
 
-          <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">
-            Thank You for Your Order
+          <h1 className="text-5xl font-bold tracking-tight text-[#151515] md:text-6xl">
+            Order Confirmed
           </h1>
 
-          <p className="mt-5 text-lg text-[#d2c5b1]">
-            Your order{' '}
-            <span className="font-bold text-[#D3A84B]">#{typedOrder.id}</span>{' '}
-            is being prepared.
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#992d20]">
+            Order #{typedOrder.id}
+          </p>
+
+          <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-[#5b5b5b]">
+            Thank you for choosing Filet Gourmet. Your selection is now being prepared by our
+            team with the same precision and care your table deserves.
           </p>
         </div>
       </section>
 
-      <section className="relative z-20 mx-auto -mt-10 grid max-w-7xl grid-cols-1 gap-6 px-6 pb-20 lg:grid-cols-12">
+      <section className="relative z-20 mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 pb-20 lg:grid-cols-12">
         <div className="lg:col-span-8">
-          <div className="border border-[#333535] bg-[#1e2020] p-8">
-            <div className="mb-8 flex items-end justify-between border-b border-[#333535] pb-4">
-              <h2 className="text-2xl font-bold uppercase tracking-[0.18em] text-[#D3A84B]">
-                Order Summary
+          <div className="border border-[#e8e8e8] bg-white p-8">
+            <div className="mb-8 flex items-end justify-between border-b border-[#ececec] pb-4">
+              <h2 className="text-3xl font-semibold tracking-tight text-[#1b1b1b]">
+                Artisanal Preparation
               </h2>
 
-              <p className="text-xs uppercase tracking-[0.18em] text-[#9a8f7e]">
+              <p className="text-xs uppercase tracking-[0.18em] text-[#7d7d7d]">
                 Placed {formatDate(typedOrder.createdAt)}
               </p>
             </div>
@@ -216,18 +217,18 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                 const lineTotal = unitPrice * quantity
 
                 return (
-                  <div key={item.id || index} className="flex items-center gap-5">
-                    <div className="relative h-24 w-24 overflow-hidden bg-[#333535]">
+                  <div key={item.id || index} className="flex items-center gap-5 border-b border-[#f0f0f0] pb-5 last:border-b-0 last:pb-0">
+                    <div className="relative h-24 w-24 overflow-hidden border border-[#e2e2e2] bg-[#f8f8f8]">
                       {image ? (
                         <Media fill imgClassName="object-cover" resource={image} />
                       ) : null}
                     </div>
 
                     <div className="flex-1">
-                      <h3 className="font-bold uppercase text-white">{product.title}</h3>
+                      <h3 className="text-lg font-semibold text-[#1f1f1f]">{product.title}</h3>
 
                       {purchaseTypeForPricing && purchaseTypeForPricing !== 'one_time' ? (
-                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#D3A84B]">
+                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#992d20]">
                           {purchaseTypeForPricing === 'monthly'
                             ? 'Monthly subscription'
                             : 'Weekly subscription'}
@@ -235,114 +236,86 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                       ) : null}
 
                       {variant?.title ? (
-                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#9a8f7e]">
+                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#7d7d7d]">
                           {variant.title}
                         </p>
                       ) : null}
                     </div>
 
                     <div className="text-right">
-                      <p className="font-bold text-[#D3A84B]">{formatMoney(lineTotal)}</p>
-                      <p className="mt-1 text-xs uppercase text-[#9a8f7e]">Qty: {quantity}</p>
+                      <p className="font-semibold text-[#1f1f1f]">{formatMoney(lineTotal)}</p>
+                      <p className="mt-1 text-xs uppercase text-[#7d7d7d]">Qty: {quantity}</p>
                     </div>
                   </div>
                 )
               })}
             </div>
 
-            <div className="mt-10 space-y-3 border-t border-[#333535] pt-6">
-              <div className="flex justify-between text-sm uppercase tracking-[0.12em] text-[#d2c5b1]">
+            <div className="mt-10 space-y-3 border-t border-[#ececec] pt-6">
+              <div className="flex justify-between text-sm text-[#666]">
                 <span>Subtotal</span>
                 <span>{formatMoney(itemsSubtotal)}</span>
               </div>
 
-              <div className="flex justify-between text-sm uppercase tracking-[0.12em] text-[#d2c5b1]">
+              <div className="flex justify-between text-sm text-[#666]">
                 <span>Shipping</span>
-                {/* <span>{shippingTotal > 0 ? formatMoney(shippingTotal) : '0.00'}</span> */}
                 <span>{formatMoney(shippingTotal)}</span>
               </div>
 
-              <div className="flex justify-between text-sm uppercase tracking-[0.12em] text-[#d2c5b1]">
+              <div className="flex justify-between text-sm text-[#666]">
                 <span>Tax</span>
                 <span>{formatMoney(estimatedTax)}</span>
               </div>
 
-              <div className="flex justify-between border-t border-[#333535] pt-4 text-2xl font-black">
-                <span className="uppercase text-[#D3A84B]">Total Amount</span>
-                <span>{formatMoney(calculatedTotal)}</span>
+              <div className="flex justify-between border-t border-[#ececec] pt-4 text-2xl font-semibold">
+                <span className="text-[#1f1f1f]">Total</span>
+                <span className="text-[#992d20]">{formatMoney(calculatedTotal)}</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <Link
-              href="/shop"
-              className="bg-[#D3A84B] py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-black"
-            >
-              Return to Shop
-            </Link>
-
-            <Link
-              href={orderUrl}
-              className="border border-[#D3A84B] py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-[#D3A84B]"
-            >
-              View Order
-            </Link>
-          </div>
+          
         </div>
 
         <aside className="space-y-6 lg:col-span-4">
-          <div className="border border-[#333535] bg-[#282a2b] p-7">
-
-            {typedOrder.fulfillment?.date ? (
-              <div className="mb-6">
-                <p className="text-xs uppercase tracking-[0.18em] text-[#9a8f7e]">
-                  Estimated Arrival
-                </p>
-                <p className="mt-1 text-xl font-bold">
-                  {formatDate(typedOrder.fulfillment.date)}
-                </p>
+          <div className="border border-[#e8e8e8] bg-[#f7f7f7] p-7">
+            <h2 className="text-[38px] font-semibold tracking-tight text-[#1f1f1f]">Order Summary</h2>
+            <div className="mt-6 space-y-3 text-sm">
+              <div className="flex justify-between text-[#666]">
+                <span>Subtotal</span>
+                <span className="font-semibold text-[#1f1f1f]">{formatMoney(itemsSubtotal)}</span>
               </div>
-            ) : null}
-
-            {address ? (
-              <div>
-                <p className="mb-2 text-xs uppercase tracking-[0.18em] text-[#9a8f7e]">
-                  Shipping Address
-                </p>
-
-                <p className="leading-relaxed text-[#e2e2e2]">
-                  {[address.firstName, address.lastName].filter(Boolean).join(' ')}
-                  <br />
-                  {address.addressLine1}
-                  {address.addressLine2 ? (
-                    <>
-                      <br />
-                      {address.addressLine2}
-                    </>
-                  ) : null}
-                  <br />
-                  {[address.city, address.state, address.postalCode].filter(Boolean).join(', ')}
-                  <br />
-                  {address.country}
-                </p>
+              <div className="flex justify-between text-[#666]">
+                <span>Shipping</span>
+                <span className="font-semibold text-[#1f1f1f]">{shippingTotal > 0 ? formatMoney(shippingTotal) : '0.00'}</span>
               </div>
-            ) : null}
-          </div>
+              <div className="flex justify-between text-[#666]">
+                <span>Tax</span>
+                <span className="font-semibold text-[#1f1f1f]">{formatMoney(estimatedTax)}</span>
+              </div>
+              <div className="mt-3 flex justify-between border-t border-[#e5e5e5] pt-3 text-[26px] font-semibold">
+                <span className="text-[#1f1f1f]">Total</span>
+                <span className="text-[#992d20]">{formatMoney(calculatedTotal)}</span>
+              </div>
+            </div>
 
-          <div className="border border-[#D3A84B]/30 bg-black p-7">
-            <p className="text-lg italic leading-relaxed text-[#e2e2e2]">
-              “Every cut that leaves our atelier is a testament to heritage, craft, and the pursuit
-              of culinary perfection.”
-            </p>
-
-            <div className="mt-8 flex items-center gap-3">
-              <div className="h-px w-8 bg-[#D3A84B]" />
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D3A84B]">
-                Artisan Curator
-              </p>
+            <div className="mt-7 space-y-3">
+              <Link
+                href={orderUrl}
+                className="block w-full bg-[#992d20] py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-white hover:bg-[#842518]"
+              >
+                View Order Status
+              </Link>
+              <Link
+                href="/shop"
+                className="block w-full border border-[#cfcfcf] bg-white py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-[#1f1f1f] hover:bg-[#fafafa]"
+              >
+                Return to Shop
+              </Link>
             </div>
           </div>
+
+       
 
 
         </aside>

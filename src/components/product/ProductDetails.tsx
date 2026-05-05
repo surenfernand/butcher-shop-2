@@ -144,35 +144,45 @@ export default function ProductDetails({ product }: Props) {
                 className={[
                   'flex w-full items-center justify-between border p-6 text-left transition',
                   isSelected
-                    ? 'border-[#d73725] bg-[#fff2ef]'
-                    : 'border-[#ded8d5] bg-white hover:border-[#d73725]/60',
+                    ? 'border-[#c23224] bg-[#fff7f5]'
+                    : 'border-[#ead8d3] bg-white hover:border-[#c23224]/60',
                 ].join(' ')}
               >
-                <span>
-                  <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#8f8680]">
-                    {option.label}
+                <div className="flex items-center gap-5">
+                  <span
+                    className={[
+                      'flex h-4 w-4 items-center justify-center rounded-full border',
+                      isSelected ? 'border-[#c23224]' : 'border-[#9f9a96]',
+                    ].join(' ')}
+                  >
+                    {isSelected && (
+                      <span className="h-2 w-2 rounded-full bg-[#c23224]" />
+                    )}
+                  </span>
+
+                  <span>
+                    <span className="block text-sm font-black text-[#15110f]">
+                      {option.label}
+                    </span>
+
                     {option.subtext && (
-                      <span className="ml-2 rounded-full bg-[#e95b45] px-2 py-1 text-[9px] text-white">
+                      <span className="mt-1 block text-xs text-[#7d7671]">
                         {option.subtext}
                       </span>
                     )}
                   </span>
+                </div>
 
-                  {option.price && (
-                    <span className="mt-1 block text-2xl font-black tracking-tight text-[#111]">
-                      {option.price}
-                    </span>
-                  )}
-                </span>
-
-                <span
-                  className={[
-                    'h-5 w-5 rounded-full border',
-                    isSelected
-                      ? 'border-[#d73725] shadow-[inset_0_0_0_4px_#fff] bg-[#d73725]'
-                      : 'border-[#d73725]',
-                  ].join(' ')}
-                />
+                {option.price && (
+                  <span
+                    className={[
+                      'text-sm font-black',
+                      isSelected ? 'text-[#c23224]' : 'text-[#15110f]',
+                    ].join(' ')}
+                  >
+                    {option.price}
+                  </span>
+                )}
               </button>
             )
           })}
