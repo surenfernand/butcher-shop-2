@@ -199,7 +199,7 @@ export const FormBlock: React.FC<
               form={String(formID)}
               type="submit"
               disabled={isLoading}
-              className="mt-3 w-full rounded-none border border-[#c8a24d] bg-[#e66d54] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[#e66d54] hover:border-[#e66d54] hover:scale-[1.03] active:scale-[0.97]"
+              className="mt-3 w-full rounded-none border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] hover:scale-[1.03] active:scale-[0.97]"
             >
               {isLoading ? 'Sending...' : submitButtonLabel || 'Dispatch Message'}
             </button>

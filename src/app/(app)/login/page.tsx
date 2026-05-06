@@ -58,7 +58,7 @@ export default async function Login() {
               New to Butchers Craft ? {' '}
               <Link
                 href="/create-account"
-                className="ml-2 text-white underline underline-offset-4 hover:text-[#d6a941]"
+                className="ml-2 text-white underline underline-offset-4 hover:text-[var(--color-gold)]"
               >
                 Create an account
               </Link>

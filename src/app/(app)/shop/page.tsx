@@ -160,16 +160,16 @@ export default async function ShopPage({ searchParams }: Props) {
   return (
     <div>
       {searchValue ? (
-        <p className="mb-6 text-sm text-[#68615b]">
+        <p className="mb-6 text-sm text-[var(--color-muted-text)]">
           {products.docs.length === 0
             ? 'There are no products that match '
             : `Showing ${products.docs.length} ${resultsText} for `}
-          <span className="font-semibold text-[#161616]">&quot;{String(searchValue)}&quot;</span>
+          <span className="font-semibold text-[var(--color-text)]">&quot;{String(searchValue)}&quot;</span>
         </p>
       ) : null}
 
       {!searchValue && products.docs.length === 0 ? (
-        <p className="mb-6 text-sm text-[#68615b]">
+        <p className="mb-6 text-sm text-[var(--color-muted-text)]">
           {shopPage.emptyStateText || 'No products found. Please try different filters.'}
         </p>
       ) : null}

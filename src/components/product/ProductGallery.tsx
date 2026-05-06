@@ -20,7 +20,7 @@ export default function ProductGallery({ product }: Props) {
 
   return (
   <div className="flex flex-col gap-6">
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] border border-[#1d1a17]/10 bg-[#151515] shadow-sm">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] border border-[var(--color-text)]/10 bg-[var(--color-text)] shadow-sm">
       {mainImage?.url ? (
         <Image
           src={mainImage.url}
@@ -49,9 +49,9 @@ export default function ProductGallery({ product }: Props) {
             disabled={!img?.url}
             onClick={() => img?.url && setActiveIndex(slotIndex)}
             className={[
-              'relative aspect-square w-full overflow-hidden border bg-[#ece8e5] transition',
+              'relative aspect-square w-full overflow-hidden border bg-[var(--color-surface)] transition',
               img?.url ? 'cursor-pointer hover:opacity-90' : 'cursor-default',
-              isActive ? 'border-[#e85b45]' : 'border-[#1d1a17]/10',
+              isActive ? 'border-[var(--color-primary)]' : 'border-[var(--color-text)]/10',
             ].join(' ')}
           >
             {img?.url ? (
@@ -63,7 +63,7 @@ export default function ProductGallery({ product }: Props) {
                 className="object-cover"
               />
             ) : (
-              <div className="h-full w-full bg-[#ece8e5]" />
+              <div className="h-full w-full bg-[var(--color-surface)]" />
             )}
           </button>
         )

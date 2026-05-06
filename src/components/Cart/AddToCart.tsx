@@ -209,7 +209,7 @@ export function AddToCart({
       aria-label="Add to cart"
       variant="outline"
       // className={className}
-      className="w-full rounded-none border border-[#c8a24d] bg-[#c8a24d] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[#c8a24d] hover:scale-[1.03] active:scale-[0.97]"
+      className="w-full rounded-none border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[var(--color-primary)] hover:scale-[1.03] active:scale-[0.97]"
       disabled={disabled || isLoading}
       onClick={addToCart}
       type="submit"

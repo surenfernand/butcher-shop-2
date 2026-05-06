@@ -10,13 +10,13 @@ function CartToastAlert({ type, title, description }: any) {
   return (
     <div className={`relative flex w-[420px] gap-5 overflow-hidden border bg-[#070b0a]/95 px-7 py-6 shadow-xl ${isSuccess ? 'border-[#6f5420]' : 'border-[#742710]'
       }`}>
-      <div className={`mt-1 flex h-8 w-8 items-center justify-center rounded-full ${isSuccess ? 'bg-[#f3c75d]' : 'bg-[#ffb6a8]'
+      <div className={`mt-1 flex h-8 w-8 items-center justify-center rounded-full ${isSuccess ? 'bg-[var(--color-gold)]' : 'bg-[var(--color-primary)]'
         }`}>
         {isSuccess ? <Check size={16} /> : <AlertTriangle size={16} />}
       </div>
 
       <div className="flex-1 pr-5">
-        <p className={`font-serif text-2xl font-bold ${isSuccess ? 'text-[#f3c75d]' : 'text-[#ffb6a8]'
+        <p className={`font-sans text-2xl font-bold ${isSuccess ? 'text-[var(--color-gold)]' : 'text-[var(--color-primary)]'
           }`}>
           {title}
         </p>
@@ -32,7 +32,7 @@ function CartToastAlert({ type, title, description }: any) {
         <X size={20} />
       </button>
 
-      <div className={`cart-toast-progress absolute bottom-0 left-0 h-[3px] w-full origin-left ${isSuccess ? 'bg-[#f3c75d]' : 'bg-[#c43a1c]'
+      <div className={`cart-toast-progress absolute bottom-0 left-0 h-[3px] w-full origin-left ${isSuccess ? 'bg-[var(--color-gold)]' : 'bg-[#c43a1c]'
         }`} />
     </div>
   )

@@ -57,7 +57,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
   return (
     <section
-      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[#1a1a1a] text-neutral-900 "
+      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[var(--color-primary-hover)] text-neutral-900 "
       data-theme="light"
     >
       <div className="absolute inset-0">
@@ -90,7 +90,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
             {(eyebrow || heading) && (
               <div className="mb-6">
                 {eyebrow && (
-                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#E66D54]">
+                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-primary)]">
                     {eyebrow}
                   </p>
                 )}
@@ -98,7 +98,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
             )}
 
             {heading && (
-              <h1 className="font-filet-serif text-3xl font-semibold leading-[1.15] tracking-tight text-black md:text-4xl lg:text-[2.75rem]">
+              <h1 className="font-sans text-3xl font-semibold leading-[1.15] tracking-tight text-black md:text-4xl lg:text-[2.75rem]">
                 {heading}
               </h1>
             )}
@@ -130,7 +130,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                           'inline-flex min-h-11 w-full items-center justify-center rounded-sm px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] transition sm:min-w-[140px]',
                           isOutline
                             ? 'border border-neutral-300 bg-transparent text-neutral-900 hover:border-neutral-400'
-                            : 'border border-[#E66D54] bg-[#E66D54] text-white hover:bg-[#d85e42]',
+                            : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]',
                         )}
                       >
                         {link.label}

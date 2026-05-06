@@ -24,6 +24,9 @@ import type { Page } from '../payload-types'
 import { ContactPageBlock } from './ContactPage/Component'
 import { ArtisansPromiseBlock } from './ArtisansPromise/Component'
 import { AboutEditableBlock } from './AboutEditable/Component'
+import { ArchitectsOfFlavorBlock } from './ArchitectsOfFlavor/Component'
+import { AboutHeritageShowcaseBlock } from './AboutHeritageShowcase/Component'
+import { HomeTestimonialShowcaseBlock } from './HomeTestimonialShowcase/Component'
 
 const blockComponents: Record<string, ComponentType<any>> = {
   aboutStory: AboutStoryBlock,
@@ -45,6 +48,9 @@ const blockComponents: Record<string, ComponentType<any>> = {
   contactPage: ContactPageBlock,
   artisansPromise: ArtisansPromiseBlock,
   aboutEditable: AboutEditableBlock,
+  architectsOfFlavor: ArchitectsOfFlavorBlock,
+  aboutHeritageShowcase: AboutHeritageShowcaseBlock,
+  homeTestimonialShowcase: HomeTestimonialShowcaseBlock,
 }
 
 

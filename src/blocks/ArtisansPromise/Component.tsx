@@ -38,13 +38,13 @@ export const ArtisansPromiseBlock: React.FC<
   if (!items?.length) return null
 
   return (
-    <section className="bg-[#f8f5f4] py-16 md:py-24">
+    <section className="bg-[var(--color-background)] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-14 text-center">
           <h2 className="text-sm font-semibold tracking-tight text-neutral-700 md:text-base">
             {heading}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-24 bg-[#E66D54]" aria-hidden />
+          <div className="mx-auto mt-4 h-1 w-24 bg-[var(--color-primary)]" aria-hidden />
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -53,10 +53,10 @@ export const ArtisansPromiseBlock: React.FC<
 
             return (
               <article
-                className="flex min-h-[250px] flex-col items-center justify-center bg-[#e9e8e6] px-8 py-10 text-center"
+                className="flex min-h-[250px] flex-col items-center justify-center rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-center text-[var(--color-text)] shadow-sm"
                 key={index}
               >
-                <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-xl border border-[#E66D54]/25 text-[#E66D54]">
+                <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-xl border border-[var(--color-primary)]/25 text-[var(--color-primary)]">
                   <Icon aria-hidden className="h-6 w-6" strokeWidth={2.4} />
                 </div>
 

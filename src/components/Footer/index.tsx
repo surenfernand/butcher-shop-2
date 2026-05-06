@@ -76,7 +76,7 @@ export async function Footer() {
                 {DEFAULT_EXPLORE.map(({ href, label }) => (
                   <li key={href + label}>
                     <Link
-                      className="text-sm text-neutral-600 transition-colors hover:text-[#E66D54]"
+                      className="text-sm text-neutral-600 transition-colors hover:text-[var(--color-primary)]"
                       href={href}
                     >
                       {label}
@@ -98,7 +98,7 @@ export async function Footer() {
                 {DEFAULT_COMPANY.map(({ href, label }) => (
                   <li key={href + label}>
                     <Link
-                      className="text-sm text-neutral-600 transition-colors hover:text-[#E66D54]"
+                      className="text-sm text-neutral-600 transition-colors hover:text-[var(--color-primary)]"
                       href={href}
                     >
                       {label}
@@ -122,7 +122,7 @@ export async function Footer() {
               {footer.contactPhone && (
                 <a
                   href={`tel:${footer.contactPhone}`}
-                  className="text-neutral-600 transition-colors hover:text-[#E66D54]"
+                  className="text-neutral-600 transition-colors hover:text-[var(--color-primary)]"
                 >
                   {footer.contactPhone}
                 </a>
@@ -131,7 +131,7 @@ export async function Footer() {
               {footer.contactEmail && (
                 <a
                   href={`mailto:${footer.contactEmail}`}
-                  className="font-medium text-[#E66D54] transition-colors hover:underline"
+                  className="font-medium text-[var(--color-primary)] transition-colors hover:underline"
                 >
                   {footer.contactEmail}
                 </a>
@@ -161,7 +161,7 @@ export async function Footer() {
                     href={footer.bottomBar.creditUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-[#E66D54]"
+                    className="transition-colors hover:text-[var(--color-primary)]"
                   >
                     {footer.bottomBar.creditLabel}
                   </a>

@@ -703,6 +703,9 @@ export interface Page {
     | ArtisansPromiseBlock
     | ContactPageBlock
     | AboutEditableBlock
+    | ArchitectsOfFlavorBlock
+    | AboutHeritageShowcaseBlock
+    | HomeTestimonialShowcaseBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1399,6 +1402,83 @@ export interface AboutEditableBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchitectsOfFlavorBlock".
+ */
+export interface ArchitectsOfFlavorBlock {
+  title?: string | null;
+  subtitle?: string | null;
+  team?:
+    | {
+        image?: (number | null) | Media;
+        name: string;
+        role?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'architectsOfFlavor';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutHeritageShowcaseBlock".
+ */
+export interface AboutHeritageShowcaseBlock {
+  heroTitle: string;
+  heroSubtitle?: string | null;
+  heroImage?: (number | null) | Media;
+  storyEyebrow?: string | null;
+  storyTitle?: string | null;
+  storyBody?: string | null;
+  primaryButtonLabel?: string | null;
+  primaryButtonUrl?: string | null;
+  secondaryButtonLabel?: string | null;
+  secondaryButtonUrl?: string | null;
+  storyImage?: (number | null) | Media;
+  storyImageBadge?: string | null;
+  foundationsTitle?: string | null;
+  foundations?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  sustainabilityEyebrow?: string | null;
+  sustainabilityTitle?: string | null;
+  sustainabilityBody?: string | null;
+  sustainabilityCtaLabel?: string | null;
+  sustainabilityCtaUrl?: string | null;
+  sustainabilityStatValue?: string | null;
+  sustainabilityStatLabel?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutHeritageShowcase';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeTestimonialShowcaseBlock".
+ */
+export interface HomeTestimonialShowcaseBlock {
+  sectionBackground?: string | null;
+  testimonials?:
+    | {
+        quote: string;
+        authorName: string;
+        authorRole?: string | null;
+        authorAvatar?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  topDecorImage?: (number | null) | Media;
+  bottomDecorImage?: (number | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homeTestimonialShowcase';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "meat-types".
  */
 export interface MeatType {
@@ -1780,6 +1860,9 @@ export interface PagesSelect<T extends boolean = true> {
         artisansPromise?: T | ArtisansPromiseBlockSelect<T>;
         contactPage?: T | ContactPageBlockSelect<T>;
         aboutEditable?: T | AboutEditableBlockSelect<T>;
+        architectsOfFlavor?: T | ArchitectsOfFlavorBlockSelect<T>;
+        aboutHeritageShowcase?: T | AboutHeritageShowcaseBlockSelect<T>;
+        homeTestimonialShowcase?: T | HomeTestimonialShowcaseBlockSelect<T>;
       };
   meta?:
     | T
@@ -2156,6 +2239,80 @@ export interface AboutEditableBlockSelect<T extends boolean = true> {
   primaryButtonUrl?: T;
   secondaryButtonLabel?: T;
   secondaryButtonUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchitectsOfFlavorBlock_select".
+ */
+export interface ArchitectsOfFlavorBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  team?:
+    | T
+    | {
+        image?: T;
+        name?: T;
+        role?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutHeritageShowcaseBlock_select".
+ */
+export interface AboutHeritageShowcaseBlockSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroImage?: T;
+  storyEyebrow?: T;
+  storyTitle?: T;
+  storyBody?: T;
+  primaryButtonLabel?: T;
+  primaryButtonUrl?: T;
+  secondaryButtonLabel?: T;
+  secondaryButtonUrl?: T;
+  storyImage?: T;
+  storyImageBadge?: T;
+  foundationsTitle?: T;
+  foundations?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  sustainabilityEyebrow?: T;
+  sustainabilityTitle?: T;
+  sustainabilityBody?: T;
+  sustainabilityCtaLabel?: T;
+  sustainabilityCtaUrl?: T;
+  sustainabilityStatValue?: T;
+  sustainabilityStatLabel?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeTestimonialShowcaseBlock_select".
+ */
+export interface HomeTestimonialShowcaseBlockSelect<T extends boolean = true> {
+  sectionBackground?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        authorName?: T;
+        authorRole?: T;
+        authorAvatar?: T;
+        id?: T;
+      };
+  topDecorImage?: T;
+  bottomDecorImage?: T;
   id?: T;
   blockName?: T;
 }

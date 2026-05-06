@@ -19,15 +19,15 @@ export default function ProductReviews({ product }: Props) {
           )}
         </div>
 
-        <button className="w-fit border-b border-[#d4a63c] pb-1 text-sm uppercase tracking-[0.15em] text-[#d4a63c]">
+        <button className="w-fit border-b border-[var(--color-gold)] pb-1 text-sm uppercase tracking-[0.15em] text-[var(--color-gold)]">
           Write a Review
         </button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
         {product.reviews.map((review, i) => (
-          <div key={i} className="border-l-2 border-[#d4a63c] bg-[#161818] p-6">
-            <div className="mb-4 text-[#d4a63c]">
+          <div key={i} className="border-l-2 border-[var(--color-gold)] bg-[#161818] p-6">
+            <div className="mb-4 text-[var(--color-gold)]">
               {'★'.repeat(review.rating || 5)}
             </div>
 

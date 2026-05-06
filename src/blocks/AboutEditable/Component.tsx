@@ -84,7 +84,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
       <div className="mb-10">
         {eyebrow && <p className="mb-4 text-sm">{eyebrow}</p>}
         {quote && (
-          <blockquote className="mb-8 max-w-2xl border-l-2 border-[#b72b1f] pl-4 text-sm italic text-neutral-600">
+          <blockquote className="mb-8 max-w-2xl border-l-2 border-[var(--color-primary-hover)] pl-4 text-sm italic text-neutral-600">
             “{quote}”
           </blockquote>
         )}
@@ -102,7 +102,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
       <div className="grid gap-12 md:grid-cols-[1fr_1fr]">
         <div>
           {heritageEyebrow && (
-            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[#b72b1f]">
+            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[var(--color-primary-hover)]">
               {heritageEyebrow}
             </p>
           )}
@@ -132,9 +132,9 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
         </div>
       </div>
 
-      <div className="my-24 rounded bg-neutral-50 px-8 py-20 text-center">
+      <div className="my-24 rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-center text-[var(--color-text)] shadow-sm">
         {standardsEyebrow && (
-          <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[#b72b1f]">
+          <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[var(--color-primary-hover)]">
             {standardsEyebrow}
           </p>
         )}
@@ -148,7 +148,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
         <div className="grid gap-10 md:grid-cols-3">
           {standards.map((item: any, index: number) => (
             <div key={index}>
-              <div className="mx-auto mb-5 h-6 w-6 rounded-full border border-[#b72b1f]" />
+              <div className="mx-auto mb-5 h-6 w-6 rounded-full border border-[var(--color-primary-hover)]" />
               <h3 className="mb-2 text-sm font-medium">{item.title}</h3>
               <p className="mx-auto max-w-[220px] text-xs leading-6 text-neutral-600">
                 {item.body}
@@ -168,7 +168,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
             />
           </div>
           {ageBadge && (
-            <div className="absolute bottom-[-25px] right-[-20px] bg-[#b72b1f] px-8 py-5 text-center text-sm font-bold uppercase text-white">
+            <div className="absolute bottom-[-25px] right-[-20px] bg-[var(--color-primary-hover)] px-8 py-5 text-center text-sm font-bold uppercase text-white">
               {ageBadge}
             </div>
           )}
@@ -176,7 +176,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
 
         <div>
           {butchersEyebrow && (
-            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[#b72b1f]">
+            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-[var(--color-primary-hover)]">
               {butchersEyebrow}
             </p>
           )}
@@ -188,7 +188,7 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
           <div className="space-y-5">
             {features.map((item: any, index: number) => (
               <div key={index} className="flex gap-3">
-                <span className="mt-1 h-4 w-4 rounded-full border border-[#b72b1f]" />
+                <span className="mt-1 h-4 w-4 rounded-full border border-[var(--color-primary-hover)]" />
                 <div>
                   <h3 className="text-sm font-medium">{item.title}</h3>
                   <p className="text-xs leading-6 text-neutral-600">{item.body}</p>
@@ -218,18 +218,18 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
         </div>
       </div>
 
-      <div className="mt-24 rounded bg-[#b72b1f] px-8 py-20 text-center text-white">
+      <div className="mt-24 rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-center text-[var(--color-text)] shadow-sm">
         {ctaTitle && <h2 className="mb-4 text-base font-semibold">{ctaTitle}</h2>}
         {ctaBody && <p className="mx-auto mb-8 max-w-xl text-sm leading-7">{ctaBody}</p>}
 
         <div className="flex justify-center gap-4">
           {primaryButtonLabel && primaryButtonUrl && (
-            <Link href={primaryButtonUrl} className="bg-white px-8 py-3 text-xs font-bold uppercase text-[#b72b1f]">
+            <Link href={primaryButtonUrl} className="bg-[var(--color-primary)] px-8 py-3 text-xs font-bold uppercase text-white">
               {primaryButtonLabel}
             </Link>
           )}
           {secondaryButtonLabel && secondaryButtonUrl && (
-            <Link href={secondaryButtonUrl} className="border border-white px-8 py-3 text-xs font-bold uppercase text-white">
+            <Link href={secondaryButtonUrl} className="border border-[var(--color-border-token)] px-8 py-3 text-xs font-bold uppercase text-[var(--color-text)]">
               {secondaryButtonLabel}
             </Link>
           )}

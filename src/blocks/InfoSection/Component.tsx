@@ -40,7 +40,7 @@ export const InfoSectionBlock: React.FC<Props> = ({
 
           <div className="max-w-md text-white">
             {eyebrow && (
-              <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[#d4a63c]">
+              <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-[var(--color-gold)]">
                 {eyebrow}
               </p>
             )}
@@ -50,7 +50,7 @@ export const InfoSectionBlock: React.FC<Props> = ({
             {linkLabel && linkUrl && (
               <Link
                 href={linkUrl}
-                className="inline-block border-b border-[#d4a63c] pb-2 text-2xl uppercase tracking-[0.08em] text-white mb-5"
+                className="inline-block border-b border-[var(--color-gold)] pb-2 text-2xl uppercase tracking-[0.08em] text-white mb-5"
               >
                 {linkLabel}
               </Link>

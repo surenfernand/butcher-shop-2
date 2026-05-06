@@ -168,18 +168,18 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
   const address = typedOrder.shippingAddress
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] text-[#1b1b1b]">
+    <main className="min-h-screen bg-[var(--color-surface)] text-[#1b1b1b]">
       <section className="relative flex items-center justify-center overflow-hidden px-6 pb-8 pt-16 text-center md:pt-20">
         <div className="w-full max-w-3xl">
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#992d20] text-2xl font-black text-white">
+          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-primary)] text-2xl font-black text-white">
             ✓
           </div>
 
-          <h1 className="text-5xl font-bold tracking-tight text-[#151515] md:text-6xl">
+          <h1 className="text-5xl font-bold tracking-tight text-[var(--color-text)] md:text-6xl">
             Order Confirmed
           </h1>
 
-          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#992d20]">
+          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-primary)]">
             Order #{typedOrder.id}
           </p>
 
@@ -198,7 +198,7 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                 Artisanal Preparation
               </h2>
 
-              <p className="text-xs uppercase tracking-[0.18em] text-[#7d7d7d]">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-muted-text)]">
                 Placed {formatDate(typedOrder.createdAt)}
               </p>
             </div>
@@ -225,10 +225,10 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                     </div>
 
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-[#1f1f1f]">{product.title}</h3>
+                      <h3 className="text-lg font-semibold text-[var(--color-text)]">{product.title}</h3>
 
                       {purchaseTypeForPricing && purchaseTypeForPricing !== 'one_time' ? (
-                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#992d20]">
+                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--color-primary)]">
                           {purchaseTypeForPricing === 'monthly'
                             ? 'Monthly subscription'
                             : 'Weekly subscription'}
@@ -236,15 +236,15 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                       ) : null}
 
                       {variant?.title ? (
-                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#7d7d7d]">
+                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--color-muted-text)]">
                           {variant.title}
                         </p>
                       ) : null}
                     </div>
 
                     <div className="text-right">
-                      <p className="font-semibold text-[#1f1f1f]">{formatMoney(lineTotal)}</p>
-                      <p className="mt-1 text-xs uppercase text-[#7d7d7d]">Qty: {quantity}</p>
+                      <p className="font-semibold text-[var(--color-text)]">{formatMoney(lineTotal)}</p>
+                      <p className="mt-1 text-xs uppercase text-[var(--color-muted-text)]">Qty: {quantity}</p>
                     </div>
                   </div>
                 )
@@ -252,24 +252,24 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
             </div>
 
             <div className="mt-10 space-y-3 border-t border-[#ececec] pt-6">
-              <div className="flex justify-between text-sm text-[#666]">
+              <div className="flex justify-between text-sm text-[var(--color-muted-text)]">
                 <span>Subtotal</span>
                 <span>{formatMoney(itemsSubtotal)}</span>
               </div>
 
-              <div className="flex justify-between text-sm text-[#666]">
+              <div className="flex justify-between text-sm text-[var(--color-muted-text)]">
                 <span>Shipping</span>
                 <span>{formatMoney(shippingTotal)}</span>
               </div>
 
-              <div className="flex justify-between text-sm text-[#666]">
+              <div className="flex justify-between text-sm text-[var(--color-muted-text)]">
                 <span>Tax</span>
                 <span>{formatMoney(estimatedTax)}</span>
               </div>
 
               <div className="flex justify-between border-t border-[#ececec] pt-4 text-2xl font-semibold">
-                <span className="text-[#1f1f1f]">Total</span>
-                <span className="text-[#992d20]">{formatMoney(calculatedTotal)}</span>
+                <span className="text-[var(--color-text)]">Total</span>
+                <span className="text-[var(--color-primary)]">{formatMoney(calculatedTotal)}</span>
               </div>
             </div>
           </div>
@@ -279,36 +279,36 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
 
         <aside className="space-y-6 lg:col-span-4">
           <div className="border border-[#e8e8e8] bg-[#f7f7f7] p-7">
-            <h2 className="text-[38px] font-semibold tracking-tight text-[#1f1f1f]">Order Summary</h2>
+            <h2 className="text-[38px] font-semibold tracking-tight text-[var(--color-text)]">Order Summary</h2>
             <div className="mt-6 space-y-3 text-sm">
-              <div className="flex justify-between text-[#666]">
+              <div className="flex justify-between text-[var(--color-muted-text)]">
                 <span>Subtotal</span>
-                <span className="font-semibold text-[#1f1f1f]">{formatMoney(itemsSubtotal)}</span>
+                <span className="font-semibold text-[var(--color-text)]">{formatMoney(itemsSubtotal)}</span>
               </div>
-              <div className="flex justify-between text-[#666]">
+              <div className="flex justify-between text-[var(--color-muted-text)]">
                 <span>Shipping</span>
-                <span className="font-semibold text-[#1f1f1f]">{shippingTotal > 0 ? formatMoney(shippingTotal) : '0.00'}</span>
+                <span className="font-semibold text-[var(--color-text)]">{shippingTotal > 0 ? formatMoney(shippingTotal) : '0.00'}</span>
               </div>
-              <div className="flex justify-between text-[#666]">
+              <div className="flex justify-between text-[var(--color-muted-text)]">
                 <span>Tax</span>
-                <span className="font-semibold text-[#1f1f1f]">{formatMoney(estimatedTax)}</span>
+                <span className="font-semibold text-[var(--color-text)]">{formatMoney(estimatedTax)}</span>
               </div>
               <div className="mt-3 flex justify-between border-t border-[#e5e5e5] pt-3 text-[26px] font-semibold">
-                <span className="text-[#1f1f1f]">Total</span>
-                <span className="text-[#992d20]">{formatMoney(calculatedTotal)}</span>
+                <span className="text-[var(--color-text)]">Total</span>
+                <span className="text-[var(--color-primary)]">{formatMoney(calculatedTotal)}</span>
               </div>
             </div>
 
             <div className="mt-7 space-y-3">
               <Link
                 href={orderUrl}
-                className="block w-full bg-[#992d20] py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-white hover:bg-[#842518]"
+                className="block w-full bg-[var(--color-primary)] py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-white hover:bg-[#842518]"
               >
                 View Order Status
               </Link>
               <Link
                 href="/shop"
-                className="block w-full border border-[#cfcfcf] bg-white py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-[#1f1f1f] hover:bg-[#fafafa]"
+                className="block w-full border border-[#cfcfcf] bg-white py-4 text-center text-sm font-black uppercase tracking-[0.16em] text-[var(--color-text)] hover:bg-[#fafafa]"
               >
                 Return to Shop
               </Link>

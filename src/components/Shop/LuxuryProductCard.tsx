@@ -29,11 +29,11 @@ export const LuxuryProductCard: React.FC<Props> = ({ product }) => {
   const originText = product.origin ? originLabels[product.origin] || product.origin : ''
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-[#e4ded6] bg-white text-[#161616] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#d84a32]/40 hover:shadow-xl">
+    <article className="overflow-hidden rounded-3xl border border-[var(--color-border-token)] bg-white text-[var(--color-text)] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--color-primary-hover)]/40 hover:shadow-xl">
       <Link className="group block h-full w-full" href={`/products/${product.slug}`}>
         <div className="relative">
           {product.shopCardLabel ? (
-            <div className="absolute left-5 top-5 z-10 rounded-full bg-[#d84a32] px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white shadow-lg transition-all duration-300 group-hover:translate-y-[-2px]">
+            <div className="absolute left-5 top-5 z-10 rounded-full bg-[var(--color-primary-hover)] px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white shadow-lg transition-all duration-300 group-hover:translate-y-[-2px]">
               {product.shopCardLabel}
             </div>
           ) : null}
@@ -55,27 +55,27 @@ export const LuxuryProductCard: React.FC<Props> = ({ product }) => {
 
         <div className="space-y-3 p-6">
           <div className="flex items-start justify-between gap-4 transition-all duration-300 group-hover:translate-y-[-2px]">
-            <h3 className="text-xl font-black leading-tight text-[#161616]">{product.title}</h3>
+            <h3 className="text-xl font-black leading-tight text-[var(--color-text)]">{product.title}</h3>
 
             {typeof product.priceInUSD === 'number' ? (
-              <div className="shrink-0 font-bold text-[#d84a32]">
+              <div className="shrink-0 font-bold text-[var(--color-primary-hover)]">
                 <Price amount={product.priceInUSD} />
               </div>
             ) : null}
           </div>
 
           {originText ? (
-            <p className="line-clamp-3 text-sm leading-6 text-[#68615b]">{originText}</p>
+            <p className="line-clamp-3 text-sm leading-6 text-[var(--color-muted-text)]">{originText}</p>
           ) : null}
 
           {product.shopCardShortDescription ? (
-            <p className="line-clamp-3 text-sm leading-6 text-[#68615b]">
+            <p className="line-clamp-3 text-sm leading-6 text-[var(--color-muted-text)]">
               {product.shopCardShortDescription}
             </p>
           ) : null}
 
           <div className="pt-2">
-            <div className="rounded-full border border-[#d84a32] bg-[#d84a32] px-5 py-3 text-center text-[11px] font-black uppercase tracking-[0.24em] text-white transition-all duration-300 ease-out group-hover:border-[#161616] group-hover:bg-[#161616]">
+            <div className="rounded-full border border-[var(--color-primary-hover)] bg-[var(--color-primary-hover)] px-5 py-3 text-center text-[11px] font-black uppercase tracking-[0.24em] text-white transition-all duration-300 ease-out group-hover:border-[#c7442e] group-hover:bg-[#c7442e]">
               {product.cardButtonLabel || 'Add to Cart'}
             </div>
           </div>

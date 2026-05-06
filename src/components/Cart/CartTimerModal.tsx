@@ -35,9 +35,9 @@ export function CartTimerModal({
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/55 backdrop-blur-[2px]">
-      <div className="w-full max-w-[520px] bg-white px-5 py-8 text-center text-[#181818] shadow-[0_24px_80px_rgba(0,0,0,0.25)]">
+      <div className="w-full max-w-[520px] bg-white px-5 py-8 text-center text-[var(--color-text)] shadow-[0_24px_80px_rgba(0,0,0,0.25)]">
       
-        <h2 className="mx-auto max-w-[360px] text-[28px] font-black uppercase leading-[1.25] tracking-[0.16em] text-[#181818]">
+        <h2 className="mx-auto max-w-[360px] text-[28px] font-black uppercase leading-[1.25] tracking-[0.16em] text-[var(--color-text)]">
           {title}
         </h2>
 
@@ -46,7 +46,7 @@ export function CartTimerModal({
         </p>
 
         <div className="mx-auto mt-5 flex max-w-[360px] flex-col items-center justify-center bg-[#f5f3f2] px-4 py-5">
-          <div className="text-[52px] font-light leading-none tracking-[-0.04em] text-[#151515]">
+          <div className="text-[52px] font-light leading-none tracking-[-0.04em] text-[var(--color-text)]">
             {formatTime(secondsLeft)}
           </div>
 
@@ -59,7 +59,7 @@ export function CartTimerModal({
           <button
             type="button"
             onClick={onExtend}
-            className="h-14 bg-[#e95b45] text-[13px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#d94c37]"
+            className="h-14 bg-[var(--color-primary)] text-[13px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-[var(--color-primary)]"
           >
             {extendLabel}
           </button>
@@ -67,7 +67,7 @@ export function CartTimerModal({
           <button
             type="button"
             onClick={onConfirm}
-            className="h-14 border border-[#b89a91] bg-white text-[13px] font-black uppercase tracking-[0.18em] text-[#181818] transition hover:bg-[#f5f3f2]"
+            className="h-14 border border-[#b89a91] bg-white text-[13px] font-black uppercase tracking-[0.18em] text-[var(--color-text)] transition hover:bg-[#f5f3f2]"
           >
             {confirmLabel}
           </button>

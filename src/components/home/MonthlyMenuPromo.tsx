@@ -14,19 +14,19 @@ export const MonthlyMenuPromo: React.FC = () => {
   }
 
   return (
-    <section className="overflow-hidden bg-[#1a1a1a]">
+    <section className="overflow-hidden bg-[var(--color-text)]">
       <div className="grid md:min-h-[440px] md:grid-cols-2">
         <div className="flex flex-col justify-center px-8 py-14 md:order-none md:px-12 md:py-16 lg:px-16 lg:py-20">
           <h2 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-[3.15rem] lg:leading-[1.12]">
             Mastery In Your Inbox.
           </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-[#a0a0a0] md:text-[17px] md:leading-8">
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-[var(--color-muted-text)] md:text-[17px] md:leading-8">
             Join our inner circle for exclusive access to vintage reserves, masterclass invites, and
             seasonal provenance reports.
           </p>
 
           {submitted ? (
-            <p className="mt-10 text-sm font-medium text-[#d4af5f]">
+            <p className="mt-10 text-sm font-medium text-[var(--color-gold)]">
               Thank you — you&apos;re on the list.
             </p>
           ) : (
@@ -41,12 +41,12 @@ export const MonthlyMenuPromo: React.FC = () => {
                   placeholder="YOUR EMAIL ADDRESS"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border-0 border-b border-[#5a5a5a] bg-transparent pb-3 pt-1 text-[11px] font-medium uppercase tracking-[0.22em] text-white placeholder:text-[#a0a0a0] focus:border-[#a0a0a0] focus:outline-none focus:ring-0"
+                  className="w-full border-0 border-b border-[#5a5a5a] bg-transparent pb-3 pt-1 text-[11px] font-medium uppercase tracking-[0.22em] text-white placeholder:text-[var(--color-muted-text)] focus:border-[var(--color-muted-text)] focus:outline-none focus:ring-0"
                 />
               </label>
               <button
                 type="submit"
-                className="mt-9 w-full bg-[#d4af5f] px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1a1a1a] transition hover:brightness-105 md:inline-block md:w-auto md:min-w-[300px]"
+                className="mt-9 w-full bg-[var(--color-gold)] px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-text)] transition hover:brightness-105 md:inline-block md:w-auto md:min-w-[300px]"
               >
                 SUBSCRIBE TO CRAFT
               </button>

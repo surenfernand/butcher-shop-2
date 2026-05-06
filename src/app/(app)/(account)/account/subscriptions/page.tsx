@@ -165,7 +165,7 @@ export default async function SubscriptionsPage() {
                     </div>
 
                     <div className="text-left md:text-right">
-                      <p className="text-xl font-bold text-[#E66D54]">
+                      <p className="text-xl font-bold text-[var(--color-primary)]">
                         {formatMoney(amount)}
                         <span className="text-sm font-normal text-muted-foreground">
                           /{purchaseType === 'monthly' ? 'mo' : 'wk'}
@@ -203,7 +203,7 @@ export default async function SubscriptionsPage() {
                   <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                     <Link
                       href={`/orders/${order.id}`}
-                      className="bg-[#E66D54] px-8 py-4 text-center text-xs font-black uppercase tracking-[0.25em] text-black"
+                      className="bg-[var(--color-primary)] px-8 py-4 text-center text-xs font-black uppercase tracking-[0.25em] text-black"
                     >
                       Manage Selection
                     </Link>

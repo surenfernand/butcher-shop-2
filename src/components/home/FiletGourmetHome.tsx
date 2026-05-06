@@ -38,11 +38,11 @@ export function FiletGourmetHome() {
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="mb-14 text-center">
-            <h2 className="font-filet-serif text-3xl font-semibold tracking-tight text-black md:text-4xl">
+            <h2 className="font-sans text-3xl font-semibold tracking-tight text-black md:text-4xl">
               The Artisan&apos;s Promise
             </h2>
             <div
-              className="mx-auto mt-4 h-0.5 w-12 bg-[#E66D54]"
+              className="mx-auto mt-4 h-0.5 w-12 bg-[var(--color-primary)]"
               aria-hidden
             />
           </div>
@@ -50,8 +50,8 @@ export function FiletGourmetHome() {
           <div className="grid gap-12 md:grid-cols-3 md:gap-8">
             {features.map(({ title, body, icon: Icon }) => (
               <div className="flex flex-col items-center text-center" key={title}>
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-sm bg-white shadow-sm ring-1 ring-black/5">
-                  <Icon className="h-7 w-7 text-[#E66D54]" strokeWidth={1.25} />
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
+                  <Icon className="h-7 w-7 text-[var(--color-primary)]" strokeWidth={1.25} />
                 </div>
                 <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-black">
                   {title}
@@ -68,15 +68,15 @@ export function FiletGourmetHome() {
         <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#E66D54]">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-primary)]">
                 Curated selections
               </p>
-              <h2 className="font-filet-serif text-3xl font-semibold text-black md:text-4xl">
+              <h2 className="font-sans text-3xl font-semibold text-black md:text-4xl">
                 Signature Collections
               </h2>
             </div>
             <Link
-              className="text-sm font-medium text-black underline decoration-neutral-400 underline-offset-4 transition hover:text-[#E66D54] hover:decoration-[#E66D54]"
+              className="text-sm font-medium text-black underline decoration-neutral-400 underline-offset-4 transition hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
               href="/shop"
             >
               Browse full catalog
@@ -95,12 +95,12 @@ export function FiletGourmetHome() {
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <span className="absolute right-4 top-4 bg-[#E66D54] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+              <span className="absolute right-4 top-4 bg-[var(--color-primary)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
                 New arrival
               </span>
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-8 text-white">
-                <h3 className="font-filet-serif text-2xl font-semibold md:text-3xl">Fresh Meat</h3>
+                <h3 className="font-sans text-2xl font-semibold md:text-3xl">Fresh Meat</h3>
                 <p className="mt-2 max-w-xs text-sm text-white/90">
                   Hand-selected, grass-fed prime cuts.
                 </p>
@@ -120,10 +120,10 @@ export function FiletGourmetHome() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 text-white">
-                <h3 className="font-filet-serif text-xl font-semibold md:text-2xl">
+                <h3 className="font-sans text-xl font-semibold md:text-2xl">
                   Ready-to-Eat
                 </h3>
-                <p className="mt-1 text-sm text-white/85">Prepared for your table.</p>
+                <p className="mt-1 text-sm text-white">Prepared for your table.</p>
               </div>
             </Link>
 
@@ -140,10 +140,10 @@ export function FiletGourmetHome() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 text-white">
-                <h3 className="font-filet-serif text-xl font-semibold md:text-2xl">
+                <h3 className="font-sans text-xl font-semibold md:text-2xl">
                   Subscription Boxes
                 </h3>
-                <p className="mt-1 text-sm text-white/85">Curated deliveries on your schedule.</p>
+                <p className="mt-1 text-sm text-white">Curated deliveries on your schedule.</p>
               </div>
             </Link>
           </div>
@@ -158,7 +158,7 @@ export function FiletGourmetHome() {
           strokeWidth={0.5}
         />
         <div className="relative z-10 mx-auto max-w-3xl px-4 text-center md:px-8">
-          <h2 className="font-filet-serif text-3xl font-semibold text-black md:text-4xl">
+          <h2 className="font-sans text-3xl font-semibold text-black md:text-4xl">
             Join the Connoisseur&apos;s Club
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-neutral-600">

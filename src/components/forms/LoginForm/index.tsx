@@ -57,7 +57,7 @@ export const LoginForm: React.FC = () => {
         <FormItem>
           <Label
             htmlFor="email"
-            className="mb-3 block text-base font-normal text-[#9f9788]"
+            className="mb-3 block text-base font-normal text-[var(--color-muted-text)]"
           >
             Email Address
           </Label>
@@ -66,7 +66,7 @@ export const LoginForm: React.FC = () => {
             type="email"
             autoComplete="email"
             style={{padding: "10px"}}
-            className="h-12 rounded-none border-0 border-b border-[#5d5647] bg-transparent px-0 text-[#f4ead8] placeholder:text-[#6f6a62] shadow-none focus-visible:ring-0 focus-visible:border-[#d6a941]"
+            className="h-12 rounded-none border-0 border-b border-[var(--color-muted-text)] bg-transparent px-0 text-[var(--color-surface)] placeholder:text-[var(--color-muted-text)] shadow-none focus-visible:ring-0 focus-visible:border-[var(--color-gold)]"
             {...register('email', { required: 'Email is required.' })}
           />
           {errors.email && <FormError message={errors.email.message} />}
@@ -75,7 +75,7 @@ export const LoginForm: React.FC = () => {
         <FormItem>
           <Label
             htmlFor="password"
-            className="mb-3 block text-base font-normal text-[#9f9788]"
+            className="mb-3 block text-base font-normal text-[var(--color-muted-text)]"
           >
             Password
           </Label>
@@ -84,17 +84,17 @@ export const LoginForm: React.FC = () => {
             type="password"
             autoComplete="current-password"
             style={{padding: "10px"}}
-            className="h-12 rounded-none border-0 border-b border-[#5d5647] bg-transparent px-0 text-[#f4ead8] placeholder:text-[#6f6a62] shadow-none focus-visible:ring-0 focus-visible:border-[#d6a941]"
+            className="h-12 rounded-none border-0 border-b border-[var(--color-muted-text)] bg-transparent px-0 text-[var(--color-surface)] placeholder:text-[var(--color-muted-text)] shadow-none focus-visible:ring-0 focus-visible:border-[var(--color-gold)]"
             {...register('password', { required: 'Please provide a password.' })}
           />
           {errors.password && <FormError message={errors.password.message} />}
         </FormItem>
 
-        <div className="flex items-center justify-between text-sm text-[#c6bca8]">
+        <div className="flex items-center justify-between text-sm text-[var(--color-muted-text)]">
           <label className="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
-              className="h-5 w-5 appearance-none border border-[#8f8676] bg-transparent checked:bg-[#d6a941]"
+              className="h-5 w-5 appearance-none border border-[var(--color-border-token)] bg-transparent checked:bg-[var(--color-gold)]"
               {...register('remember')}
             />
             <span>Remember me</span>
@@ -102,7 +102,7 @@ export const LoginForm: React.FC = () => {
 
           <Link
             href={`/forgot-password${allParams}`}
-            className="text-[#d6a941] hover:underline"
+            className="text-[var(--color-gold)] hover:underline"
           >
             Forgot password?
           </Link>
@@ -110,7 +110,7 @@ export const LoginForm: React.FC = () => {
       </div>
 
       <Button
-       className="mt-5 w-full rounded-none border border-[#c8a24d] bg-[#c8a24d] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[#c8a24d] hover:scale-[1.03] active:scale-[0.97]"
+       className="mt-5 w-full rounded-none border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[var(--color-primary)] hover:scale-[1.03] active:scale-[0.97]"
         disabled={isLoading}
         size="lg"
         type="submit"

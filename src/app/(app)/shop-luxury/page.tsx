@@ -42,7 +42,7 @@ export default async function ShopLuxuryPage() {
       <div className="mx-auto max-w-7xl ">
         <div className="mb-10">
           {pageData.eyebrow ? (
-            <p className="mb-2 text-sm uppercase tracking-[0.2em] text-[#c8a24d]">
+            <p className="mb-2 text-sm uppercase tracking-[0.2em] text-[var(--color-gold)]">
               {pageData.eyebrow}
             </p>
           ) : null}
@@ -53,11 +53,11 @@ export default async function ShopLuxuryPage() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-          <aside className="border-r border-[#1f1f1f] pr-8">
+          <aside className="border-r border-[var(--color-text)] pr-8">
             <div className="space-y-8">
              {filterSections.map((section, i) => (
                 <div key={i}>
-                  <h2 className="mb-4 text-xs uppercase tracking-[0.2em] text-[#c8a24d]">
+                  <h2 className="mb-4 text-xs uppercase tracking-[0.2em] text-[var(--color-gold)]">
                     {section.title}
                   </h2>
 
@@ -76,7 +76,7 @@ export default async function ShopLuxuryPage() {
 
           <section>
             <div className="mb-8 flex items-center justify-end">
-              <div className="text-sm uppercase tracking-[0.18em] text-[#c8a24d]">
+              <div className="text-sm uppercase tracking-[0.18em] text-[var(--color-gold)]">
                 Sort by: {pageData.sortLabel || 'Recommended'}
               </div>
             </div>

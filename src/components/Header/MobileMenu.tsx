@@ -47,7 +47,7 @@ export function MobileMenu({ menu }: Props) {
 
   return (
     <Sheet onOpenChange={setIsOpen} open={isOpen}>
-      <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-sm border border-neutral-200 text-neutral-800 transition-colors hover:border-neutral-300 hover:text-[#E66D54]">
+      <SheetTrigger className="relative flex h-11 w-11 items-center justify-center rounded-sm border border-neutral-200 text-neutral-800 transition-colors hover:border-neutral-300 hover:text-[var(--color-primary)]">
         <MenuIcon className="h-4" />
       </SheetTrigger>
 

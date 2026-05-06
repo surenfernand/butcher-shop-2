@@ -13,7 +13,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
 
   return (
     <Suspense fallback={null}>
-      <div className="mt-5 bg-[#f7f5f2] text-[#161616]">
+      <div className="mt-5 bg-[#f7f5f2] text-[var(--color-text)]">
         <div className="container py-16">
           <Breadcrumbs
             items={[
@@ -22,16 +22,16 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
             ]}
           />
 
-          <div className="mb-12 border-b border-[#e4ded6] pb-10">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#d84a32]">
+          <div className="mb-12 border-b border-[var(--color-border-token)] pb-10">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[var(--color-primary-hover)]">
               Artisanal selections
             </p>
 
-            <h1 className="mb-4 text-4xl font-black uppercase tracking-tight text-[#161616] md:text-6xl">
+            <h1 className="mb-4 text-4xl font-black uppercase tracking-tight text-[var(--color-text)] md:text-6xl">
               {shopPage.title || 'Shop'}
             </h1>
 
-            <p className="max-w-3xl text-base leading-7 text-[#68615b]">
+            <p className="max-w-3xl text-base leading-7 text-[var(--color-muted-text)]">
               {shopPage.introText || ''}
             </p>
           </div>

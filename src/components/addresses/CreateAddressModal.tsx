@@ -60,10 +60,10 @@ export const CreateAddressModal: React.FC<Props> = ({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="box-border w-[calc(100vw-2rem)] max-w-[760px] overflow-x-hidden border border-[#dedede] bg-white p-0 text-[#1f1f1f] shadow-2xl sm:max-w-[760px]">
+      <DialogContent className="box-border w-[calc(100vw-2rem)] max-w-[760px] overflow-x-hidden border border-[#dedede] bg-white p-0 text-[var(--color-text)] shadow-2xl sm:max-w-[760px]">
         <div className="box-border px-6 py-6 sm:px-10 sm:py-8">
           <DialogHeader className="mb-6 border-b border-[#ededed] pb-5 pr-10">
-            <DialogTitle className="text-[40px] font-semibold tracking-tight text-[#181818]">
+            <DialogTitle className="text-[40px] font-semibold tracking-tight text-[var(--color-text)]">
               {modalTitle}
             </DialogTitle>
             <DialogDescription className="mt-1 text-base text-[#707070]">

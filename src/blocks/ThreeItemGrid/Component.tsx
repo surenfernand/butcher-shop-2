@@ -73,7 +73,7 @@ const BentoTile: React.FC<BentoTileProps> = ({
       />
 
       {badge ? (
-        <span className="absolute right-4 top-4 bg-[#E66D54] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
+        <span className="absolute right-4 top-4 bg-[var(--color-primary)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
           {badge}
         </span>
       ) : null}
@@ -93,7 +93,7 @@ const BentoTile: React.FC<BentoTileProps> = ({
             className={
               size === 'large'
                 ? 'mt-2 max-w-sm text-sm leading-relaxed text-white/90'
-                : 'mt-1 text-sm text-white/85'
+                : 'mt-1 text-sm text-white'
             }
           >
             {subtitle}
@@ -137,19 +137,19 @@ export const ThreeItemGridBlock: React.FC<
   const thirdImage = img2 ?? { src: SUBSCRIPTION_IMAGE, alt: thirdTitle }
 
   return (
-    <section className="bg-[#f8f5f4] py-16 md:py-24">
+    <section className="bg-[var(--color-background)] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-10 flex flex-col justify-between gap-6 md:mb-12 md:flex-row md:items-end">
           <div>
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#E66D54]">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-primary)]">
               Curated selections
             </p>
-            <h2 className="font-filet-serif text-3xl font-semibold text-neutral-800 md:text-4xl">
+            <h2 className="font-sans text-3xl font-semibold text-neutral-800 md:text-4xl">
               Signature Collections
             </h2>
           </div>
           <Link
-            className="self-start text-sm font-medium text-neutral-800 underline decoration-[#E66D54] decoration-1 underline-offset-4 transition hover:text-[#E66D54] md:self-auto"
+            className="self-start text-sm font-medium text-neutral-800 underline decoration-[var(--color-primary)] decoration-1 underline-offset-4 transition hover:text-[var(--color-primary)] md:self-auto"
             href="/shop"
           >
             Browse full catalog

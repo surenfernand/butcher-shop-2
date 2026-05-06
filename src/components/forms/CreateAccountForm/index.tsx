@@ -72,13 +72,13 @@ export const CreateAccountForm: React.FC = () => {
   )
 
   return (
-    <form className="w-full max-w-md py-4 text-[#d8d0c2]" onSubmit={handleSubmit(onSubmit)}>
-      <div className="prose prose-invert mb-8 text-[#b8ad9a]">
+    <form className="w-full max-w-md py-4 text-[var(--color-muted-text)]" onSubmit={handleSubmit(onSubmit)}>
+      <div className="prose prose-invert mb-8 text-[var(--color-muted-text)]">
         <p>
           {`This is where new customers can signup and create a new account. To manage all users, `}
           <Link
             href="/admin/collections/users"
-            className="text-[#d8aa3f] underline-offset-4 hover:text-[#f0c86a]"
+            className="text-[var(--color-gold)] underline-offset-4 hover:text-[var(--color-gold)]"
           >
             login to the admin dashboard
           </Link>
@@ -90,33 +90,33 @@ export const CreateAccountForm: React.FC = () => {
 
       <div className="flex flex-col gap-8 mb-10">
         <FormItem>
-          <Label htmlFor="email" className="mb-2 text-[#9f9584]">
+          <Label htmlFor="email" className="mb-2 text-[var(--color-muted-text)]">
             Email Address
           </Label>
           <Input
             id="email"
             {...register('email', { required: 'Email is required.' })}
             type="email"
-            className="border-0 border-b border-[#5f5546] rounded-none bg-transparent px-0 text-[#eee6d8] placeholder:text-[#7f7463] focus-visible:ring-0 focus-visible:border-[#d8aa3f]"
+            className="border-0 border-b border-[var(--color-muted-text)] rounded-none bg-transparent px-0 text-[var(--color-surface)] placeholder:text-[var(--color-muted-text)] focus-visible:ring-0 focus-visible:border-[var(--color-gold)]"
           />
           {errors.email && <FormError message={errors.email.message} />}
         </FormItem>
 
         <FormItem>
-          <Label htmlFor="password" className="mb-2 text-[#9f9584]">
+          <Label htmlFor="password" className="mb-2 text-[var(--color-muted-text)]">
             New password
           </Label>
           <Input
             id="password"
             {...register('password', { required: 'Password is required.' })}
             type="password"
-            className="border-0 border-b border-[#5f5546] rounded-none bg-transparent px-0 text-[#eee6d8] placeholder:text-[#7f7463] focus-visible:ring-0 focus-visible:border-[#d8aa3f]"
+            className="border-0 border-b border-[var(--color-muted-text)] rounded-none bg-transparent px-0 text-[var(--color-surface)] placeholder:text-[var(--color-muted-text)] focus-visible:ring-0 focus-visible:border-[var(--color-gold)]"
           />
           {errors.password && <FormError message={errors.password.message} />}
         </FormItem>
 
         <FormItem>
-          <Label htmlFor="passwordConfirm" className="mb-2 text-[#9f9584]">
+          <Label htmlFor="passwordConfirm" className="mb-2 text-[var(--color-muted-text)]">
             Confirm Password
           </Label>
           <Input
@@ -126,7 +126,7 @@ export const CreateAccountForm: React.FC = () => {
               validate: (value) => value === password.current || 'The passwords do not match',
             })}
             type="password"
-            className="border-0 border-b border-[#5f5546] rounded-none bg-transparent px-0 text-[#eee6d8] placeholder:text-[#7f7463] focus-visible:ring-0 focus-visible:border-[#d8aa3f]"
+            className="border-0 border-b border-[var(--color-muted-text)] rounded-none bg-transparent px-0 text-[var(--color-surface)] placeholder:text-[var(--color-muted-text)] focus-visible:ring-0 focus-visible:border-[var(--color-gold)]"
           />
           {errors.passwordConfirm && <FormError message={errors.passwordConfirm.message} />}
         </FormItem>
@@ -136,15 +136,15 @@ export const CreateAccountForm: React.FC = () => {
         disabled={loading}
         type="submit"
         variant="default"
-        className="w-full rounded-none border border-[#c8a24d] bg-[#c8a24d] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[#c8a24d] hover:scale-[1.03] active:scale-[0.97]"
+        className="w-full rounded-none border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[var(--color-primary)] hover:scale-[1.03] active:scale-[0.97]"
       >
         {loading ? 'Processing' : 'Create Account'}
       </Button>
 
-      <div className="prose prose-invert mt-8 text-[#b8ad9a]">
+      <div className="prose prose-invert mt-8 text-[var(--color-muted-text)]">
         <p>
           {'Already have an account? '}
-          <Link href={`/login${allParams}`} className="text-[#d8aa3f] underline-offset-4 hover:text-[#f0c86a]">
+          <Link href={`/login${allParams}`} className="text-[var(--color-gold)] underline-offset-4 hover:text-[var(--color-gold)]">
             Login
           </Link>
         </p>

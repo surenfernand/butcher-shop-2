@@ -89,7 +89,7 @@ export const ProductGridBlock = async ({
                   <Link
                     key={product.id}
                     href={`/products/${product.slug}`}
-                    className="group block overflow-hidden border border-white/5 bg-[#121414] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#d3a84b]/40 hover:shadow-2xl hover:shadow-black/40"
+                    className="group block overflow-hidden border border-white/5 bg-[#121414] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--color-gold)]/40 hover:shadow-2xl hover:shadow-black/40"
                   >
                     <div className="relative h-[300px] overflow-hidden bg-black">
                       {image ? <Media
@@ -107,7 +107,7 @@ export const ProductGridBlock = async ({
 
                     <div className="p-6 transition-transform duration-300 ease-out group-hover:-translate-y-1">
                       <div className="flex items-start justify-between gap-4 transition-colors duration-300">
-                        <h3 className="text-lg transition-colors duration-300 group-hover:text-[#d3a84b]">
+                        <h3 className="text-lg transition-colors duration-300 group-hover:text-[var(--color-gold)]">
                           {product.title}
                         </h3>
 

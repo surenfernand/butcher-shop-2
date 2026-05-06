@@ -20,10 +20,10 @@ export default async function CreateAccount() {
   }
 
   return (
-    <div className="min-h-screen text-[#eee6d8]"  style={{margin: "80px 40px 80px 40px"}}>
+    <div className="min-h-screen text-[var(--color-surface)]"  style={{margin: "80px 40px 80px 40px"}}>
       <div className="container flex min-h-screen items-center justify-end py-16">
         <div className="w-full max-w-md">
-          <h1 className="text-xl mb-4 font-medium text-[#eee6d8]">Create Account</h1>
+          <h1 className="text-xl mb-4 font-medium text-[var(--color-surface)]">Create Account</h1>
           <RenderParams />
           <CreateAccountForm />
         </div>

@@ -322,7 +322,7 @@ export function CartModal() {
 
                 <Link
                   href="/checkout"
-                  className="mt-8 flex h-16 w-full items-center justify-center bg-[#ef553f] text-sm font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#d94732]"
+                  className="mt-8 flex h-16 w-full rounded-none border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-center text-[11px] font-extrabold uppercase tracking-[0.28em] text-black transition-all duration-300 ease-out hover:bg-transparent hover:text-[var(--color-primary)] hover:scale-[1.03] active:scale-[0.97] d-flex justify-center"
                 >
                   Checkout
                 </Link>

@@ -39,7 +39,7 @@ export const VisitSectionBlock: React.FC<Props> = ({
           <div className="space-y-4">
             {(hours || []).map((item, index) => (
               <div key={index} className="flex justify-between gap-4 border-b border-white/10 pb-4 last:border-b-0">
-                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#d3a84b]">{item.label}</span>
+                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-gold)]">{item.label}</span>
                 <span className="text-base text-white">{item.value}</span>
               </div>
             ))}

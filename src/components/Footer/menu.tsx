@@ -18,7 +18,7 @@ export function FooterMenu({ menu }: Props) {
           <CMSLink
             {...link}
             appearance="inline"
-            className="text-sm normal-case tracking-normal text-neutral-600 transition-colors hover:text-[#E66D54]"
+            className="text-sm normal-case tracking-normal text-neutral-600 transition-colors hover:text-[var(--color-primary)]"
           />
         </li>
       ))}

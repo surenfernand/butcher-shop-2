@@ -39,7 +39,7 @@ export const AboutStoryBlock: React.FC<Props> = ({
             <div className="pt-2">
               <Link
                 href={ctaUrl}
-                className="inline-flex items-center bg-[#d3a84b] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:brightness-110"
+                className="inline-flex items-center bg-[var(--color-gold)] px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:brightness-110"
               >
                 {ctaLabel}
               </Link>
@@ -47,7 +47,7 @@ export const AboutStoryBlock: React.FC<Props> = ({
           )}
         </div>
 
-        <div className="relative min-h-[420px] overflow-hidden border border-[#d3a84b]/20 bg-[#1a1c1c]">
+        <div className="relative min-h-[420px] overflow-hidden border border-[var(--color-gold)]/20 bg-[#1a1c1c]">
           {imageUrl ? (
             <Image
               src={imageUrl}

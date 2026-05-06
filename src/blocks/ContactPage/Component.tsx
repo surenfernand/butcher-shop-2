@@ -93,36 +93,20 @@ export const ContactPageBlock: React.FC<Props> = ({
   const formDoc = form && typeof form === 'object' && 'fields' in form ? form : null
 
   return (
-    <section className="bg-white text-[#111]">
-      <div className="relative flex min-h-[560px] items-center justify-center overflow-hidden px-6 text-center">
-        {heroUrl ? (
-          <img src={heroUrl} alt="" className="absolute inset-0 h-full w-full object-cover grayscale" />
-        ) : null}
-        <div className="absolute inset-0 bg-white" />
-        <div className="relative z-10 max-w-3xl">
-          <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.48em] text-[#e66d54]">
-            {heroEyebrow || 'THE HERITAGE'}
-          </p>
-          <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] md:text-5xl">
-            {heroTitle || 'CRAFTSMANSHIP BORN OF TRADITION'}
-          </h1>
-          {heroDescription ? (
-            <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[#555]">{heroDescription}</p>
-          ) : null}
-        </div>
-      </div>
+    <section className="bg-[var(--color-background)] text-[var(--color-text)]">
 
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 py-24 lg:grid-cols-[1fr_480px] lg:items-center">
+
+      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 py-24 lg:grid-cols-[1fr_480px] lg:items-center ">
         <div>
           {storyEyebrow ? (
-            <p className="mb-8 inline-flex border-l-2 border-[#e66d54] bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#e66d54]">
+            <p className="mb-8 inline-flex border-l-2 border-[var(--color-primary)] bg-[var(--color-background)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
               {storyEyebrow}
             </p>
           ) : null}
           <h2 className="max-w-2xl text-4xl font-black uppercase leading-[1.05] tracking-[-0.04em] md:text-5xl">
             {storyTitle || 'THE THEATER OF ARTISANAL BUTCHERY'}
           </h2>
-          <div className="mt-8 max-w-3xl space-y-5 text-sm leading-7 text-[#555]">
+          <div className="mt-8 max-w-3xl space-y-5 text-sm leading-7 text-[var(--color-muted-text)]">
             {splitLines(storyBody).map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
@@ -146,7 +130,7 @@ export const ContactPageBlock: React.FC<Props> = ({
             {storyUrl ? (
               <img src={storyUrl} alt="" className="h-[520px] w-full object-cover grayscale" />
             ) : (
-              <div className="flex h-[520px] items-center justify-center bg-[#111] text-sm uppercase text-white/60">
+              <div className="flex h-[520px] items-center justify-center bg-[var(--color-text)] text-sm uppercase text-white/60">
                 Add story image in admin
               </div>
             )}
@@ -154,16 +138,34 @@ export const ContactPageBlock: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="bg-white px-6 py-20">
+      <div className="relative flex min-h-[560px] items-center justify-center overflow-hidden px-6 text-center">
+        {heroUrl ? (
+          <img src={heroUrl} alt="" className="absolute inset-0 h-full w-full object-cover grayscale" />
+        ) : null}
+        <div className="absolute inset-0 bg-[var(--color-background)]" />
+        <div className="relative z-10 max-w-3xl">
+          <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.48em] text-[var(--color-primary)]">
+            {heroEyebrow || 'THE HERITAGE'}
+          </p>
+          <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] md:text-5xl">
+            {heroTitle || 'CRAFTSMANSHIP BORN OF TRADITION'}
+          </h1>
+          {heroDescription ? (
+            <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[var(--color-muted-text)]">{heroDescription}</p>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="bg-[var(--color-background)] px-6 py-20">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[1fr_490px]">
-          <div className="bg-white p-10 shadow-sm">
+          <div className="rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
             <h2 className="text-2xl font-black uppercase">{formTitle || 'INQUIRIES'}</h2>
-            {formDescription ? <p className="mt-3 text-sm text-[#555]">{formDescription}</p> : null}
+            {formDescription ? <p className="mt-3 text-sm text-[var(--color-muted-text)]">{formDescription}</p> : null}
             <div className="mt-8">
               {formDoc ? (
                 <FormBlock form={formDoc} enableIntro={false} />
               ) : (
-                <div className="border border-dashed border-[#c93522]/50 p-6 text-sm text-[#555]">
+                <div className="border border-dashed border-[#c93522]/50 p-6 text-sm text-[var(--color-muted-text)]">
                   Select a Payload form for this page in the admin panel.
                 </div>
               )}
@@ -171,19 +173,19 @@ export const ContactPageBlock: React.FC<Props> = ({
           </div>
 
           <div className="space-y-8">
-            <div className="bg-white p-10 shadow-sm">
+            <div className="rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
               <h3 className="mb-7 text-2xl font-black uppercase">{hoursTitle || 'OPENING HOURS'}</h3>
               <div className="space-y-5">
                 {(storeHours || []).map((item, index) => (
                   <div key={index} className="flex justify-between border-b border-[#ddd] pb-4 text-sm">
-                    <span className="text-[#555]">{item.day}</span>
+                    <span className="text-[var(--color-muted-text)]">{item.day}</span>
                     <span className={item.highlight ? 'font-black text-[#c93522]' : 'font-black'}>{item.time}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* <div className="bg-[#d0452e] p-10 text-white shadow-sm">
+            {/* <div className="bg-[var(--color-primary)] p-10 text-white shadow-sm">
               <h3 className="mb-6 text-2xl font-black uppercase">{visitTitle || 'VISIT THE ATELIER'}</h3>
               <div className="space-y-5">
                 {(contactDetails || []).map((detail, index) => {
@@ -201,7 +203,7 @@ export const ContactPageBlock: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className="relative h-[500px] overflow-hidden bg-[#777]">
+      <div className="relative h-[500px] overflow-hidden bg-[var(--color-muted-text)]">
         {mapEmbedUrl ? (
           <iframe
             src={mapEmbedUrl}

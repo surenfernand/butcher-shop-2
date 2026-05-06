@@ -32,6 +32,9 @@ import { revalidatePage, revalidateDelete } from './hooks/revalidatePage'
 import { ContactPage } from '@/blocks/ContactPage/config'
 import { ArtisansPromise } from '@/blocks/ArtisansPromise/config'
 import { AboutEditable } from '@/blocks/AboutEditable/config'
+import { ArchitectsOfFlavor } from '@/blocks/ArchitectsOfFlavor/config'
+import { AboutHeritageShowcase } from '@/blocks/AboutHeritageShowcase/config'
+import { HomeTestimonialShowcase } from '@/blocks/HomeTestimonialShowcase/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -118,6 +121,9 @@ export const Pages: CollectionConfig = {
                 ArtisansPromise,
                 ContactPage,
                 AboutEditable, 
+                ArchitectsOfFlavor,
+                AboutHeritageShowcase,
+                HomeTestimonialShowcase,
               ],
               required: true,
             },

@@ -92,7 +92,7 @@ function StatusBadge({ status }: { status: Order['status'] }) {
   }
 
   return (
-    <span className="inline-block rounded-full bg-[#f3f3f3] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#666]">
+    <span className="inline-block rounded-full bg-[#f3f3f3] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted-text)]">
       {label.toUpperCase()}
     </span>
   )
@@ -131,16 +131,16 @@ export default async function Orders() {
   }
 
   return (
-    <div className="w-full space-y-10 text-[#1f1f1f]">
+    <div className="w-full space-y-10 text-[var(--color-text)]">
       <div className="mt-2">
         
         <h1 className="mt-3 text-6xl font-semibold tracking-tight text-[#171717]">Past Orders</h1>
-        <div className="mt-3 h-[3px] w-20 bg-[#d66152]" />
+        <div className="mt-3 h-[3px] w-20 bg-[var(--color-primary)]" />
       </div>
 
       <div className="overflow-hidden border border-[#e8e8e8] bg-white">
         {(!orders || orders.length === 0) && (
-          <div className="px-6 py-14 text-center text-[#777]">You have no orders.</div>
+          <div className="px-6 py-14 text-center text-[var(--color-muted-text)]">You have no orders.</div>
         )}
 
         {orders && orders.length > 0 && (
@@ -148,19 +148,19 @@ export default async function Orders() {
             <table className="w-full min-w-[820px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-[#ebebeb] bg-[#fafafa]">
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-7">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-muted-text)] lg:px-7">
                     Order ID
                   </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-muted-text)] lg:px-6">
                     Date
                   </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-muted-text)] lg:px-6">
                     Total
                   </th>
-                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-6">
+                  <th className="px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-muted-text)] lg:px-6">
                     Status
                   </th>
-                  <th className="px-5 py-4 text-right text-[11px] font-semibold uppercase tracking-[0.2em] text-[#666] lg:px-7">
+                  <th className="px-5 py-4 text-right text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-muted-text)] lg:px-7">
                     Actions
                   </th>
                 </tr>
@@ -178,7 +178,7 @@ export default async function Orders() {
                       <td className="px-5 py-5 align-middle text-sm lg:px-7">
                         <Link
                           href={href}
-                          className="font-semibold tracking-[0.06em] text-[#202020] underline-offset-4 hover:text-[#992d20]"
+                          className="font-semibold tracking-[0.06em] text-[#202020] underline-offset-4 hover:text-[var(--color-primary)]"
                         >
                           #{formatOrderRef(order.id)}
                         </Link>
@@ -187,7 +187,7 @@ export default async function Orders() {
                         {formatOrderDate(order.createdAt)}
                       </td>
                       <td className="px-5 py-5 align-middle lg:px-6">
-                        <span className="font-semibold text-[#d66152]">{formatMoney(order.amount)}</span>
+                        <span className="font-semibold text-[var(--color-primary)]">{formatMoney(order.amount)}</span>
                       </td>
                       <td className="px-5 py-5 align-middle lg:px-6">
                         <StatusBadge status={order.status} />

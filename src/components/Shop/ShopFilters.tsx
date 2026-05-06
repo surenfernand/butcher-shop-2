@@ -49,11 +49,11 @@ const sorting = [
 ]
 
 const inputClassName =
-  'w-full rounded-xl border border-[#e4ded6] bg-[#fbfaf8] px-4 py-3 text-sm text-[#161616] outline-none transition focus:border-[#d84a32] focus:ring-2 focus:ring-[#d84a32]/15'
+  'w-full rounded-xl border border-[var(--color-border-token)] bg-[#fbfaf8] px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-primary-hover)] focus:ring-2 focus:ring-[var(--color-primary-hover)]/15'
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-4 text-[11px] font-black uppercase tracking-[0.24em] text-[#161616]">
+    <h3 className="mb-4 text-[11px] font-black uppercase tracking-[0.24em] text-[var(--color-text)]">
       {children}
     </h3>
   )
@@ -95,7 +95,7 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
   }
 
   return (
-    <aside className="w-full max-w-[260px] rounded-2xl border border-[#e4ded6] bg-white p-6 text-[#161616] shadow-sm">
+    <aside className="w-full max-w-[260px] rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
       <div className="space-y-8">
         <div>
           <SectionTitle>{labels?.cutTypeLabel || 'Meat Type'}</SectionTitle>
@@ -127,8 +127,8 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
                   className={clsx(
                     'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] transition',
                     active
-                      ? 'border-[#d84a32] bg-[#d84a32] text-white'
-                      : 'border-[#e4ded6] bg-white text-[#68615b] hover:border-[#d84a32] hover:text-[#d84a32]',
+                      ? 'border-[var(--color-primary-hover)] bg-[var(--color-primary-hover)] text-white'
+                      : 'border-[var(--color-border-token)] bg-white text-[var(--color-muted-text)] hover:border-[var(--color-primary-hover)] hover:text-[var(--color-primary-hover)]',
                   )}
                 >
                   {item.label}
@@ -156,11 +156,11 @@ export const ShopFilters = ({ labels, sortLabel }: ShopFiltersProps) => {
 
         <div>
           <SectionTitle>Availability</SectionTitle>
-          <label className="flex cursor-pointer items-center gap-3 text-sm text-[#68615b]">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-[var(--color-muted-text)]">
             <input
               type="checkbox"
               checked={currentInStock === 'true'}
-              className="h-4 w-4 accent-[#d84a32]"
+              className="h-4 w-4 accent-[var(--color-primary-hover)]"
               onChange={(e) => updateParam('inStock', e.target.checked ? 'true' : '')}
             />
             <span>In Stock Only</span>

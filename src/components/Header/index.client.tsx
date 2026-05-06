@@ -56,9 +56,9 @@ export function HeaderClient({ header }: Props) {
                       appearance="nav"
                       size="clear"
                       className={cn(
-                        'relative text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-800 transition-colors duration-200 hover:text-[#E66D54]',
+                        'relative text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-800 transition-colors duration-200 hover:text-[var(--color-primary)]',
                         {
-                          'text-[#E66D54] after:absolute after:left-0 after:top-full after:mt-1.5 after:h-px after:w-full after:bg-[#E66D54]':
+                          'text-[var(--color-primary)] after:absolute after:left-0 after:top-full after:mt-1.5 after:h-px after:w-full after:bg-[var(--color-primary)]':
                             item.link?.url === '/'
                               ? pathname === '/'
                               : item.link?.url
@@ -80,7 +80,7 @@ export function HeaderClient({ header }: Props) {
 
             <Link
               href="/account"
-              className="hidden transition-colors hover:text-[#E66D54] md:inline-flex"
+              className="hidden transition-colors hover:text-[var(--color-primary)] md:inline-flex"
               aria-label="Account"
             >
               <User className="h-[18px] w-[18px]" strokeWidth={1.5} />

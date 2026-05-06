@@ -6,23 +6,15 @@ import { Header } from '@/components/Header'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { ensureStartsWith } from '@/utilities/ensureStartsWith'
 import { Providers } from '@/providers'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Cormorant_Garamond, Montserrat } from 'next/font/google'
+import { Epilogue } from 'next/font/google'
 import React from 'react'
 
-const montserrat = Montserrat({
+const epilogue = Epilogue({
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  variable: '--font-epilogue',
   display: 'swap',
 })
 
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-filet-serif',
-  display: 'swap',
-})
 import './globals.css'
 
 /* const { SITE_NAME, TWITTER_CREATOR, TWITTER_SITE } = process.env
@@ -56,10 +48,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html
       className={[
-        GeistSans.variable,
-        GeistMono.variable,
-        montserrat.variable,
-        cormorantGaramond.variable,
+        epilogue.variable,
       ]
         .filter(Boolean)
         .join(' ')}

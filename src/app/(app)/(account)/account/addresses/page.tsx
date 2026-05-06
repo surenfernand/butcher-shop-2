@@ -36,13 +36,13 @@ export default async function AddressesPage() {
       {/* GRID */}
       <div className="grid">
 
-        <h2 className="text-xl font-bold uppercase tracking-wide text-[#E66D54] mb-5">
+        <h2 className="text-xl font-bold uppercase tracking-wide text-[var(--color-primary)] mb-5">
            Shipping Address
         </h2>
 
         {/* LEFT - FORM / LIST */}
         <div className="rounded-xl border border-border bg-card p-8">
-          {/* <h2 className="mb-8 text-xl font-bold uppercase tracking-[0.18em] text-[#E66D54]">
+          {/* <h2 className="mb-8 text-xl font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
             Shipping Address
           </h2> */}
 

@@ -86,7 +86,7 @@ export default function ProductDetails({ product }: Props) {
         </span>
       )}
 
-      <h1 className="mb-5 text-5xl font-black tracking-[-0.06em] text-[#111]">
+      <h1 className="mb-5 text-5xl font-black tracking-[-0.06em] text-[var(--color-text)]">
         {product.title}
       </h1>
 
@@ -95,7 +95,7 @@ export default function ProductDetails({ product }: Props) {
           {product.badges.map((badge, i) => (
             <span
               key={i}
-              className="bg-[#e9e6e4] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#1d1a17]"
+              className="bg-[#e9e6e4] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-text)]"
             >
               {badge.label}
             </span>
@@ -122,7 +122,7 @@ export default function ProductDetails({ product }: Props) {
                   <span>{item.quantity}</span>{' '}
                   <span>{item.label}</span>
                 </span>
-                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[#d73725] text-[11px] text-[#d73725]">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--color-primary)] text-[11px] text-[var(--color-primary)]">
                   ✓
                 </span>
               </li>
@@ -144,19 +144,19 @@ export default function ProductDetails({ product }: Props) {
                 className={[
                   'flex w-full items-center justify-between border p-6 text-left transition',
                   isSelected
-                    ? 'border-[#c23224] bg-[#fff7f5]'
-                    : 'border-[#ead8d3] bg-white hover:border-[#c23224]/60',
+                    ? 'border-[var(--color-primary)] bg-[#fff7f5]'
+                    : 'border-[#ead8d3] bg-white hover:border-[var(--color-primary)]/60',
                 ].join(' ')}
               >
                 <div className="flex items-center gap-5">
                   <span
                     className={[
                       'flex h-4 w-4 items-center justify-center rounded-full border',
-                      isSelected ? 'border-[#c23224]' : 'border-[#9f9a96]',
+                      isSelected ? 'border-[var(--color-primary)]' : 'border-[#9f9a96]',
                     ].join(' ')}
                   >
                     {isSelected && (
-                      <span className="h-2 w-2 rounded-full bg-[#c23224]" />
+                      <span className="h-2 w-2 rounded-full bg-[var(--color-primary)]" />
                     )}
                   </span>
 
@@ -177,7 +177,7 @@ export default function ProductDetails({ product }: Props) {
                   <span
                     className={[
                       'text-sm font-black',
-                      isSelected ? 'text-[#c23224]' : 'text-[#15110f]',
+                      isSelected ? 'text-[var(--color-primary)]' : 'text-[#15110f]',
                     ].join(' ')}
                   >
                     {option.price}
@@ -192,7 +192,7 @@ export default function ProductDetails({ product }: Props) {
       <AddToCart
         product={product}
         purchaseType={purchaseType}
-        className="flex h-24 w-full items-center justify-center bg-[#e95b45] text-xs font-bold uppercase tracking-[0.3em] text-white transition hover:bg-[#d94d38]"
+        className="flex h-24 w-full items-center justify-center bg-[var(--color-primary)] text-xs font-bold uppercase tracking-[0.3em] text-white transition hover:bg-[var(--color-primary)]"
       />
     </div>
   )

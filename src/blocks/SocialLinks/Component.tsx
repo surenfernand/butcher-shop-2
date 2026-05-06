@@ -25,7 +25,7 @@ export const SocialLinksBlock: React.FC<Props> = ({ title, items, className }) =
             <Link
               key={index}
               href={item.url || '#'}
-              className="text-xs uppercase tracking-[0.3em] text-[#d2c5b1] transition hover:text-[#d3a84b]"
+              className="text-xs uppercase tracking-[0.3em] text-[var(--color-primary)] transition hover:text-[var(--color-gold)]"
             >
               {item.label}
             </Link>
