@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
-import React, { Fragment, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type FormData = {
@@ -47,46 +47,57 @@ export const ForgotPasswordForm: React.FC = () => {
   }, [])
 
   return (
-    <Fragment>
+    <>
       {!success && (
-        <React.Fragment>
-          <h1 className="text-xl mb-4">Forgot Password</h1>
-          <div className="prose dark:prose-invert mb-8">
+        <>
+          <h1 className="text-headline-lg mb-3">Forgot password</h1>
+          <div className="text-muted-foreground text-body-md mb-8">
             <p>
               {`Please enter your email below. You will receive an email message with instructions on
               how to reset your password. To manage your all users, `}
-              <Link href="/admin/collections/users">login to the admin dashboard</Link>.
+              <Link
+                href="/admin/collections/users"
+                className="text-primary underline underline-offset-4 hover:text-[var(--color-primary-hover)]"
+              >
+                login to the admin dashboard
+              </Link>
+              .
             </p>
           </div>
-          <form className="max-w-lg" onSubmit={handleSubmit(onSubmit)}>
-            <Message className="mb-8" error={error} />
+          <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+            <Message className="mb-6 text-sm text-red-500" error={error} />
 
             <FormItem className="mb-8">
-              <Label htmlFor="email" className="mb-2">
+              <Label htmlFor="email" className="text-muted-foreground mb-2 block text-base font-normal">
                 Email address
               </Label>
               <Input
                 id="email"
                 {...register('email', { required: 'Please provide your email.' })}
                 type="email"
+                className="h-12 border-0 border-b border-[var(--color-muted-text)] bg-transparent px-0 shadow-none focus-visible:ring-0 focus-visible:border-[var(--color-primary)]"
               />
               {errors.email && <FormError message={errors.email.message} />}
             </FormItem>
 
-            <Button type="submit" variant="default">
-              Forgot Password
+            <Button
+              type="submit"
+              variant="default"
+              className="w-full rounded border border-[var(--color-primary)] bg-[var(--color-primary)] px-5 py-6 text-[11px] font-extrabold uppercase tracking-[0.24em] text-white transition-all duration-300 ease-out hover:bg-[var(--color-primary-hover)]"
+            >
+              Send reset link
             </Button>
           </form>
-        </React.Fragment>
+        </>
       )}
       {success && (
-        <React.Fragment>
-          <h1 className="text-xl mb-4">Request submitted</h1>
-          <div className="prose dark:prose-invert">
+        <>
+          <h1 className="text-headline-lg mb-3">Request submitted</h1>
+          <div className="text-muted-foreground text-body-md">
             <p>Check your email for a link that will allow you to securely reset your password.</p>
           </div>
-        </React.Fragment>
+        </>
       )}
-    </Fragment>
+    </>
   )
 }

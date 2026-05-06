@@ -18,47 +18,30 @@ export default async function Login() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden text-[#d8c7a0]" style={{margin: "80px 40px 80px 40px"}}>
-      <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
-        <div
-          className="hidden lg:block bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/butcher-portrait.jpg')",
-          }}
-        />
-        <div className=" " />
-      </div>
+    <main className="bg-background text-foreground min-h-screen bg-cover bg-center mt-5" style={{ backgroundImage: "url('/media/surreal-food-online-content-creation.jpg')" }}>
+      <section className="container relative flex min-h-[calc(100vh-10rem)] items-center overflow-hidden py-16 md:py-24"
 
-      <div className="absolute inset-0" />
- 
-      <section className="relative z-10 min-h-screen grid grid-cols-1 lg:grid-cols-2">
-        <div className="hidden lg:flex flex-col justify-end px-8 pb-10">
-        
-
-           
-        </div>
-
-        <div className="flex flex-col justify-center px-8 sm:px-16 lg:px-28">
-          <div className="w-full max-w-md mx-auto mt-10">
+      // className="pointer-events-none absolute inset-0 rounded-lg bg-cover bg-center opacity-10"
+      >
+    
+        <div className="bg-card border-border w-full max-w-xl rounded-lg border p-8 shadow-sm md:p-12">
+          <div className="mx-auto w-full max-w-md">
             <RenderParams />
 
-            <div className="mb-16">
-               
-               
-
-              <h1 className="text-white text-lg font-medium mb-3">Welcome back</h1>
-              <p className="text-[#b9ad9a] text-base">
+            <div className="mb-10">
+              <h1 className="text-headline-lg mb-3">Welcome back</h1>
+              <p className="text-muted-foreground text-body-md">
                 Enter your credentials to access your account.
               </p>
             </div>
 
             <LoginForm />
 
-            <div className="mt-36 text-sm text-[#c6bca8]">
-              New to Butchers Craft ? {' '}
+            <div className="text-muted-foreground text-body-md mt-8">
+              New to Butchers Craft?
               <Link
                 href="/create-account"
-                className="ml-2 text-white underline underline-offset-4 hover:text-[var(--color-gold)]"
+                className="ml-2 text-primary underline underline-offset-4 hover:text-[var(--color-primary-hover)]"
               >
                 Create an account
               </Link>
@@ -66,8 +49,6 @@ export default async function Login() {
           </div>
         </div>
       </section>
-
- 
     </main>
   )
 }

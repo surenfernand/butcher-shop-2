@@ -39,8 +39,8 @@ export function HeaderClient({ header }: Props) {
                   imgClassName="h-12 w-auto max-w-[200px] object-contain object-left md:h-14"
                 />
               ) : (
-                <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-black">
-                  FILET GOURMET
+                <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#e65c43]">
+                  The Butcher's Craft
                 </span>
               )}
             </Link>

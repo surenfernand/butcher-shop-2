@@ -236,10 +236,15 @@ button {
 .cart-toast-progress {
   animation: cart-toast-shrink 4s linear forwards;
 }
-/* 
 /* Light-mode fallback for legacy dark-only utility classes used across the app.
    Skip elements inside a dark island ([data-theme='dark']) so header/footer stay dark in light mode. */
 [data-theme='light'] .bg-black:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121212\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0f0f0f\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#111\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121414\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#161818\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0a0a0a\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-\[\#1A1C1C\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-stone-800:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
   background-color: var(--color-card) !important;
@@ -261,10 +266,22 @@ button {
 }
 
 [data-theme='light'] .bg-black[class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121212\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0f0f0f\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#111\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121414\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#161818\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-\[\#1A1C1C\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0a0a0a\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-stone-800[class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-black [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121212\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0f0f0f\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#111\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#121414\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#161818\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-\[\#1A1C1C\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
+[data-theme='light'] .bg-\[\#0a0a0a\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-stone-800 [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
   color: var(--color-foreground) !important;
 }
@@ -298,7 +315,7 @@ button {
 .checkout-luxury input,
 .checkout-luxury textarea,
 .checkout-luxury select {
-  border-radius: 0 !important;
+  border-radius: var(--radius) !important;
   border-color: var(--ds-border) !important;
   background: #fff !important;
   color: var(--ds-text) !important;
@@ -313,7 +330,7 @@ button {
 }
 
 .checkout-luxury button {
-  border-radius: 0 !important;
+  border-radius: var(--radius) !important;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.14em;
