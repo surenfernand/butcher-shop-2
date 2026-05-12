@@ -38,7 +38,7 @@ export const ProductGridBlock = async ({
   })
 
   return (
-    <section className="bg-black py-16 text-white">
+    <section className="on-dark-media bg-black py-16 text-white">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-8 md:grid-cols-4">
         <div className="md:col-span-4">
           <div className="mb-8 flex items-center justify-between">

@@ -42,8 +42,8 @@ const BentoTile: React.FC<BentoTileProps> = ({
       href={href}
       className={
         size === 'large'
-          ? 'group relative block min-h-[280px] overflow-hidden bg-neutral-900 md:row-span-2 md:min-h-[min(640px,70vh)]'
-          : 'group relative block min-h-[200px] overflow-hidden bg-neutral-900 md:min-h-0'
+          ? 'on-dark-media group relative block min-h-[280px] overflow-hidden bg-neutral-900 text-white md:row-span-2 md:min-h-[min(640px,70vh)]'
+          : 'on-dark-media group relative block min-h-[200px] overflow-hidden bg-neutral-900 text-white md:min-h-0'
       }
     >
       {image ? (
@@ -82,8 +82,8 @@ const BentoTile: React.FC<BentoTileProps> = ({
         <h3
           className={
             size === 'large'
-              ? 'text-2xl font-semibold tracking-tight md:text-3xl'
-              : 'text-xl font-semibold tracking-tight md:text-2xl'
+              ? 'text-2xl font-semibold tracking-tight text-white md:text-3xl'
+              : 'text-xl font-semibold tracking-tight text-white md:text-2xl'
           }
         >
           {title}
@@ -93,7 +93,7 @@ const BentoTile: React.FC<BentoTileProps> = ({
             className={
               size === 'large'
                 ? 'mt-2 max-w-sm text-sm leading-relaxed text-white/90'
-                : 'mt-1 text-sm text-white'
+                : 'mt-1 text-sm leading-relaxed text-white/90'
             }
           >
             {subtitle}

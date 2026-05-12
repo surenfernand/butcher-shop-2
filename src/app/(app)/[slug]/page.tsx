@@ -102,9 +102,11 @@ export default async function Page({ params, searchParams }: Args) {
   const showFiletHomeSections =
     slug === 'home' && Array.isArray(layout) && layout.length === 0
 
+  const heroPullsUnderHeader = hero?.type === 'highImpact'
+
   return (
     <article>
-      <div className="pt-20">
+      <div className={heroPullsUnderHeader ? '' : 'pt-20'}>
         <RenderHero {...hero} brandLogo={headerGlobal.logo} pageSlug={slug} />
         <RenderBlocks blocks={layout} searchParams={resolvedSearchParams} slug={slug} />
         {showFiletHomeSections ? <FiletGourmetHome /> : null}

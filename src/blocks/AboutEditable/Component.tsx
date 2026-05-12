@@ -190,18 +190,12 @@ export const AboutEditableBlock: React.FC<any> = (props) => {
       {/* Intro + hero */}
       <RevealSection>
         <div className="mx-auto max-w-6xl px-5 pb-14 pt-10 md:px-8 md:pb-20 md:pt-14">
-          <div className="mx-auto max-w-3xl text-center md:max-w-4xl">
+          <div className="mx-auto max-w-3xl text-center md:max-w-4xl pt-5">
             {eyebrow ? <p className={eyebrowClass}>{eyebrow}</p> : null}
             {quote ? (
-              <blockquote className="mt-6 font-serif text-2xl font-medium leading-snug tracking-tight text-[var(--color-muted-text)] motion-reduce:animate-none animate-in fade-in slide-in-from-bottom-3 duration-700 md:text-3xl md:leading-snug">
-                <span className="text-[var(--color-primary)] opacity-90 transition-opacity duration-300 hover:opacity-100">
-                  “
-                </span>
+              <h1 className="mt-5 text-4xl font-bold leading-[1.08] tracking-tight text-[var(--color-text)] motion-reduce:animate-none animate-in fade-in slide-in-from-bottom-3 duration-700 md:mt-6 md:text-5xl md:leading-[1.06]">
                 {quote}
-                <span className="text-[var(--color-primary)] opacity-90 transition-opacity duration-300 hover:opacity-100">
-                  ”
-                </span>
-              </blockquote>
+              </h1>
             ) : null}
           </div>
 

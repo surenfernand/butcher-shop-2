@@ -85,7 +85,7 @@ export const RenderBlocks: React.FC<{
                 slug === 'home' && firstPromoAnchorIndex !== -1 && index === firstPromoAnchorIndex
 
               return (
-                <div className="my-16" key={index}>
+                <div className="" key={index}>
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                   {/* @ts-ignore */}
                   <Block

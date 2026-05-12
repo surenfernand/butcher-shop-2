@@ -40,7 +40,9 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   eyebrow,
   heading,
   description,
+  pageSlug,
 }) => {
+  const isMeatHome = pageSlug === 'home'
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
@@ -55,15 +57,27 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   const imageAlt =
     (media && typeof media === 'object' && media.alt) || 'Premium marbled steak on a dark surface'
 
+  const headingLines =
+    isMeatHome && heading
+      ? heading
+          .split('\n')
+          .map((l) => l.trim())
+          .filter(Boolean)
+      : null
+
   return (
     <section
-      className="relative -mt-[10.4rem] min-h-[85vh] overflow-hidden bg-[var(--color-primary-hover)] text-neutral-900 "
+      className={cn(
+        /* Pull under fixed header (h-20), then pad so content clears it — avoids clipping & “squashed” band */
+        'relative z-0 -mt-20 min-h-svh overflow-hidden pt-20',
+        isMeatHome ? 'on-dark-media bg-[#0f0e0c] text-white' : 'bg-[var(--color-primary-hover)] text-neutral-900',
+      )}
       data-theme="light"
     >
-      <div className="absolute inset-0">
-        <div className="relative h-full min-h-[85vh] w-full">
+      <div className="absolute inset-0 min-h-svh">
+        <div className="relative min-h-svh w-full">
           {mediaUrl && isVideo ? (
-            <video autoPlay muted loop playsInline className="h-full w-full object-cover">
+            <video autoPlay muted loop playsInline className="h-full min-h-svh w-full object-cover">
               <source src={mediaUrl} type={media.mimeType || 'video/mp4'} />
             </video>
           ) : (
@@ -73,38 +87,78 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
               fill
               sizes="100vw"
               priority
-              className="object-cover object-center"
+              className={cn('object-cover object-center', isMeatHome && 'brightness-[0.85] contrast-[1.05]')}
             />
           )}
         </div>
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent md:from-black/45"
+        className={cn(
+          'pointer-events-none absolute inset-0 min-h-svh bg-gradient-to-r to-transparent',
+          isMeatHome
+            ? 'from-black/80 via-black/50 md:from-black/75'
+            : 'from-black/55 via-black/25 md:from-black/45',
+        )}
         aria-hidden
       />
 
-      <div className="relative z-10 flex min-h-[85vh] items-center mt-5">
-        <div className="container w-full px-4 pt-24 pb-16 md:px-8 md:pt-28 md:pb-24">
-          <div className="max-w-xl animate-in fade-in-0 slide-in-from-bottom-4 rounded-sm bg-white/90 p-8 shadow-lg backdrop-blur-sm duration-700 motion-reduce:animate-none md:p-10 lg:p-12">
+      <div className="relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-center py-10 md:py-14">
+        <div className="container w-full px-4 md:px-8">
+          <div
+            className={cn(
+              'max-w-xl animate-in fade-in-0 slide-in-from-bottom-4 p-8 duration-700 motion-reduce:animate-none md:p-10 lg:p-12',
+              isMeatHome
+                ? 'rounded-lg border border-white/15 bg-black/55 shadow-2xl backdrop-blur-xl lg:max-w-lg'
+                : 'rounded-sm bg-white/90 shadow-lg backdrop-blur-sm',
+            )}
+          >
             {(eyebrow || heading) && (
               <div className="mb-6">
                 {eyebrow && (
-                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-primary)]">
+                  <p
+                    className={cn(
+                      'mb-4 text-[11px] font-semibold uppercase tracking-[0.28em]',
+                      isMeatHome ? 'text-[var(--color-gold)]' : 'text-[var(--color-primary)]',
+                    )}
+                  >
                     {eyebrow}
                   </p>
                 )}
               </div>
             )}
 
-            {heading && (
-              <h1 className="font-sans text-3xl font-semibold leading-[1.15] tracking-tight text-black md:text-4xl lg:text-[2.75rem]">
-                {heading}
-              </h1>
-            )}
+            {heading &&
+              (headingLines && headingLines.length > 1 ? (
+                <h1 className="font-sans font-bold tracking-tight text-white">
+                  {headingLines.map((line, idx) => (
+                    <span
+                      key={idx}
+                      className="block py-0.5 text-[clamp(2.25rem,6vw,3.75rem)] leading-[1.02] uppercase md:text-[clamp(2.75rem,5.5vw,4.25rem)]"
+                      style={{ color: '#faf8f5' }}
+                    >
+                      {line}
+                    </span>
+                  ))}
+                </h1>
+              ) : (
+                <h1
+                  className={cn(
+                    'font-sans text-3xl font-semibold leading-[1.15] tracking-tight md:text-4xl lg:text-[2.75rem]',
+                    isMeatHome ? 'text-[#faf8f5]' : 'text-black',
+                  )}
+                >
+                  {heading}
+                </h1>
+              ))}
 
             {description && (
-              <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-600 md:text-base">
+              <p
+                className={cn(
+                  'mt-5 max-w-md text-sm leading-relaxed md:text-base',
+                  isMeatHome ? 'text-white/78' : 'text-neutral-600',
+                )}
+              >
                 {description}
               </p>
             )}
@@ -128,9 +182,13 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                         {...newTabProps}
                         className={cn(
                           'inline-flex min-h-11 w-full items-center justify-center rounded-sm px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out motion-reduce:transition-colors motion-reduce:duration-0 motion-reduce:hover:translate-y-0 active:scale-[0.98] motion-reduce:active:scale-100 sm:min-w-[140px]',
-                          isOutline
-                            ? 'border border-neutral-300 bg-transparent text-neutral-900 shadow-sm hover:-translate-y-0.5 hover:border-neutral-400 hover:shadow-md'
-                            : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[var(--color-primary-hover)] hover:shadow-md',
+                          isMeatHome
+                            ? isOutline
+                              ? 'border border-white/35 bg-transparent text-white shadow-sm hover:-translate-y-0.5 hover:border-white/55 hover:bg-white/10 hover:shadow-md'
+                              : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[var(--color-primary-hover)] hover:shadow-md'
+                            : isOutline
+                              ? 'border border-neutral-300 bg-transparent text-neutral-900 shadow-sm hover:-translate-y-0.5 hover:border-neutral-400 hover:shadow-md'
+                              : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[var(--color-primary-hover)] hover:shadow-md',
                         )}
                       >
                         {link.label}

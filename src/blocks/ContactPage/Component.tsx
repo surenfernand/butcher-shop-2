@@ -177,7 +177,7 @@ export const ContactPageBlock: React.FC<Props> = ({
                   <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted-text)]">
                     {stat.label}
                   </div>
-                </div>
+                </div> 
               ))}
             </div>
           ) : null}

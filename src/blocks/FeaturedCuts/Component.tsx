@@ -59,7 +59,7 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
             return (
               <article
                 key={item.id || index}
-                className="group flex flex-col bg-[var(--color-text)] text-center text-white transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.75)] motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none motion-reduce:transition-none"
+                className="on-dark-media group flex flex-col bg-[var(--color-text)] text-center text-white transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.75)] motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none motion-reduce:transition-none"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/40">
                   {imageUrl ? (

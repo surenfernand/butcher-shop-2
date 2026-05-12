@@ -237,7 +237,7 @@ button {
   animation: cart-toast-shrink 4s linear forwards;
 }
 /* Light-mode fallback for legacy dark-only utility classes used across the app.
-   Skip elements inside a dark island ([data-theme='dark']) so header/footer stay dark in light mode. */
+   Skip elements inside a dark island ([data-theme='dark']) or intentional photo/video overlays (.on-dark-media). */
 [data-theme='light'] .bg-black:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-\[\#121212\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
 [data-theme='light'] .bg-\[\#0f0f0f\]:not(:is([data-theme='dark'], [data-theme='dark'] *)),
@@ -250,9 +250,13 @@ button {
   background-color: var(--color-card) !important;
 }
 
-[data-theme='light'] .text-stone-100:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .text-white:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .text-white\/85:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
+[data-theme='light'] .text-stone-100:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .text-white:not(:is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)),
+[data-theme='light'] .text-white\/85:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ) {
   color: var(--color-foreground) !important;
 }
 
@@ -265,24 +269,60 @@ button {
   color: var(--color-muted-foreground) !important;
 }
 
-[data-theme='light'] .bg-black[class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#121212\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#0f0f0f\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#111\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#121414\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#161818\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#1A1C1C\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#0a0a0a\][class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-stone-800[class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-black [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#121212\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#0f0f0f\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#111\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#121414\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#161818\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#1A1C1C\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-\[\#0a0a0a\] [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)),
-[data-theme='light'] .bg-stone-800 [class*='text-white']:not(:is([data-theme='dark'], [data-theme='dark'] *)) {
+[data-theme='light'] .bg-black[class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#121212\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#0f0f0f\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#111\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#121414\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#161818\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#1A1C1C\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#0a0a0a\][class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-stone-800[class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-black [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#121212\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#0f0f0f\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#111\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#121414\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#161818\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#1A1C1C\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-\[\#0a0a0a\] [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ),
+[data-theme='light'] .bg-stone-800 [class*='text-white']:not(
+    :is([data-theme='dark'], [data-theme='dark'] *, .on-dark-media, .on-dark-media *)
+  ) {
   color: var(--color-foreground) !important;
 }
 

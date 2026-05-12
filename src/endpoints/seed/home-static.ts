@@ -6,25 +6,25 @@ export const homeStaticData: () => RequiredDataFromCollectionSlug<'pages'> = () 
     _status: 'published',
     hero: {
       type: 'highImpact',
-      eyebrow: 'Masterfully crafted since 1998',
-      heading: 'Premium Cuts, Delivered to Your Door',
+      eyebrow: 'What we do',
+      heading: 'Fresh\nCuts\nFire grilled\nButcher',
       description:
-        'Exceptional beef, lamb, and poultry—hand-selected, expertly trimmed, and shipped with the care your table deserves.',
+        'At the core of our craft is excellence: prime cuts, open flame, and hospitality worthy of your table—served with the same care from our block to your door.',
       links: [
         {
           link: {
             type: 'custom',
             appearance: 'default',
-            label: 'Shop now',
-            url: '/shop',
+            label: 'Our menu',
+            url: '/shop-luxury',
           },
         },
         {
           link: {
             type: 'custom',
             appearance: 'outline',
-            label: 'View menu',
-            url: '/shop-luxury',
+            label: 'Book a table',
+            url: '/contact',
           },
         },
       ],
