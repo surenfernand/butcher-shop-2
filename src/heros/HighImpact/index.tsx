@@ -86,7 +86,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
       <div className="relative z-10 flex min-h-[85vh] items-center mt-5">
         <div className="container w-full px-4 pt-24 pb-16 md:px-8 md:pt-28 md:pb-24">
-          <div className="max-w-xl rounded-sm bg-white/90 p-8 shadow-lg backdrop-blur-sm md:p-10 lg:p-12">
+          <div className="max-w-xl animate-in fade-in-0 slide-in-from-bottom-4 rounded-sm bg-white/90 p-8 shadow-lg backdrop-blur-sm duration-700 motion-reduce:animate-none md:p-10 lg:p-12">
             {(eyebrow || heading) && (
               <div className="mb-6">
                 {eyebrow && (
@@ -127,10 +127,10 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
                         href={href}
                         {...newTabProps}
                         className={cn(
-                          'inline-flex min-h-11 w-full items-center justify-center rounded-sm px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] transition sm:min-w-[140px]',
+                          'inline-flex min-h-11 w-full items-center justify-center rounded-sm px-6 py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out motion-reduce:transition-colors motion-reduce:duration-0 motion-reduce:hover:translate-y-0 active:scale-[0.98] motion-reduce:active:scale-100 sm:min-w-[140px]',
                           isOutline
-                            ? 'border border-neutral-300 bg-transparent text-neutral-900 hover:border-neutral-400'
-                            : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]',
+                            ? 'border border-neutral-300 bg-transparent text-neutral-900 shadow-sm hover:-translate-y-0.5 hover:border-neutral-400 hover:shadow-md'
+                            : 'border border-[var(--color-primary)] bg-[var(--color-primary)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[var(--color-primary-hover)] hover:shadow-md',
                         )}
                       >
                         {link.label}

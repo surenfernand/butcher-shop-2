@@ -49,9 +49,15 @@ export function FiletGourmetHome() {
 
           <div className="grid gap-12 md:grid-cols-3 md:gap-8">
             {features.map(({ title, body, icon: Icon }) => (
-              <div className="flex flex-col items-center text-center" key={title}>
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
-                  <Icon className="h-7 w-7 text-[var(--color-primary)]" strokeWidth={1.25} />
+              <div
+                className="group flex flex-col items-center text-center transition-transform duration-300 ease-out motion-reduce:transition-none motion-reduce:duration-0 md:hover:-translate-y-1"
+                key={title}
+              >
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm transition-[box-shadow,transform,border-color] duration-300 ease-out group-hover:border-[var(--color-primary)]/25 group-hover:shadow-md motion-reduce:group-hover:translate-y-0">
+                  <Icon
+                    className="h-7 w-7 text-[var(--color-primary)] transition-transform duration-300 ease-out group-hover:scale-110 motion-reduce:group-hover:scale-100"
+                    strokeWidth={1.25}
+                  />
                 </div>
                 <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-black">
                   {title}
@@ -76,7 +82,7 @@ export function FiletGourmetHome() {
               </h2>
             </div>
             <Link
-              className="text-sm font-medium text-black underline decoration-neutral-400 underline-offset-4 transition hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)]"
+              className="text-sm font-medium text-black underline decoration-neutral-400 underline-offset-4 transition-[color,text-decoration-color,transform] duration-200 ease-out hover:text-[var(--color-primary)] hover:decoration-[var(--color-primary)] hover:translate-x-0.5 motion-reduce:hover:translate-x-0"
               href="/shop"
             >
               Browse full catalog
@@ -85,14 +91,14 @@ export function FiletGourmetHome() {
 
           <div className="grid gap-5 md:grid-cols-2 md:grid-rows-2 md:gap-6">
             <Link
-              className="group relative block min-h-[320px] overflow-hidden rounded-sm md:row-span-2 md:min-h-[min(640px,70vh)]"
+              className="group relative block min-h-[320px] overflow-hidden rounded-sm shadow-md ring-1 ring-black/5 transition-[box-shadow,transform] duration-500 ease-out hover:shadow-xl hover:ring-black/10 motion-reduce:transition-shadow motion-reduce:md:hover:translate-y-0 md:row-span-2 md:min-h-[min(640px,70vh)] md:hover:-translate-y-1"
               href="/shop"
             >
               <Image
                 src={ASSETS.freshMeat}
                 alt="Premium raw steaks and butcher knife"
                 fill
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:duration-0 motion-reduce:group-hover:scale-100"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <span className="absolute right-4 top-4 bg-[var(--color-primary)] px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
@@ -108,14 +114,14 @@ export function FiletGourmetHome() {
             </Link>
 
             <Link
-              className="group relative block min-h-[220px] overflow-hidden rounded-sm md:min-h-0"
+              className="group relative block min-h-[220px] overflow-hidden rounded-sm shadow-md ring-1 ring-black/5 transition-[box-shadow,transform] duration-500 ease-out hover:shadow-xl hover:ring-black/10 motion-reduce:transition-shadow motion-reduce:md:hover:translate-y-0 md:hover:-translate-y-1"
               href="/shop"
             >
               <Image
                 src={ASSETS.readyToEat}
                 alt="Ready-to-eat sliced meats"
                 fill
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:duration-0 motion-reduce:group-hover:scale-100"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -128,14 +134,14 @@ export function FiletGourmetHome() {
             </Link>
 
             <Link
-              className="group relative block min-h-[220px] overflow-hidden rounded-sm md:min-h-0"
+              className="group relative block min-h-[220px] overflow-hidden rounded-sm shadow-md ring-1 ring-black/5 transition-[box-shadow,transform] duration-500 ease-out hover:shadow-xl hover:ring-black/10 motion-reduce:transition-shadow motion-reduce:md:hover:translate-y-0 md:hover:-translate-y-1"
               href="/shop-luxury"
             >
               <Image
                 src={ASSETS.subscription}
                 alt="Subscription meat delivery box"
                 fill
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                className="object-cover transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:duration-0 motion-reduce:group-hover:scale-100"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

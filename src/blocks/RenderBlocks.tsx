@@ -67,6 +67,9 @@ export const RenderBlocks: React.FC<{
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
   if (hasBlocks) {
+    const promoAnchorTypes = new Set(['infoSection', 'aboutStory'])
+    const firstPromoAnchorIndex = blocks.findIndex((b) => b.blockType && promoAnchorTypes.has(b.blockType))
+
     return (
       <Fragment>
         {blocks.map((block, index) => {
@@ -78,6 +81,9 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const insertPromoAfter =
+                slug === 'home' && firstPromoAnchorIndex !== -1 && index === firstPromoAnchorIndex
+
               return (
                 <div className="my-16" key={index}>
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
@@ -87,9 +93,7 @@ export const RenderBlocks: React.FC<{
                     searchParams={searchParams}
                     {...block}
                   />
-                  {slug === 'home' && (blockType === 'infoSection' || blockType === 'aboutStory') ? (
-                    <MonthlyMenuPromo />
-                  ) : null}
+                  {insertPromoAfter ? <MonthlyMenuPromo /> : null}
                 </div>
               )
             }

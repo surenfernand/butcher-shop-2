@@ -2,9 +2,10 @@
 
 import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
 import { Mail, MapPin, Phone, type LucideIcon } from 'lucide-react'
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { FormBlock } from '@/blocks/Form/Component'
+import { cn } from '@/utilities/cn'
 
 const icons: Record<string, LucideIcon> = {
   'map-pin': MapPin,
@@ -60,6 +61,11 @@ const getMediaUrl = (media?: Media | number | string | null) => {
   return undefined
 }
 
+const getMediaAlt = (media?: Media | number | string | null) => {
+  if (media && typeof media === 'object' && 'alt' in media && media.alt) return media.alt
+  return undefined
+}
+
 const splitLines = (text?: string | null) =>
   (text || '')
     .split('\n')
@@ -88,35 +94,87 @@ export const ContactPageBlock: React.FC<Props> = ({
   mapEmbedUrl,
 }) => {
   const heroUrl = getMediaUrl(heroBackgroundImage)
+  const heroAlt = getMediaAlt(heroBackgroundImage) || ''
   const storyUrl = getMediaUrl(storyImage)
+  const storyAlt = getMediaAlt(storyImage) || 'Our atelier'
   const mapUrl = getMediaUrl(mapImage)
+  const mapAlt = getMediaAlt(mapImage) || ''
   const formDoc = form && typeof form === 'object' && 'fields' in form ? form : null
+  const heroHasImage = Boolean(heroUrl)
+  const hasMap = Boolean(mapEmbedUrl?.trim()) || Boolean(mapUrl)
+  const details = contactDetails || []
+  const hours = storeHours || []
 
   return (
-    <section className="bg-[var(--color-background)] text-[var(--color-text)]">
+    <Fragment>
+      {/* Hero is its own section so body `text-[var(--color-text)]` never leaks onto headings */}
+      <section className="not-prose bg-[#1a1817] text-[#f6f3ef]">
+        <div className="relative flex min-h-[min(52vh,560px)] items-center justify-center overflow-hidden px-6 py-20 text-center md:py-28">
+          {heroHasImage ? (
+            <img
+              src={heroUrl}
+              alt={heroAlt}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-[#2a2624] via-[#1a1817] to-[#0f0e0d]"
+              aria-hidden
+            />
+          )}
+          <div
+            className={cn(
+              'absolute inset-0',
+              heroHasImage
+                ? 'bg-gradient-to-b from-black/75 via-black/50 to-black/72'
+                : 'bg-gradient-to-b from-black/20 to-black/40',
+            )}
+            aria-hidden
+          />
+          <div className="relative z-10 mx-auto w-full max-w-3xl animate-in fade-in-0 slide-in-from-bottom-3 duration-700 motion-reduce:animate-none">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[var(--color-gold)]">
+              {heroEyebrow || 'THE HERITAGE'}
+            </p>
+            <h1
+              className="font-sans text-3xl font-semibold leading-[1.12] tracking-tight text-[#fafafa] md:text-5xl lg:text-[3.25rem]"
+              style={{ color: '#fafafa' }}
+            >
+              {heroTitle || 'Craftsmanship born of tradition'}
+            </h1>
+            {heroDescription ? (
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[#e8e4df] md:text-[17px] md:leading-8">
+                {heroDescription}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </section>
 
-
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-6 py-24 lg:grid-cols-[1fr_480px] lg:items-center ">
+      <section className="bg-[#f7f5f2] text-[var(--color-text)]">
+      {/* Story */}
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:py-24 lg:grid-cols-[1fr_min(42%,480px)] lg:items-center lg:gap-16">
         <div>
           {storyEyebrow ? (
-            <p className="mb-8 inline-flex border-l-2 border-[var(--color-primary)] bg-[var(--color-background)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--color-primary)]">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-primary)]">
               {storyEyebrow}
             </p>
           ) : null}
-          <h2 className="max-w-2xl text-4xl font-black uppercase leading-[1.05] tracking-[-0.04em] md:text-5xl">
-            {storyTitle || 'THE THEATER OF ARTISANAL BUTCHERY'}
+          <h2 className="max-w-2xl font-sans text-3xl font-semibold leading-tight tracking-tight text-[var(--color-text)] md:text-4xl lg:text-[2.5rem]">
+            {storyTitle || 'The theater of artisanal butchery'}
           </h2>
-          <div className="mt-8 max-w-3xl space-y-5 text-sm leading-7 text-[var(--color-muted-text)]">
+          <div className="mt-8 max-w-2xl space-y-5 text-sm leading-7 text-[var(--color-muted-text)] md:text-[15px] md:leading-8">
             {splitLines(storyBody).map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
           {stats?.length ? (
-            <div className="mt-10 grid max-w-2xl grid-cols-3 gap-8 border-t border-[#ddd] pt-7">
+            <div className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-[var(--color-border-token)] pt-8 md:gap-10">
               {stats.map((stat, index) => (
                 <div key={index}>
-                  <div className="text-xl font-black">{stat.value}</div>
-                  <div className="mt-1 text-[10px] font-bold uppercase tracking-[-0.02em] text-[#222]">
+                  <div className="text-2xl font-semibold tabular-nums text-[var(--color-text)] md:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted-text)]">
                     {stat.label}
                   </div>
                 </div>
@@ -125,110 +183,143 @@ export const ContactPageBlock: React.FC<Props> = ({
           ) : null}
         </div>
 
-        <div className="relative border-[14px] border-black bg-black p-5 shadow-sm">
-          <div className="border border-white/15 p-3">
-            {storyUrl ? (
-              <img src={storyUrl} alt="" className="h-[520px] w-full object-cover grayscale" />
-            ) : (
-              <div className="flex h-[520px] items-center justify-center bg-[var(--color-text)] text-sm uppercase text-white/60">
-                Add story image in admin
-              </div>
-            )}
-          </div>
+        <div className="relative overflow-hidden rounded-2xl bg-[var(--color-text)] shadow-xl ring-1 ring-black/10">
+          {storyUrl ? (
+            <img
+              src={storyUrl}
+              alt={storyAlt}
+              className="aspect-[4/5] w-full object-cover md:aspect-[3/4] lg:min-h-[420px]"
+            />
+          ) : (
+            <div className="flex aspect-[4/5] min-h-[280px] items-center justify-center bg-[#2a2624] px-6 text-center text-sm text-white/50 md:aspect-[3/4] lg:min-h-[420px]">
+              Add a story image in the Contact Page block (Story tab).
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="relative flex min-h-[560px] items-center justify-center overflow-hidden px-6 text-center">
-        {heroUrl ? (
-          <img src={heroUrl} alt="" className="absolute inset-0 h-full w-full object-cover grayscale" />
-        ) : null}
-        <div className="absolute inset-0 bg-[var(--color-background)]" />
-        <div className="relative z-10 max-w-3xl">
-          <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.48em] text-[var(--color-primary)]">
-            {heroEyebrow || 'THE HERITAGE'}
-          </p>
-          <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] md:text-5xl">
-            {heroTitle || 'CRAFTSMANSHIP BORN OF TRADITION'}
-          </h1>
-          {heroDescription ? (
-            <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[var(--color-muted-text)]">{heroDescription}</p>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="bg-[var(--color-background)] px-6 py-20">
-        <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[1fr_490px]">
-          <div className="rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
-            <h2 className="text-2xl font-black uppercase">{formTitle || 'INQUIRIES'}</h2>
-            {formDescription ? <p className="mt-3 text-sm text-[var(--color-muted-text)]">{formDescription}</p> : null}
+      {/* Form + sidebar */}
+      <div className="border-t border-[var(--color-border-token)] bg-white px-6 py-16 md:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_380px] lg:gap-12 xl:grid-cols-[1fr_400px]">
+          <div className="rounded-2xl border border-[var(--color-border-token)] bg-[#faf9f7] p-6 shadow-sm md:p-8">
+            <h2 className="font-sans text-2xl font-semibold tracking-tight text-[var(--color-text)]">
+              {formTitle || 'Send a message'}
+            </h2>
+            {formDescription ? (
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--color-muted-text)]">
+                {formDescription}
+              </p>
+            ) : null}
             <div className="mt-8">
               {formDoc ? (
                 <FormBlock form={formDoc} enableIntro={false} />
               ) : (
-                <div className="border border-dashed border-[#c93522]/50 p-6 text-sm text-[var(--color-muted-text)]">
-                  Select a Payload form for this page in the admin panel.
+                <div className="rounded-xl border border-dashed border-[var(--color-primary)]/35 bg-white px-5 py-8 text-center text-sm text-[var(--color-muted-text)]">
+                  Connect a form in the admin: Contact Page block → Inquiry &amp; Hours → Payload Form.
                 </div>
               )}
             </div>
           </div>
 
-          <div className="space-y-8">
-            <div className="rounded-2xl border border-[var(--color-border-token)] bg-white p-6 text-[var(--color-text)] shadow-sm">
-              <h3 className="mb-7 text-2xl font-black uppercase">{hoursTitle || 'OPENING HOURS'}</h3>
-              <div className="space-y-5">
-                {(storeHours || []).map((item, index) => (
-                  <div key={index} className="flex justify-between border-b border-[#ddd] pb-4 text-sm">
-                    <span className="text-[var(--color-muted-text)]">{item.day}</span>
-                    <span className={item.highlight ? 'font-black text-[#c93522]' : 'font-black'}>{item.time}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="flex flex-col gap-8">
+            <div className="rounded-2xl border border-[var(--color-border-token)] bg-white p-6 shadow-sm md:p-7">
+              <h3 className="font-sans text-lg font-semibold tracking-tight text-[var(--color-text)]">
+                {hoursTitle || 'Opening hours'}
+              </h3>
+              {hours.length > 0 ? (
+                <ul className="mt-6 space-y-0 divide-y divide-[var(--color-border-token)]">
+                  {hours.map((item, index) => (
+                    <li
+                      key={index}
+                      className="flex flex-wrap items-baseline justify-between gap-2 py-3.5 text-sm first:pt-0"
+                    >
+                      <span className="text-[var(--color-muted-text)]">{item.day}</span>
+                      <span
+                        className={cn(
+                          'shrink-0 font-medium tabular-nums text-[var(--color-text)]',
+                          item.highlight && 'text-[var(--color-primary)]',
+                        )}
+                      >
+                        {item.time}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-sm text-[var(--color-muted-text)]">Hours will appear here once added in the CMS.</p>
+              )}
             </div>
 
-            {/* <div className="bg-[var(--color-primary)] p-10 text-white shadow-sm">
-              <h3 className="mb-6 text-2xl font-black uppercase">{visitTitle || 'VISIT THE ATELIER'}</h3>
-              <div className="space-y-5">
-                {(contactDetails || []).map((detail, index) => {
-                  const Icon = icons[detail.icon || 'map-pin'] || MapPin
-                  return (
-                    <div key={index} className="flex gap-4 text-sm font-bold leading-6">
-                      <Icon className="mt-1 h-4 w-4 shrink-0" />
-                      <span className="whitespace-pre-line">{detail.text}</span>
-                    </div>
-                  )
-                })}
+            {details.length > 0 ? (
+              <div className="rounded-2xl border border-[var(--color-border-token)] bg-[var(--color-text)] p-6 text-white shadow-sm md:p-7">
+                <h3 className="font-sans text-lg font-semibold tracking-tight text-white">
+                  {visitTitle || 'Visit the atelier'}
+                </h3>
+                <ul className="mt-6 space-y-5">
+                  {details.map((detail, index) => {
+                    const Icon = icons[detail.icon || 'map-pin'] || MapPin
+                    return (
+                      <li key={index} className="flex gap-4 text-sm leading-relaxed text-white/90">
+                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/10">
+                          <Icon className="h-4 w-4 text-[var(--color-gold)]" strokeWidth={1.5} />
+                        </span>
+                        <span className="whitespace-pre-line pt-1">{detail.text}</span>
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
-            </div> */}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative h-[500px] overflow-hidden bg-[var(--color-muted-text)]">
-        {mapEmbedUrl ? (
-          <iframe
-            src={mapEmbedUrl}
-            width="100%"
-            height="100%"
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-            className="absolute inset-0 h-full w-full border-0 grayscale"
-          />
-        ) : mapUrl ? (
-          <img src={mapUrl} alt="" className="absolute inset-0 h-full w-full object-cover grayscale" />
-        ) : null}
-        <div className="absolute inset-0 bg-black/35" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white/90">
-            <MapPin className="mx-auto h-28 w-28 opacity-70" strokeWidth={1.3} />
-            {mapLabel ? (
-              <p className="mt-3 inline-flex bg-black/35 px-4 py-2 text-xs font-bold uppercase tracking-wide">
-                {mapLabel}
-              </p>
             ) : null}
           </div>
         </div>
       </div>
-    </section>
+
+      {/* Map */}
+      <div className="relative min-h-[380px] overflow-hidden bg-[#e8e4df] md:min-h-[440px]">
+        {hasMap ? (
+          <>
+            {mapEmbedUrl?.trim() ? (
+              <iframe
+                src={mapEmbedUrl.trim()}
+                title={mapLabel || 'Location map'}
+                width="100%"
+                height="100%"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 h-full min-h-[380px] w-full border-0 md:min-h-[440px]"
+              />
+            ) : mapUrl ? (
+              <img
+                src={mapUrl}
+                alt={mapAlt || mapLabel || 'Map'}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : null}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+            {(mapLabel || !mapEmbedUrl?.trim()) && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-10 pt-16">
+                <div className="mx-4 flex max-w-lg items-center gap-3 rounded-full border border-white/20 bg-black/55 px-5 py-3 text-left text-white shadow-lg backdrop-blur-sm">
+                  <MapPin className="h-5 w-5 shrink-0 text-[var(--color-gold)]" strokeWidth={1.75} />
+                  {mapLabel ? (
+                    <p className="text-xs font-medium uppercase tracking-[0.12em] text-white/95">{mapLabel}</p>
+                  ) : (
+                    <p className="text-xs text-white/80">Location</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="flex min-h-[380px] flex-col items-center justify-center gap-3 px-6 text-center md:min-h-[440px]">
+            <MapPin className="h-10 w-10 text-[var(--color-muted-text)]" strokeWidth={1.25} />
+            <p className="max-w-sm text-sm text-[var(--color-muted-text)]">
+              Add a map embed URL or map image in the Contact Page block (Map tab) to show your location here.
+            </p>
+          </div>
+        )}
+      </div>
+      </section>
+    </Fragment>
   )
 }
