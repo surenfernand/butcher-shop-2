@@ -9,7 +9,7 @@
     "@/*": "./src/*"
   },
   "scripts": {
-    "postinstall": "node scripts/patch-better-auth-plugin-signup-url.mjs",
+    "postinstall": "node scripts/patch-better-auth-plugin-signup-url.mjs && node scripts/patch-payload-createLocalReq-headers-promise.mjs && node scripts/patch-payload-global-cache-map.mjs",
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && pnpm build && pnpm start",
