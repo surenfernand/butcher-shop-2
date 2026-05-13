@@ -287,7 +287,7 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
               </div>
               <div className="flex justify-between text-[var(--color-muted-text)]">
                 <span>Shipping</span>
-                <span className="font-semibold text-[var(--color-text)]">{shippingTotal > 0 ? formatMoney(shippingTotal) : '0.00'}</span>
+                <span className="font-semibold text-[var(--color-text)]">{(shippingTotal ?? 0) > 0 ? formatMoney(shippingTotal ?? 0) : '0.00'}</span>
               </div>
               <div className="flex justify-between text-[var(--color-muted-text)]">
                 <span>Tax</span>

@@ -10,6 +10,10 @@ import { redirects } from './redirects'
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 const nextConfig: NextConfig = {
+  env: {
+    // Inlined for client bundles; plugin sign-up falls back when unset. Prefer matching how you open the site (localhost vs 127.0.0.1).
+    NEXT_PUBLIC_SERVER_URL,
+  },
   // Temporarily required on Windows until Next.js fixes Turbopack Sass resolution.
   // See: https://github.com/vercel/next.js/issues/86431
   sassOptions: {

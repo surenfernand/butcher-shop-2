@@ -2,7 +2,7 @@ import React from 'react'
 
 export const BeforeLogin: React.FC = () => {
   return (
-    <div>
+    <div className='mb-5'>
       <p>
         <b>Welcome to your dashboard!</b>
         {' This is where site admins will log in to manage your store. Customers will need to '}

@@ -1,22 +1,25 @@
 import type { CollectionConfig } from 'payload'
 
 import { adminOnly } from '@/access/adminOnly'
-import { adminOnlyFieldAccess } from '@/access/adminOnlyFieldAccess'
+import { adminOnlyFieldAccessUsers } from '@/access/adminOnlyFieldAccessUsers'
 import { publicAccess } from '@/access/publicAccess'
 import { adminOrSelf } from '@/access/adminOrSelf'
-import { checkRole } from '@/access/utilities'
+import { adminOrSelfOrBootstrapAdminRole } from '@/access/adminOrSelfOrBootstrapAdminRole'
+import { rolesFieldBootstrapOrAdmin } from '@/access/rolesFieldBootstrapOrAdmin'
+import { isAdminPrincipal } from '@/access/utilities'
 
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
+import { syncBetterAuthRoleToPayloadRoles } from './hooks/syncBetterAuthRoleToPayloadRoles'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    admin: ({ req: { user } }) => checkRole(['admin'], user),
+    admin: ({ req: { user } }) => isAdminPrincipal(user),
     create: publicAccess,
     delete: adminOnly,
     read: adminOrSelf,
     unlock: adminOnly,
-    update: adminOrSelf,
+    update: adminOrSelfOrBootstrapAdminRole,
   },
   admin: {
     group: 'Users',
@@ -26,18 +29,17 @@ export const Users: CollectionConfig = {
   auth: {
     tokenExpiration: 1209600,
   },
+  hooks: {
+    beforeChange: [syncBetterAuthRoleToPayloadRoles],
+  },
   fields: [
-    {
-      name: 'name',
-      type: 'text',
-    },
     {
       name: 'roles',
       type: 'select',
       access: {
-        create: adminOnlyFieldAccess,
-        read: adminOnlyFieldAccess,
-        update: adminOnlyFieldAccess,
+        create: rolesFieldBootstrapOrAdmin,
+        read: adminOnlyFieldAccessUsers,
+        update: rolesFieldBootstrapOrAdmin,
       },
       defaultValue: ['customer'],
       hasMany: true,
