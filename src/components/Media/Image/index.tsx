@@ -3,7 +3,6 @@
 import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/cn'
-import { absolutizeMediaSrc } from '@/utilities/absolutizeMediaSrc'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import NextImage from 'next/image'
 import React from 'react'
@@ -55,9 +54,9 @@ export const Image: React.FC<MediaProps> = (props) => {
     src = url?.startsWith('http') ? url : url || ''
   }
 
-  if (typeof src === 'string' && src.startsWith('/') && !src.startsWith('//')) {
-    src = absolutizeMediaSrc(src)
-  }
+  // Keep same-origin paths (e.g. `/api/media/...`) relative. Prefixing with
+  // `getServerSideURL()` in the client breaks Next/Image when env points at
+  // localhost or a different host than the page (remotePatterns / loading).
 
   let usedPlaceholder = false
   if (typeof src === 'string' && !src.trim()) {
