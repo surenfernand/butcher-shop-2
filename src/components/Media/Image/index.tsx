@@ -28,14 +28,14 @@ export const Image: React.FC<MediaProps> = (props) => {
     width: widthFromProps,
   } = props
 
-  const [isLoading, setIsLoading] = React.useState(true)
+  const [fallbackSrc, setFallbackSrc] = React.useState<string | null>(null)
 
   let width: number | undefined | null
   let height: number | undefined | null
   let alt = altFromProps
-  let src: StaticImageData | string = srcFromProps || ''
+  let resolvedSrc: StaticImageData | string = srcFromProps || ''
 
-  if (!src && resource && typeof resource === 'object') {
+  if (!resolvedSrc && resource && typeof resource === 'object') {
     const {
       alt: altFromResource,
       filename: fullFilename,
@@ -48,42 +48,47 @@ export const Image: React.FC<MediaProps> = (props) => {
     height = heightFromProps ?? fullHeight
     alt = altFromResource
 
-    const filename = fullFilename
-
-    // src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
-    src = url?.startsWith('http') ? url : url || ''
+    resolvedSrc = url?.startsWith('http') ? url : url || ''
   }
 
-  // Keep same-origin paths (e.g. `/api/media/...`) relative. Prefixing with
-  // `getServerSideURL()` in the client breaks Next/Image when env points at
-  // localhost or a different host than the page (remotePatterns / loading).
+  const seed =
+    (typeof alt === 'string' && alt) ||
+    (resource &&
+    typeof resource === 'object' &&
+    resource !== null &&
+    'id' in resource &&
+    resource.id !== undefined &&
+    String(resource.id)) ||
+    'media'
 
   let usedPlaceholder = false
-  if (typeof src === 'string' && !src.trim()) {
-    const seed =
-      (typeof alt === 'string' && alt) ||
-      (resource &&
-      typeof resource === 'object' &&
-      resource !== null &&
-      'id' in resource &&
-      resource.id !== undefined &&
-      String(resource.id)) ||
-      'media'
-    src = placeholderImageUrl(seed, 'meat')
+  if (typeof resolvedSrc === 'string' && !resolvedSrc.trim()) {
+    resolvedSrc = placeholderImageUrl(seed, 'meat')
     usedPlaceholder = true
   }
 
-  if (usedPlaceholder && !fill) {
+  const resourceUrl =
+    resource && typeof resource === 'object' && 'url' in resource
+      ? String((resource as { url?: string | null }).url ?? '')
+      : ''
+
+  React.useEffect(() => {
+    setFallbackSrc(null)
+  }, [srcFromProps, resourceUrl])
+
+  const displaySrc: StaticImageData | string =
+    fallbackSrc !== null ? fallbackSrc : resolvedSrc
+
+  if ((usedPlaceholder || fallbackSrc !== null) && !fill) {
     width = width ?? widthFromProps ?? 1600
     height = height ?? heightFromProps ?? 900
   }
 
-  // NOTE: this is used by the browser to determine which image to download at different screen sizes
   const sizes = sizeFromProps
     ? sizeFromProps
     : Object.entries(breakpoints)
-      .map(([, value]) => `(max-width: ${value}px) ${value}px`)
-      .join(', ')
+        .map(([, value]) => `(max-width: ${value}px) ${value}px`)
+        .join(', ')
 
   return (
     <NextImage
@@ -92,8 +97,11 @@ export const Image: React.FC<MediaProps> = (props) => {
       fill={fill}
       height={!fill ? height || heightFromProps : undefined}
       onClick={onClick}
+      onError={() => {
+        if (fallbackSrc !== null) return
+        setFallbackSrc(placeholderImageUrl(seed, 'meat'))
+      }}
       onLoad={() => {
-        setIsLoading(false)
         if (typeof onLoadFromProps === 'function') {
           onLoadFromProps()
         }
@@ -101,7 +109,7 @@ export const Image: React.FC<MediaProps> = (props) => {
       priority={priority}
       quality={90}
       sizes={sizes}
-      src={src}
+      src={displaySrc}
       width={!fill ? width || widthFromProps : undefined}
     />
   )
