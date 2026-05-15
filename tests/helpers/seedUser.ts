@@ -1,5 +1,9 @@
+import type { RequiredDataFromCollectionSlug } from 'payload'
 import { getPayload } from 'payload'
 import config from '../../src/payload.config.js'
+
+/** Local API accepts `password` for auth collections; generated create types omit it. */
+type SeedUserCreate = RequiredDataFromCollectionSlug<'users'> & { password: string }
 
 export const testUser = {
   email: 'dev@payloadcms.com',
@@ -23,16 +27,17 @@ export async function seedTestUser(): Promise<void> {
   })
 
   // Create fresh test user with Payload auth (email + password).
-  // Generated `data` types omit `password`; Local API still accepts it for auth collections.
+  const data: SeedUserCreate = {
+    email: testUser.email,
+    emailVerified: true,
+    role: 'admin',
+    roles: ['admin'],
+    password: testUser.password,
+  }
+
   await payload.create({
     collection: 'users',
-    data: {
-      email: testUser.email,
-      emailVerified: true,
-      role: 'admin',
-      roles: ['admin'],
-      password: testUser.password,
-    } as unknown as Parameters<typeof payload.create>[0]['data'],
+    data,
   })
 }
 

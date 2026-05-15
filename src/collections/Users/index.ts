@@ -30,6 +30,14 @@ export const Users: CollectionConfig = {
   },
   fields: [
     {
+      name: 'name',
+      type: 'text',
+      label: 'Name',
+      admin: {
+        description: 'Shown in the admin sidebar and account UI when set.',
+      },
+    },
+    {
       name: 'roles',
       type: 'select',
       access: {
