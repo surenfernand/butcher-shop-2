@@ -1,6 +1,7 @@
 import type { Media, Order, Product } from '@/payload-types'
 
 import { getPurchaseUnitPriceInCents } from '@/utilities/purchasePricing'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import configPromise from '@payload-config'
 import { headers as getHeaders } from 'next/headers'
 import Link from 'next/link'
@@ -137,16 +138,15 @@ export default async function SubscriptionsPage() {
                 className="grid overflow-hidden border border-border bg-card lg:grid-cols-[320px_1fr]"
               >
                 <div className="relative bg-muted">
-                  <div className="flex h-full min-h-[300px] items-center justify-center">
-                    {image?.url ? (
-                      <img
-                        src={image.url}
-                        alt={image.alt || product?.title || 'Subscription product'}
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="text-center text-muted-foreground">No product image</div>
-                    )}
+                  <div className="relative flex h-full min-h-[300px] items-center justify-center">
+                    <img
+                      src={
+                        image?.url?.trim() ||
+                        placeholderImageUrl(product?.slug || String(product?.id || 'subscription'))
+                      }
+                      alt={image?.alt || product?.title || 'Subscription product'}
+                      className="h-full min-h-[300px] w-full object-cover"
+                    />
                   </div>
                 </div>
 

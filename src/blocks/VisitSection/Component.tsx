@@ -1,5 +1,6 @@
 import type { DefaultDocumentIDType } from 'payload'
 import type { Media } from '@/payload-types'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import React from 'react'
 
@@ -27,7 +28,8 @@ export const VisitSectionBlock: React.FC<Props> = ({
   className,
 }) => {
   const media = typeof mapImage === 'object' && mapImage ? mapImage : null
-  const imageUrl = media?.url
+  const displaySrc =
+    media?.url?.trim() || placeholderImageUrl(locationLabel || title || 'visit-section')
 
   return (
     <section className={['py-20', className].filter(Boolean).join(' ')}>
@@ -47,19 +49,13 @@ export const VisitSectionBlock: React.FC<Props> = ({
         </div>
 
         <div className="relative min-h-[420px] overflow-hidden bg-[#1a1c1c] md:col-span-8">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={media?.alt || locationLabel || 'Location image'}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover opacity-60 transition duration-700 hover:opacity-100"
-            />
-          ) : (
-            <div className="flex h-full min-h-[420px] items-center justify-center px-10 text-center text-sm uppercase tracking-[0.2em] text-[#9a8f7e]">
-              Upload a map or location image from the admin panel
-            </div>
-          )}
+          <Image
+            src={displaySrc}
+            alt={media?.alt || locationLabel || 'Location image'}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover opacity-60 transition duration-700 hover:opacity-100"
+          />
 
           {locationLabel && (
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-3xl uppercase tracking-[0.4em] text-white/30">

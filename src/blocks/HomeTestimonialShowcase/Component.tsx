@@ -1,6 +1,7 @@
 'use client'
 
 import type { Media } from '@/payload-types'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import Image from 'next/image'
 import React, { useMemo, useState } from 'react'
@@ -26,7 +27,7 @@ const toMedia = (value?: Upload) =>
 
 const mediaUrl = (value?: Upload) => {
   const media = toMedia(value)
-  return media?.url || ''
+  return media?.url?.trim() || ''
 }
 
 export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({
@@ -42,22 +43,18 @@ export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({
 
   const active = items[activeIndex]
   const avatarMedia = toMedia(active.authorAvatar)
-  const topDecorUrl = mediaUrl(topDecorImage)
-  const bottomDecorUrl = mediaUrl(bottomDecorImage)
+  const topDecorUrl = mediaUrl(topDecorImage) || placeholderImageUrl('testimonial-top-decor')
+  const bottomDecorUrl = mediaUrl(bottomDecorImage) || placeholderImageUrl('testimonial-bottom-decor')
 
   return (
     <section className="relative overflow-hidden py-20 md:py-24" style={{ backgroundColor: sectionBackground || 'var(--color-surface)' }}>
-      {topDecorUrl ? (
-        <div className="pointer-events-none absolute right-0 top-0 hidden h-28 w-72 opacity-95 md:block">
-          <Image src={topDecorUrl} alt="" fill sizes="288px" className="object-contain object-right-top" />
-        </div>
-      ) : null}
+      <div className="pointer-events-none absolute right-0 top-0 hidden h-28 w-72 opacity-95 md:block">
+        <Image src={topDecorUrl} alt="" fill sizes="288px" className="object-contain object-right-top" />
+      </div>
 
-      {bottomDecorUrl ? (
-        <div className="pointer-events-none absolute bottom-0 left-0 hidden h-28 w-72 opacity-95 md:block">
-          <Image src={bottomDecorUrl} alt="" fill sizes="288px" className="object-contain object-left-bottom" />
-        </div>
-      ) : null}
+      <div className="pointer-events-none absolute bottom-0 left-0 hidden h-28 w-72 opacity-95 md:block">
+        <Image src={bottomDecorUrl} alt="" fill sizes="288px" className="object-contain object-left-bottom" />
+      </div>
 
       <div className="mx-auto grid max-w-5xl grid-cols-[48px_1fr_48px] items-center gap-6 px-6 md:gap-10">
         <button
@@ -77,15 +74,16 @@ export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({
 
           <div className="mt-10 flex flex-col items-center">
             <div className="relative h-16 w-16 overflow-hidden rounded-full border border-[#d8d1c8] bg-white">
-              {avatarMedia?.url ? (
-                <Image
-                  src={avatarMedia.url}
-                  alt={avatarMedia.alt || active.authorName || 'Author avatar'}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                />
-              ) : null}
+              <Image
+                src={
+                  avatarMedia?.url?.trim() ||
+                  placeholderImageUrl(active.authorName || `testimonial-${activeIndex}`)
+                }
+                alt={avatarMedia?.alt || active.authorName || 'Author avatar'}
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
             </div>
             <p className="mt-4 text-sm font-medium text-[#25384d]">{active.authorName}</p>
             {active.authorRole ? <p className="mt-1 text-xs text-[#5e6f81]">{active.authorRole}</p> : null}

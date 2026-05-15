@@ -6,6 +6,7 @@ import React, { Fragment } from 'react'
 
 import { FormBlock } from '@/blocks/Form/Component'
 import { cn } from '@/utilities/cn'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 
 const icons: Record<string, LucideIcon> = {
   'map-pin': MapPin,
@@ -100,8 +101,10 @@ export const ContactPageBlock: React.FC<Props> = ({
   const mapUrl = getMediaUrl(mapImage)
   const mapAlt = getMediaAlt(mapImage) || ''
   const formDoc = form && typeof form === 'object' && 'fields' in form ? form : null
-  const heroHasImage = Boolean(heroUrl)
-  const hasMap = Boolean(mapEmbedUrl?.trim()) || Boolean(mapUrl)
+  const heroResolved = heroUrl?.trim() || placeholderImageUrl('contact-hero')
+  const storyResolved = storyUrl?.trim() || placeholderImageUrl('contact-story')
+  const mapStaticResolved = mapUrl?.trim() || placeholderImageUrl('contact-map')
+  const hasMap = Boolean(mapEmbedUrl?.trim()) || Boolean(mapUrl?.trim())
   const details = contactDetails || []
   const hours = storeHours || []
 
@@ -110,25 +113,13 @@ export const ContactPageBlock: React.FC<Props> = ({
       {/* Hero is its own section so body `text-[var(--color-text)]` never leaks onto headings */}
       <section className="not-prose bg-[#1a1817] text-[#f6f3ef]">
         <div className="relative flex min-h-[min(52vh,560px)] items-center justify-center overflow-hidden px-6 py-20 text-center md:py-28">
-          {heroHasImage ? (
-            <img
-              src={heroUrl}
-              alt={heroAlt}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          ) : (
-            <div
-              className="absolute inset-0 bg-gradient-to-br from-[#2a2624] via-[#1a1817] to-[#0f0e0d]"
-              aria-hidden
-            />
-          )}
+          <img
+            src={heroResolved}
+            alt={heroAlt}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div
-            className={cn(
-              'absolute inset-0',
-              heroHasImage
-                ? 'bg-gradient-to-b from-black/75 via-black/50 to-black/72'
-                : 'bg-gradient-to-b from-black/20 to-black/40',
-            )}
+            className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/72"
             aria-hidden
           />
           <div className="relative z-10 mx-auto w-full max-w-3xl animate-in fade-in-0 slide-in-from-bottom-3 duration-700 motion-reduce:animate-none">
@@ -184,17 +175,11 @@ export const ContactPageBlock: React.FC<Props> = ({
         </div>
 
         <div className="relative overflow-hidden rounded-2xl bg-[var(--color-text)] shadow-xl ring-1 ring-black/10">
-          {storyUrl ? (
-            <img
-              src={storyUrl}
-              alt={storyAlt}
-              className="aspect-[4/5] w-full object-cover md:aspect-[3/4] lg:min-h-[420px]"
-            />
-          ) : (
-            <div className="flex aspect-[4/5] min-h-[280px] items-center justify-center bg-[#2a2624] px-6 text-center text-sm text-white/50 md:aspect-[3/4] lg:min-h-[420px]">
-              Add a story image in the Contact Page block (Story tab).
-            </div>
-          )}
+          <img
+            src={storyResolved}
+            alt={storyAlt}
+            className="aspect-[4/5] w-full object-cover md:aspect-[3/4] lg:min-h-[420px]"
+          />
         </div>
       </div>
 
@@ -289,13 +274,13 @@ export const ContactPageBlock: React.FC<Props> = ({
                 referrerPolicy="no-referrer-when-downgrade"
                 className="absolute inset-0 h-full min-h-[380px] w-full border-0 md:min-h-[440px]"
               />
-            ) : mapUrl ? (
+            ) : (
               <img
-                src={mapUrl}
+                src={mapStaticResolved}
                 alt={mapAlt || mapLabel || 'Map'}
                 className="absolute inset-0 h-full w-full object-cover"
               />
-            ) : null}
+            )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
             {(mapLabel || !mapEmbedUrl?.trim()) && (
               <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center pb-10 pt-16">
@@ -311,12 +296,20 @@ export const ContactPageBlock: React.FC<Props> = ({
             )}
           </>
         ) : (
-          <div className="flex min-h-[380px] flex-col items-center justify-center gap-3 px-6 text-center md:min-h-[440px]">
-            <MapPin className="h-10 w-10 text-[var(--color-muted-text)]" strokeWidth={1.25} />
-            <p className="max-w-sm text-sm text-[var(--color-muted-text)]">
-              Add a map embed URL or map image in the Contact Page block (Map tab) to show your location here.
-            </p>
-          </div>
+          <>
+            <img
+              src={mapStaticResolved}
+              alt={mapAlt || mapLabel || 'Map'}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-black/30" />
+            <div className="relative z-[1] flex min-h-[380px] flex-col items-center justify-center gap-3 px-6 text-center md:min-h-[440px]">
+              <MapPin className="h-10 w-10 text-white drop-shadow" strokeWidth={1.25} />
+              <p className="max-w-sm text-sm text-white drop-shadow">
+                Add a map embed URL or map image in the Contact Page block (Map tab) to show your location here.
+              </p>
+            </div>
+          </>
         )}
       </div>
       </section>

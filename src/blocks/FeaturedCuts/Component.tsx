@@ -1,5 +1,6 @@
 import type { FeaturedCutsBlock as FeaturedCutsBlockProps } from '@/payload-types'
 import type { DefaultDocumentIDType } from 'payload'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -47,7 +48,8 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
           {items.map((item, index) => {
             const media =
               typeof item.image === 'object' && item.image !== null ? item.image : undefined
-            const imageUrl = media?.url
+            const displaySrc =
+              media?.url?.trim() || placeholderImageUrl(item.name || `featured-${index}`)
 
             const p = item.product
             const productSlug =
@@ -62,19 +64,13 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
                 className="on-dark-media group flex flex-col bg-[var(--color-text)] text-center text-white transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.75)] motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-none motion-reduce:transition-none"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/40">
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={media?.alt || item.name || 'Product'}
-                      fill
-                      className="object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-[1.05] motion-reduce:group-hover:scale-100 motion-reduce:group-hover:brightness-100"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-sm text-white/35 transition-colors duration-300 group-hover:text-white/50">
-                      Image
-                    </div>
-                  )}
+                  <Image
+                    src={displaySrc}
+                    alt={media?.alt || item.name || 'Product'}
+                    fill
+                    className="object-cover transition-[transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-[1.05] motion-reduce:group-hover:scale-100 motion-reduce:group-hover:brightness-100"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
 
                   {item.tag && (
                     <span className="absolute bottom-3 left-3 border border-[var(--color-gold)]/60 bg-black/60 px-2 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--color-gold)] backdrop-blur-sm transition-colors duration-300 group-hover:border-[var(--color-gold)] group-hover:bg-black/70">

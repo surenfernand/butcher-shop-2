@@ -2,7 +2,9 @@ import type { Media as MediaType } from '@/payload-types'
 
 import { Label } from '@/components/Grid/Label'
 import { Media } from '@/components/Media'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import clsx from 'clsx'
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {
@@ -13,7 +15,7 @@ type Props = {
     position?: 'bottom' | 'center'
     title: string
   }
-  media: MediaType
+  media?: MediaType | null
 }
 
 export const GridTileImage: React.FC<Props> = ({
@@ -25,11 +27,10 @@ export const GridTileImage: React.FC<Props> = ({
   return (
     <div
       className={clsx(
-        'group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-black hover:border-blue-600 dark:bg-black',
+        'group relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-black hover:border-blue-600 dark:bg-black',
         {
           'border-2 border-blue-600': active,
           'border-neutral-200 dark:border-neutral-800': !active,
-          relative: label,
         },
       )}
     >
@@ -43,7 +44,15 @@ export const GridTileImage: React.FC<Props> = ({
           resource={props.media}
           width={80}
         />
-      ) : null}
+      ) : (
+        <Image
+          src={placeholderImageUrl('carousel-tile')}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 70vw, 400px"
+          className="object-cover"
+        />
+      )}
       {label ? <Label amount={label.amount} position={label.position} title={label.title} /> : null}
     </div>
   )

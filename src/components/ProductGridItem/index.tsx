@@ -3,7 +3,9 @@ import type { Product, Variant } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
 import clsx from 'clsx'
+import Image from 'next/image'
 import { Media } from '@/components/Media'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { Price } from '@/components/Price'
 
 type Props = {
@@ -34,19 +36,31 @@ export const ProductGridItem: React.FC<Props> = ({ product }) => {
 
   return (
     <Link className="relative inline-block h-full w-full group" href={`/products/${product.slug}`}>
-      {image ? (
-        <Media
-          className={clsx(
-            'relative aspect-square object-cover border rounded-2xl p-8 bg-primary-foreground',
-          )}
-          height={80}
-          imgClassName={clsx('h-full w-full object-cover rounded-2xl', {
-            'transition duration-300 ease-in-out group-hover:scale-102': true,
-          })}
-          resource={image}
-          width={80}
-        />
-      ) : null}
+      <div
+        className={clsx(
+          'relative aspect-square overflow-hidden border rounded-2xl p-8 bg-primary-foreground',
+        )}
+      >
+        {image ? (
+          <Media
+            className="relative h-full w-full"
+            height={80}
+            imgClassName={clsx('h-full w-full object-cover rounded-2xl', {
+              'transition duration-300 ease-in-out group-hover:scale-102': true,
+            })}
+            resource={image}
+            width={80}
+          />
+        ) : (
+          <Image
+            src={placeholderImageUrl(product.slug || String(product.id || 'grid-item'))}
+            alt={title || 'Product'}
+            width={80}
+            height={80}
+            className="h-full w-full object-cover rounded-2xl transition duration-300 ease-in-out group-hover:scale-102"
+          />
+        )}
+      </div>
 
       <div className="font-mono text-primary/50 group-hover:text-primary flex justify-between items-center mt-4">
         <div>{title}</div>

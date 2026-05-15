@@ -2,7 +2,9 @@ import type { Product } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { Price } from '@/components/Price'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import clsx from 'clsx'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -47,7 +49,15 @@ export const LuxuryProductCard: React.FC<Props> = ({ product }) => {
               resource={image as never}
             />
           ) : (
-            <div className="relative aspect-[4/4.4] w-full bg-[#eee7df]" />
+            <div className="relative aspect-[4/4.4] w-full bg-[#eee7df]">
+              <Image
+                src={placeholderImageUrl(product.slug || String(product.id || 'luxury-card'))}
+                alt={product.title || 'Product'}
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
           )}
 
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-black/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

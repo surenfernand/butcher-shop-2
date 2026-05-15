@@ -17,6 +17,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import { Product } from '@/payload-types'
 import { getPurchaseUnitPriceInCents } from '@/utilities/purchasePricing'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { CartTimerModal } from './CartTimerModal'
 import { DeleteItemButton } from './DeleteItemButton'
 import { EditItemQuantityButton } from './EditItemQuantityButton'
@@ -252,15 +253,16 @@ export function CartModal() {
                       <li key={i} className="flex gap-5">
                         <Link href={`/products/${product.slug}`} className="block shrink-0">
                           <div className="relative h-[104px] w-[104px] overflow-hidden bg-zinc-100">
-                            {image?.url && (
-                              <Image
-                                alt={image?.alt || product?.title || ''}
-                                className="h-full w-full object-cover"
-                                height={120}
-                                src={image.url}
-                                width={120}
-                              />
-                            )}
+                            <Image
+                              alt={image?.alt || product?.title || ''}
+                              className="h-full w-full object-cover"
+                              height={120}
+                              src={
+                                image?.url?.trim() ||
+                                placeholderImageUrl(product.slug || String(product.id || 'cart-line'))
+                              }
+                              width={120}
+                            />
                           </div>
                         </Link>
 

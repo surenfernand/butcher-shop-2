@@ -3,6 +3,7 @@
 import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/cn'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import NextImage from 'next/image'
 import React from 'react'
 
@@ -51,6 +52,26 @@ export const Image: React.FC<MediaProps> = (props) => {
 
     // src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
     src = url?.startsWith('http') ? url : url || ''
+  }
+
+  let usedPlaceholder = false
+  if (typeof src === 'string' && !src.trim()) {
+    const seed =
+      (typeof alt === 'string' && alt) ||
+      (resource &&
+      typeof resource === 'object' &&
+      resource !== null &&
+      'id' in resource &&
+      resource.id !== undefined &&
+      String(resource.id)) ||
+      'media'
+    src = placeholderImageUrl(seed)
+    usedPlaceholder = true
+  }
+
+  if (usedPlaceholder && !fill) {
+    width = width ?? widthFromProps ?? 1600
+    height = height ?? heightFromProps ?? 900
   }
 
   // NOTE: this is used by the browser to determine which image to download at different screen sizes

@@ -3,26 +3,27 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { DefaultDocumentIDType } from 'payload'
 import React from 'react'
-
-const SUBSCRIPTION_IMAGE =
-  'https://images.unsplash.com/photo-1603048297172-c92544798d5a?auto=format&fit=crop&w=900&q=80'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 
 type ProductWithGallery = Product & {
   productGallery?: { image?: Media | string | null }[] | null
 }
 
-function productImageUrl(item: ProductWithGallery): { src: string; alt: string } | null {
+function productImageUrl(item: ProductWithGallery): { src: string; alt: string } {
   const image = item.productGallery?.[0]?.image
   const media = typeof image === 'object' && image !== null ? image : null
-  if (media?.url) {
+  if (media?.url?.trim()) {
     return { src: media.url, alt: media.alt || item.title || 'Product' }
   }
-  return null
+  return {
+    src: placeholderImageUrl(item.slug || item.title || 'bento-tile'),
+    alt: media?.alt || item.title || 'Product',
+  }
 }
 
 type BentoTileProps = {
   href: string
-  image: { src: string; alt: string } | null
+  image: { src: string; alt: string }
   title: string
   subtitle?: string | null
   size: 'large' | 'small'
@@ -46,19 +47,13 @@ const BentoTile: React.FC<BentoTileProps> = ({
           : 'on-dark-media group relative block min-h-[200px] overflow-hidden bg-neutral-900 text-white md:min-h-0'
       }
     >
-      {image ? (
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          className="object-cover transition duration-500 group-hover:scale-[1.02]"
-          sizes={size === 'large' ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 25vw'}
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center bg-neutral-800 text-sm text-white/50">
-          No image
-        </div>
-      )}
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        className="object-cover transition duration-500 group-hover:scale-[1.02]"
+        sizes={size === 'large' ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 100vw, 25vw'}
+      />
 
       {size === 'large' && (
         <div
@@ -134,7 +129,7 @@ export const ThreeItemGridBlock: React.FC<
   const thirdTitle = p2?.title || 'Subscription Boxes'
   const thirdSubtitle = p2?.shopCardShortDescription?.trim() || (p2 ? undefined : 'Curated deliveries on your schedule.')
 
-  const thirdImage = img2 ?? { src: SUBSCRIPTION_IMAGE, alt: thirdTitle }
+  const thirdImage = img2 ?? { src: placeholderImageUrl(thirdTitle), alt: thirdTitle }
 
   return (
     <section className="bg-[var(--color-background)] py-16 md:py-24">

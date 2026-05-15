@@ -2,10 +2,12 @@ import type { Order } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { getOrderLineProductImage } from '@/utilities/getOrderLineProductImage'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { getPurchaseUnitPriceInCents, PurchaseType } from '@/utilities/purchasePricing'
 import { batchResolveOrderLinesForPricing } from '@/utilities/resolveOrderLinePricingDocs'
 import configPromise from '@payload-config'
 import { headers as getHeaders } from 'next/headers'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
@@ -219,9 +221,21 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                 return (
                   <div key={item.id || index} className="flex items-center gap-5 border-b border-[#f0f0f0] pb-5 last:border-b-0 last:pb-0">
                     <div className="relative h-24 w-24 overflow-hidden border border-[#e2e2e2] bg-[#f8f8f8]">
-                      {image ? (
+                      {image?.url?.trim() ? (
                         <Media fill imgClassName="object-cover" resource={image} />
-                      ) : null}
+                      ) : (
+                        <Image
+                          src={
+                            placeholderImageUrl(
+                              product.slug || String(product.id || `thankyou-line-${index}`),
+                            )
+                          }
+                          alt={product.title || ''}
+                          fill
+                          sizes="96px"
+                          className="object-cover"
+                        />
+                      )}
                     </div>
 
                     <div className="flex-1">
