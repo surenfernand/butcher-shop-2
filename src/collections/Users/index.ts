@@ -22,8 +22,9 @@ export const Users: CollectionConfig = {
   },
   admin: {
     group: 'Users',
-    defaultColumns: ['name', 'email', 'roles'],
-    useAsTitle: 'name',
+    defaultColumns: ['email', 'name', 'roles'],
+    // For auth collections Payload only skips `useAsTitle` validation when it is `email`.
+    useAsTitle: 'email',
   },
   auth: {
     tokenExpiration: 1209600,
