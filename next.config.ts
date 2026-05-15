@@ -35,6 +35,20 @@ const nextConfig: NextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      ...(process.env.S3_BUCKET && process.env.S3_REGION
+        ? [
+            {
+              protocol: 'https' as const,
+              hostname: `${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com`,
+              pathname: '/**',
+            },
+            {
+              protocol: 'https' as const,
+              hostname: `s3.${process.env.S3_REGION}.amazonaws.com`,
+              pathname: `/${process.env.S3_BUCKET}/**`,
+            },
+          ]
+        : []),
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
         const url = new URL(item)
 

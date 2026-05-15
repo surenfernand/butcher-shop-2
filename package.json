@@ -37,6 +37,7 @@
     "@payloadcms/plugin-form-builder": "3.83.0",
     "@payloadcms/plugin-seo": "3.83.0",
     "@payloadcms/richtext-lexical": "3.83.0",
+    "@payloadcms/storage-s3": "^3.83.0",
     "@payloadcms/translations": "3.83.0",
     "@payloadcms/ui": "3.83.0",
     "@prisma/client": "^5.22.0",
