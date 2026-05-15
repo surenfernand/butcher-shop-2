@@ -9,7 +9,6 @@ import { rolesFieldBootstrapOrAdmin } from '@/access/rolesFieldBootstrapOrAdmin'
 import { isAdminPrincipal } from '@/access/utilities'
 
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
-import { syncBetterAuthRoleToPayloadRoles } from './hooks/syncBetterAuthRoleToPayloadRoles'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -28,9 +27,6 @@ export const Users: CollectionConfig = {
   },
   auth: {
     tokenExpiration: 1209600,
-  },
-  hooks: {
-    beforeChange: [syncBetterAuthRoleToPayloadRoles],
   },
   fields: [
     {

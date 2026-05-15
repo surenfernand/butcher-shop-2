@@ -14,7 +14,6 @@ import {
 import 'dotenv/config'
 import path from 'path'
 import { buildConfig } from 'payload'
-import type { Plugin } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Categories } from '@/collections/Categories'
@@ -31,11 +30,6 @@ import { Qualities } from './collections/ProductCategories/Qualities'
 import { CartSettings } from './globals/CartSettings'
 import { ShopLuxuryPage } from './globals/ShopLuxuryPage'
 import { plugins } from './plugins'
-import { openAdminLoginBypassBeforeHook } from './auth/openAdminLoginBypass'
-import { overrideBetterAuthAdminViews } from './plugins/overrideBetterAuthAdminViews'
-import { payloadBetterAuth } from '@payload-auth/better-auth-plugin'
-import { admin } from 'better-auth/plugins'
-
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -123,24 +117,6 @@ export default buildConfig({
       },
     }),
     ...plugins,
-    payloadBetterAuth({
-      users: {
-        // Plugin hardcodes defaultValue 'user' on `role`; the DB enum must include it or
-        // push-schema fails (e.g. DEFAULT 'user' with enum only admin|customer).
-        roles: ['admin', 'customer', 'user'],
-        adminRoles: ['admin'],
-      },
-      betterAuthOptions: {
-        emailAndPassword: {
-          enabled: true,
-        },
-        hooks: {
-          before: openAdminLoginBypassBeforeHook,
-        },
-        plugins: [admin()],
-      },
-    }) as unknown as Plugin,
-    overrideBetterAuthAdminViews,
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

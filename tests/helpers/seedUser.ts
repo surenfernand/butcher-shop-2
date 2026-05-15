@@ -22,14 +22,15 @@ export async function seedTestUser(): Promise<void> {
     },
   })
 
-  // Create fresh test user (Better Auth: no local `password` on users; use role + verified email)
+  // Create fresh test user with Payload auth (email + password)
   await payload.create({
     collection: 'users',
     data: {
       email: testUser.email,
+      password: testUser.password,
       emailVerified: true,
-      role: 'customer',
-      roles: ['customer'],
+      role: 'admin',
+      roles: ['admin'],
     },
   })
 }

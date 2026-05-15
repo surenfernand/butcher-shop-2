@@ -1,6 +1,6 @@
 import type { PayloadRequest } from 'payload'
 
-/** Better Auth `role` + Payload `roles[]` */
+/** Payload `roles[]` and optional legacy `role` from older schemas */
 export async function hasAdminUser(req: PayloadRequest): Promise<boolean> {
   const { totalDocs: byRoles } = await req.payload.find({
     collection: 'users',
@@ -32,8 +32,7 @@ export async function hasAdminUser(req: PayloadRequest): Promise<boolean> {
 }
 
 /**
- * Create-first-admin sends a PATCH with `role: 'admin'` (and sometimes `id`) while Better Auth
- * cookies do not always populate Payload `req.user` the same way as admin UI requests.
+ * Bootstrap PATCH with only `role: 'admin'` (and optional `id`) while aligning Payload user state.
  */
 export function isBootstrapAdminRoleOnlyPatch(data: unknown): boolean {
   if (!data || typeof data !== 'object') return false

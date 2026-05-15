@@ -13,9 +13,7 @@ export const checkRole = (allRoles: User['roles'] = [], user?: User | null): boo
 }
 
 /**
- * Payload admin checks use `roles[]`; Better Auth + `@payload-auth/better-auth-plugin`
- * can set `role: 'admin'` before `roles` is synced (e.g. right after sign-up).
- * The Better Auth auth strategy only attaches `req.user` when `role` is in `adminRoles`.
+ * Treats a user as an admin if `roles` includes `admin`, or legacy `role === 'admin'`.
  */
 export const isAdminPrincipal = (user?: User | null): boolean => {
   if (!user) return false
