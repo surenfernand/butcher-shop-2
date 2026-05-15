@@ -6,11 +6,14 @@ import Link from 'next/link'
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/utilities/cn'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 
 type Upload = Media | string | null | undefined
 
-const mediaUrl = (image: Upload) =>
-  typeof image === 'object' && image ? image.url : undefined
+const mediaUrl = (image: Upload) => {
+  const u = typeof image === 'object' && image ? image.url : undefined
+  return u?.trim() || undefined
+}
 
 /** Shown when no media is set in the CMS (e.g. static /about fallback). */
 const ABOUT_FALLBACK_IMAGES = {
@@ -131,20 +134,19 @@ const EditableImage = ({
   fallbackSrc?: string
   imageClassName?: string
 }) => {
-  const src = mediaUrl(image) ?? fallbackSrc
-
-  if (!src) {
-    return <div className={['bg-muted', className].filter(Boolean).join(' ')} />
-  }
+  const raw = mediaUrl(image)
+  const src = raw || fallbackSrc?.trim() || placeholderImageUrl(alt)
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      sizes="(max-width: 768px) 100vw, 50vw"
-      className={imageClassName}
-    />
+    <div className={cn('relative h-full w-full', className)}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className={imageClassName}
+      />
+    </div>
   )
 }
 

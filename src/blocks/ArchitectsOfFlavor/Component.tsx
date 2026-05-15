@@ -1,18 +1,14 @@
 import type { Media } from '@/payload-types'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import React from 'react'
 
 type Upload = Media | string | null | undefined
 
-const mediaUrl = (image: Upload) =>
-  typeof image === 'object' && image ? image.url : undefined
-
-const fallbackImages = [
-  'https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=700&q=80',
-  'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=700&q=80',
-  'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?auto=format&fit=crop&w=700&q=80',
-  'https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=700&q=80',
-]
+const mediaUrl = (image: Upload) => {
+  const u = typeof image === 'object' && image ? image.url : undefined
+  return u?.trim() || undefined
+}
 
 const TeamImage = ({
   image,
@@ -23,7 +19,7 @@ const TeamImage = ({
   alt: string
   index: number
 }) => {
-  const src = mediaUrl(image) ?? fallbackImages[index % fallbackImages.length]
+  const src = mediaUrl(image) || placeholderImageUrl(`${alt}-${index}`)
 
   return (
     <div className="relative h-[184px] w-full overflow-hidden bg-neutral-200">

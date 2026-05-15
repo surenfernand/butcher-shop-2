@@ -5,7 +5,10 @@ import React from 'react'
 
 type Upload = Media | string | null | undefined
 
-const mediaUrl = (image: Upload) => (typeof image === 'object' && image ? image.url : undefined)
+const mediaUrl = (image: Upload) => {
+  const u = typeof image === 'object' && image ? image.url : undefined
+  return u?.trim() || undefined
+}
 
 const FALLBACKS = {
   hero: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1800&q=80',

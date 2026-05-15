@@ -49,7 +49,8 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
     setHeaderTheme('light')
   }, [setHeaderTheme])
 
-  const mediaUrl = media && typeof media === 'object' && media.url ? media.url : null
+  const mediaUrl =
+    media && typeof media === 'object' && media.url?.trim() ? media.url.trim() : null
 
   const isVideo = media && typeof media === 'object' && media.mimeType?.startsWith('video')
 
