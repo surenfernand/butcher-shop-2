@@ -228,6 +228,7 @@ export default async function ThankYouPage({ params, searchParams }: PageProps) 
                           src={
                             placeholderImageUrl(
                               product.slug || String(product.id || `thankyou-line-${index}`),
+                              'meat',
                             )
                           }
                           alt={product.title || ''}

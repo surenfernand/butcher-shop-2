@@ -18,7 +18,7 @@ export default function ProductGallery({ product }: Props) {
 
   const mainImage = gallery[activeIndex] ?? gallery[0]
   const mainSrc =
-    mainImage?.url?.trim() || placeholderImageUrl(product.slug || String(product.id || 'product-gallery'))
+    mainImage?.url?.trim() || placeholderImageUrl(product.slug || String(product.id || 'product-gallery'), 'meat')
   const thumbSlots = [1, 2, 3] as const
 
   return (
@@ -38,7 +38,7 @@ export default function ProductGallery({ product }: Props) {
       {thumbSlots.map((slotIndex) => {
         const img = gallery[slotIndex]
         const isActive = activeIndex === slotIndex
-        const thumbSrc = img?.url?.trim() || placeholderImageUrl(`${product.slug}-thumb-${slotIndex}`)
+        const thumbSrc = img?.url?.trim() || placeholderImageUrl(`${product.slug}-thumb-${slotIndex}`, 'meat')
 
         return (
           <button

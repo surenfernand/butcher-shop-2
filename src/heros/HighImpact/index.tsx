@@ -3,12 +3,10 @@
 import type { Header, Page } from '@/payload-types'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import { cn } from '@/utilities/cn'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
-
-const HERO_FALLBACK_IMAGE =
-  'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=2000&q=80'
 
 type HeroLink = NonNullable<NonNullable<Page['hero']['links']>[number]['link']>
 
@@ -54,7 +52,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
   const isVideo = media && typeof media === 'object' && media.mimeType?.startsWith('video')
 
-  const imageSrc = mediaUrl || HERO_FALLBACK_IMAGE
+  const imageSrc = mediaUrl || placeholderImageUrl(pageSlug || 'high-impact-hero', 'hero')
   const imageAlt =
     (media && typeof media === 'object' && media.alt) || 'Premium marbled steak on a dark surface'
 

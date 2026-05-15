@@ -22,7 +22,7 @@ export const InfoSectionBlock: React.FC<Props> = ({
 }) => {
   const media = image as Media | undefined
   const displaySrc =
-    media?.url?.trim() || placeholderImageUrl(title || 'info-section')
+    media?.url?.trim() || placeholderImageUrl(title || 'info-section', 'info')
 
   return (
     <section className={['py-20', className].filter(Boolean).join(' ')}>

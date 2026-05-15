@@ -2,6 +2,8 @@ import { Media } from '@/components/Media'
 import { Price } from '@/components/Price'
 import { Product, Variant } from '@/payload-types'
 import { getOrderLineProductImage } from '@/utilities/getOrderLineProductImage'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
@@ -42,7 +44,15 @@ export const ProductItem: React.FC<Props> = ({
         <div className="relative w-full h-full">
           {image ? (
             <Media fill imgClassName="rounded-lg object-cover" resource={image} />
-          ) : null}
+          ) : (
+            <Image
+              src={placeholderImageUrl(product.slug || String(product.id || 'product-item'), 'meat')}
+              alt={title || ''}
+              fill
+              sizes="80px"
+              className="rounded-lg object-cover"
+            />
+          )}
         </div>
       </div>
 

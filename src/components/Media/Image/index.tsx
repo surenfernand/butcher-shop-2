@@ -65,7 +65,7 @@ export const Image: React.FC<MediaProps> = (props) => {
       resource.id !== undefined &&
       String(resource.id)) ||
       'media'
-    src = placeholderImageUrl(seed)
+    src = placeholderImageUrl(seed, 'meat')
     usedPlaceholder = true
   }
 

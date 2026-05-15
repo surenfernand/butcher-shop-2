@@ -19,7 +19,7 @@ const TeamImage = ({
   alt: string
   index: number
 }) => {
-  const src = mediaUrl(image) || placeholderImageUrl(`${alt}-${index}`)
+  const src = mediaUrl(image) || placeholderImageUrl(`${alt}-${index}`, 'team')
 
   return (
     <div className="relative h-[184px] w-full overflow-hidden bg-neutral-200">

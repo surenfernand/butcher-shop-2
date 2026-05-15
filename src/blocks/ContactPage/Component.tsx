@@ -101,9 +101,9 @@ export const ContactPageBlock: React.FC<Props> = ({
   const mapUrl = getMediaUrl(mapImage)
   const mapAlt = getMediaAlt(mapImage) || ''
   const formDoc = form && typeof form === 'object' && 'fields' in form ? form : null
-  const heroResolved = heroUrl?.trim() || placeholderImageUrl('contact-hero')
-  const storyResolved = storyUrl?.trim() || placeholderImageUrl('contact-story')
-  const mapStaticResolved = mapUrl?.trim() || placeholderImageUrl('contact-map')
+  const heroResolved = heroUrl?.trim() || placeholderImageUrl('contact-hero', 'hero')
+  const storyResolved = storyUrl?.trim() || placeholderImageUrl('contact-story', 'story')
+  const mapStaticResolved = mapUrl?.trim() || placeholderImageUrl('contact-map', 'map')
   const hasMap = Boolean(mapEmbedUrl?.trim()) || Boolean(mapUrl?.trim())
   const details = contactDetails || []
   const hours = storeHours || []

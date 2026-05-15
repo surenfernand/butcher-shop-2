@@ -40,7 +40,7 @@ export const Video: React.FC<MediaProps> = (props) => {
       return (
         <div className={cn('relative block min-h-[200px] w-full overflow-hidden', videoClassName)}>
           <Image
-            src={placeholderImageUrl(String(filename || 'video'))}
+            src={placeholderImageUrl(String(filename || 'video'), 'videoPoster')}
             alt=""
             fill
             className="object-cover"

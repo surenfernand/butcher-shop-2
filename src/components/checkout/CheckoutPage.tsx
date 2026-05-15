@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/providers/Auth'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
@@ -757,10 +759,20 @@ export const CheckoutPage: React.FC = () => {
                 return (
                   <div className="grid grid-cols-[80px_1fr_auto] items-center gap-4" key={index}>
                     <div className="relative h-20 w-20 border border-[var(--color-border-token)] bg-[var(--color-surface)]">
-                      {image && typeof image !== 'string' && (
+                      {image && typeof image !== 'string' ? (
                         <Media className="" fill imgClassName="object-cover" resource={image} />
+                      ) : (
+                        <Image
+                          src={placeholderImageUrl(
+                            product.slug || String(product.id || `checkout-${index}`),
+                            'meat',
+                          )}
+                          alt={title || ''}
+                          fill
+                          sizes="80px"
+                          className="object-cover"
+                        />
                       )}
-
                     </div>
                     <div>
                       <p className="font-sans text-base font-semibold text-[var(--color-text)]">{title}</p>

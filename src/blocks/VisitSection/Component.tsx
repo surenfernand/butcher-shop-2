@@ -29,7 +29,7 @@ export const VisitSectionBlock: React.FC<Props> = ({
 }) => {
   const media = typeof mapImage === 'object' && mapImage ? mapImage : null
   const displaySrc =
-    media?.url?.trim() || placeholderImageUrl(locationLabel || title || 'visit-section')
+    media?.url?.trim() || placeholderImageUrl(locationLabel || title || 'visit-section', 'shop')
 
   return (
     <section className={['py-20', className].filter(Boolean).join(' ')}>

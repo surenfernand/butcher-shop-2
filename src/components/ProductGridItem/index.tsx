@@ -53,7 +53,7 @@ export const ProductGridItem: React.FC<Props> = ({ product }) => {
           />
         ) : (
           <Image
-            src={placeholderImageUrl(product.slug || String(product.id || 'grid-item'))}
+            src={placeholderImageUrl(product.slug || String(product.id || 'grid-item'), 'meat')}
             alt={title || 'Product'}
             width={80}
             height={80}

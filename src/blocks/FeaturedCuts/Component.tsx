@@ -49,7 +49,7 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
             const media =
               typeof item.image === 'object' && item.image !== null ? item.image : undefined
             const displaySrc =
-              media?.url?.trim() || placeholderImageUrl(item.name || `featured-${index}`)
+              media?.url?.trim() || placeholderImageUrl(item.name || `featured-${index}`, 'meat')
 
             const p = item.product
             const productSlug =

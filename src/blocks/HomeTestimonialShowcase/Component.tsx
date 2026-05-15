@@ -43,8 +43,8 @@ export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({
 
   const active = items[activeIndex]
   const avatarMedia = toMedia(active.authorAvatar)
-  const topDecorUrl = mediaUrl(topDecorImage) || placeholderImageUrl('testimonial-top-decor')
-  const bottomDecorUrl = mediaUrl(bottomDecorImage) || placeholderImageUrl('testimonial-bottom-decor')
+  const topDecorUrl = mediaUrl(topDecorImage) || placeholderImageUrl('testimonial-top-decor', 'decor')
+  const bottomDecorUrl = mediaUrl(bottomDecorImage) || placeholderImageUrl('testimonial-bottom-decor', 'decor')
 
   return (
     <section className="relative overflow-hidden py-20 md:py-24" style={{ backgroundColor: sectionBackground || 'var(--color-surface)' }}>
@@ -77,7 +77,7 @@ export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({
               <Image
                 src={
                   avatarMedia?.url?.trim() ||
-                  placeholderImageUrl(active.authorName || `testimonial-${activeIndex}`)
+                  placeholderImageUrl(active.authorName || `testimonial-${activeIndex}`, 'portrait')
                 }
                 alt={avatarMedia?.alt || active.authorName || 'Author avatar'}
                 fill

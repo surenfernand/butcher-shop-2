@@ -15,15 +15,12 @@ const mediaUrl = (image: Upload) => {
   return u?.trim() || undefined
 }
 
-/** Shown when no media is set in the CMS (e.g. static /about fallback). */
+/** Shown when no media is set in the CMS (thematic Unsplash fallbacks). */
 const ABOUT_FALLBACK_IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1600&q=80',
-  heritageOne:
-    'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-  heritageTwo:
-    'https://images.unsplash.com/photo-1603048297172-c92544798d5a?auto=format&fit=crop&w=800&q=80',
-  butchers:
-    'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1400&q=80',
+  hero: placeholderImageUrl('about-editable-hero', 'hero'),
+  heritageOne: placeholderImageUrl('about-editable-heritage-1', 'story'),
+  heritageTwo: placeholderImageUrl('about-editable-heritage-2', 'story'),
+  butchers: placeholderImageUrl('about-editable-butchers', 'team'),
 } as const
 
 const SectionVisibleContext = createContext(false)
@@ -135,7 +132,7 @@ const EditableImage = ({
   imageClassName?: string
 }) => {
   const raw = mediaUrl(image)
-  const src = raw || fallbackSrc?.trim() || placeholderImageUrl(alt)
+  const src = raw || fallbackSrc?.trim() || placeholderImageUrl(alt, 'story')
 
   return (
     <div className={cn('relative h-full w-full', className)}>

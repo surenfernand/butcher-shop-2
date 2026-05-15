@@ -142,7 +142,7 @@ export default async function SubscriptionsPage() {
                     <img
                       src={
                         image?.url?.trim() ||
-                        placeholderImageUrl(product?.slug || String(product?.id || 'subscription'))
+                        placeholderImageUrl(product?.slug || String(product?.id || 'subscription'), 'meat')
                       }
                       alt={image?.alt || product?.title || 'Subscription product'}
                       className="h-full min-h-[300px] w-full object-cover"

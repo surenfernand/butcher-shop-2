@@ -259,7 +259,7 @@ export function CartModal() {
                               height={120}
                               src={
                                 image?.url?.trim() ||
-                                placeholderImageUrl(product.slug || String(product.id || 'cart-line'))
+                                placeholderImageUrl(product.slug || String(product.id || 'cart-line'), 'meat')
                               }
                               width={120}
                             />

@@ -16,7 +16,7 @@ function productImageUrl(item: ProductWithGallery): { src: string; alt: string }
     return { src: media.url, alt: media.alt || item.title || 'Product' }
   }
   return {
-    src: placeholderImageUrl(item.slug || item.title || 'bento-tile'),
+    src: placeholderImageUrl(item.slug || item.title || 'bento-tile', 'meat'),
     alt: media?.alt || item.title || 'Product',
   }
 }
@@ -129,7 +129,7 @@ export const ThreeItemGridBlock: React.FC<
   const thirdTitle = p2?.title || 'Subscription Boxes'
   const thirdSubtitle = p2?.shopCardShortDescription?.trim() || (p2 ? undefined : 'Curated deliveries on your schedule.')
 
-  const thirdImage = img2 ?? { src: placeholderImageUrl(thirdTitle), alt: thirdTitle }
+  const thirdImage = img2 ?? { src: placeholderImageUrl(thirdTitle, 'meat'), alt: thirdTitle }
 
   return (
     <section className="bg-[var(--color-background)] py-16 md:py-24">

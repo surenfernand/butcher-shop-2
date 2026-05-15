@@ -46,7 +46,7 @@ export const GridTileImage: React.FC<Props> = ({
         />
       ) : (
         <Image
-          src={placeholderImageUrl('carousel-tile')}
+          src={placeholderImageUrl('carousel-tile', 'meat')}
           alt=""
           fill
           sizes="(max-width: 768px) 70vw, 400px"

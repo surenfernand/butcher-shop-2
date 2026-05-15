@@ -27,7 +27,7 @@ export const AboutStoryBlock: React.FC<Props> = ({
 }) => {
   const media = typeof image === 'object' && image ? image : null
   const displaySrc =
-    media?.url?.trim() || placeholderImageUrl(title || 'about-story')
+    media?.url?.trim() || placeholderImageUrl(title || 'about-story', 'story')
 
   return (
     <section className={['mx-auto max-w-[1280px] px-8 py-20', className].filter(Boolean).join(' ')}>

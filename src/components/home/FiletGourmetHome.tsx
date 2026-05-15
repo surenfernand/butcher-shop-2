@@ -1,16 +1,14 @@
 import { NewsletterClub } from '@/components/home/NewsletterClub'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import { Flame, Sparkles, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const ASSETS = {
-  freshMeat:
-    'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80',
-  readyToEat:
-    'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80',
-  subscription:
-    'https://images.unsplash.com/photo-1603048297172-c92544798d5a?auto=format&fit=crop&w=900&q=80',
+  freshMeat: placeholderImageUrl('home-bento-fresh', 'meat'),
+  readyToEat: placeholderImageUrl('home-bento-ready', 'meat'),
+  subscription: placeholderImageUrl('home-bento-subscription', 'meat'),
 }
 
 const features = [

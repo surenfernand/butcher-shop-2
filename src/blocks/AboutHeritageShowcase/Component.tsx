@@ -1,4 +1,5 @@
 import type { Media } from '@/payload-types'
+import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -9,12 +10,6 @@ const mediaUrl = (image: Upload) => {
   const u = typeof image === 'object' && image ? image.url : undefined
   return u?.trim() || undefined
 }
-
-const FALLBACKS = {
-  hero: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1800&q=80',
-  story:
-    'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1200&q=80',
-} as const
 
 export const AboutHeritageShowcaseBlock: React.FC<any> = ({
   heroTitle,
@@ -39,8 +34,8 @@ export const AboutHeritageShowcaseBlock: React.FC<any> = ({
   sustainabilityStatValue,
   sustainabilityStatLabel,
 }) => {
-  const heroSrc = mediaUrl(heroImage) ?? FALLBACKS.hero
-  const storySrc = mediaUrl(storyImage) ?? FALLBACKS.story
+  const heroSrc = mediaUrl(heroImage) ?? placeholderImageUrl('heritage-showcase-hero', 'hero')
+  const storySrc = mediaUrl(storyImage) ?? placeholderImageUrl('heritage-showcase-story', 'story')
 
   return (
     <section className="bg-[var(--color-background)] text-[#17110f]">

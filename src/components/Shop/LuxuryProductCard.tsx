@@ -51,7 +51,7 @@ export const LuxuryProductCard: React.FC<Props> = ({ product }) => {
           ) : (
             <div className="relative aspect-[4/4.4] w-full bg-[#eee7df]">
               <Image
-                src={placeholderImageUrl(product.slug || String(product.id || 'luxury-card'))}
+                src={placeholderImageUrl(product.slug || String(product.id || 'luxury-card'), 'meat')}
                 alt={product.title || 'Product'}
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
