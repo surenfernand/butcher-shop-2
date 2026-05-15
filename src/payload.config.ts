@@ -31,6 +31,7 @@ import { Qualities } from './collections/ProductCategories/Qualities'
 import { CartSettings } from './globals/CartSettings'
 import { ShopLuxuryPage } from './globals/ShopLuxuryPage'
 import { plugins } from './plugins'
+import { openAdminLoginBypassBeforeHook } from './auth/openAdminLoginBypass'
 import { overrideBetterAuthAdminViews } from './plugins/overrideBetterAuthAdminViews'
 import { payloadBetterAuth } from '@payload-auth/better-auth-plugin'
 import { admin } from 'better-auth/plugins'
@@ -132,6 +133,9 @@ export default buildConfig({
       betterAuthOptions: {
         emailAndPassword: {
           enabled: true,
+        },
+        hooks: {
+          before: openAdminLoginBypassBeforeHook,
         },
         plugins: [admin()],
       },

@@ -16,26 +16,47 @@ import { FiletGourmetHome } from '@/components/home/FiletGourmetHome'
 import type { Page } from '@/payload-types'
 import { notFound } from 'next/navigation'
 
+/** Opt this segment out of static prerendering so `next build` does not run full page queries against Postgres. */
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
+  // Docker / CI builds often omit .env; without a DB, prebuilding slug paths must be skipped.
+  if (!process.env.DATABASE_URL?.trim()) {
+    return []
+  }
 
-  const pages = await payload.find({
-    collection: 'pages',
-    limit: 1000,
-    depth: 0,
-    pagination: false,
-    where: {
-      _status: {
-        equals: 'published',
+  try {
+    const payload = await getPayload({ config: configPromise })
+
+    const pages = await payload.find({
+      collection: 'pages',
+      limit: 1000,
+      depth: 0,
+      pagination: false,
+      // Only slugs are needed; selecting layout would join every block table and breaks builds
+      // when DATABASE_URL points at a DB that has not been migrated to the current schema.
+      select: {
+        slug: true,
       },
-    },
-  })
+      where: {
+        _status: {
+          equals: 'published',
+        },
+      },
+    })
 
-  return pages.docs
-    .filter((doc) => doc.slug && doc.slug !== 'home')
-    .map((doc) => ({
-      slug: doc.slug,
-    }))
+    return pages.docs
+      .filter((doc) => doc.slug && doc.slug !== 'home')
+      .map((doc) => ({
+        slug: doc.slug,
+      }))
+  } catch (err) {
+    console.warn(
+      '[pages/[slug]] generateStaticParams: database unavailable, skipping pre-rendered slug paths.',
+      err instanceof Error ? err.message : err,
+    )
+    return []
+  }
 }
 
 type SearchParams = { [key: string]: string | string[] | undefined }

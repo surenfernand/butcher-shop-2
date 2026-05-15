@@ -17,6 +17,9 @@ const epilogue = Epilogue({
 
 import './globals.css'
 
+/** CMS-backed layout (header/footer globals); avoid Postgres during `next build` without a DB. */
+export const dynamic = 'force-dynamic'
+
 /* const { SITE_NAME, TWITTER_CREATOR, TWITTER_SITE } = process.env
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`

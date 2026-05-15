@@ -22,7 +22,12 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Add ARGs for Next.js public variables
+# Build-time env (see .dockerignore: .env is not copied). Pass real values when building, e.g.:
+#   docker build --build-arg DATABASE_URL=postgresql://... --build-arg PAYLOAD_SECRET=... .
+# DATABASE_URL must point to a reachable Postgres whose schema matches this commit (run
+# `pnpm payload migrate` after deploy, or migrate before build). If the DB is behind the code,
+# builds can fail with missing "pages_blocks_*" relations. To skip slug prebuild entirely, omit
+# DATABASE_URL for the build stage.
 
 ARG NEXT_PUBLIC_SERVER_URL
 ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -34,6 +39,8 @@ ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
 ENV DATABASE_URL=$DATABASE_URL
+# Better Auth reads BETTER_AUTH_SECRET / AUTH_SECRET; align with Payload secret for image builds.
+ENV BETTER_AUTH_SECRET=$PAYLOAD_SECRET
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
