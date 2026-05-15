@@ -21,7 +21,7 @@ export const Users: CollectionConfig = {
     update: adminOrSelfOrBootstrapAdminRole,
   },
   admin: {
-    group: 'Users',
+    group: 'Users', 
     defaultColumns: ['email', 'name', 'roles'],
     // For auth collections Payload only skips `useAsTitle` validation when it is `email`.
     useAsTitle: 'email',

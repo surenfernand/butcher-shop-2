@@ -1,5 +1,4 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { s3Storage } from '@payloadcms/storage-s3'
 import {
     BoldFeature,
     EXPERIMENTAL_TableFeature,
@@ -102,22 +101,8 @@ export default buildConfig({
   //email: nodemailerAdapter(),
   endpoints: [],
   globals: [Header, Footer, ShopPage, ShopLuxuryPage, CartSettings],
-  plugins: [
-    s3Storage({
-      collections: {
-        media: true,
-      },
-      bucket: process.env.S3_BUCKET!,
-      config: {
-        region: process.env.S3_REGION!,
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-        },
-      },
-    }),
-    ...plugins,
-  ],
+  // S3 (when configured) lives in `./plugins` only — avoids duplicate plugins and empty-env crashes on hosts like Render.
+  plugins,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

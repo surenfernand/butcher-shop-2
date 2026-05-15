@@ -7,6 +7,10 @@ export const getServerSideURL = () => {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
 
+  if (!url && process.env.RENDER_EXTERNAL_URL) {
+    return process.env.RENDER_EXTERNAL_URL.replace(/\/$/, '')
+  }
+
   if (!url) {
     url = 'http://localhost:3000'
   }

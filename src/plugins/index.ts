@@ -20,6 +20,34 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import type { Plugin } from "payload";
 import multiLocationPlugin from "./payload-multi-location-plugin/src";
 
+const s3EnvReady =
+	Boolean(process.env.S3_BUCKET?.trim()) &&
+	Boolean(process.env.S3_REGION?.trim()) &&
+	Boolean(process.env.S3_ACCESS_KEY_ID?.trim()) &&
+	Boolean(process.env.S3_SECRET_ACCESS_KEY?.trim());
+
+const s3Plugin: Plugin | undefined = s3EnvReady
+	? s3Storage({
+			collections: {
+				media: true,
+			},
+			bucket: process.env.S3_BUCKET!,
+			config: {
+				...(process.env.S3_ENDPOINT
+					? {
+							endpoint: process.env.S3_ENDPOINT,
+							forcePathStyle: true as const,
+						}
+					: {}),
+				region: process.env.S3_REGION!,
+				credentials: {
+					accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+					secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+				},
+			},
+		})
+	: undefined;
+
 const generateTitle: GenerateTitle<Product | Page> = ({ doc }) => {
 	return doc?.title
 		? `${doc.title} | Payload Ecommerce Template`
@@ -33,21 +61,7 @@ const generateURL: GenerateURL<Product | Page> = ({ doc }) => {
 };
 
 export const plugins: Plugin[] = [
-	s3Storage({
-		collections: {
-			media: true,
-		},
-		bucket: process.env.S3_BUCKET!,
-		config: {
-			endpoint: process.env.S3_ENDPOINT!,
-			forcePathStyle: true,
-			region: process.env.S3_REGION!,
-			credentials: {
-				accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-				secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-			},
-		},
-	}),
+	...(s3Plugin ? [s3Plugin] : []),
 	seoPlugin({
 		generateTitle,
 		generateURL,
