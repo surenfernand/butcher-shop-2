@@ -3,6 +3,7 @@
 import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/cn'
+import { absolutizeMediaSrc } from '@/utilities/absolutizeMediaSrc'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import NextImage from 'next/image'
 import React from 'react'
@@ -52,6 +53,10 @@ export const Image: React.FC<MediaProps> = (props) => {
 
     // src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
     src = url?.startsWith('http') ? url : url || ''
+  }
+
+  if (typeof src === 'string' && src.startsWith('/') && !src.startsWith('//')) {
+    src = absolutizeMediaSrc(src)
   }
 
   let usedPlaceholder = false

@@ -6,6 +6,7 @@ import { isDocumentOwner } from "@/access/isDocumentOwner";
 import { ProductsCollection } from "@/collections/Products";
 import type { Page, Product } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
+import { isS3StorageConfigured } from "@/utilities/isS3StorageConfigured";
 import { ecommercePlugin } from "@payloadcms/plugin-ecommerce";
 import { stripeAdapter } from "@payloadcms/plugin-ecommerce/payments/stripe";
 import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
@@ -20,13 +21,7 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import type { Plugin } from "payload";
 import multiLocationPlugin from "./payload-multi-location-plugin/src";
 
-const s3EnvReady =
-	Boolean(process.env.S3_BUCKET?.trim()) &&
-	Boolean(process.env.S3_REGION?.trim()) &&
-	Boolean(process.env.S3_ACCESS_KEY_ID?.trim()) &&
-	Boolean(process.env.S3_SECRET_ACCESS_KEY?.trim());
-
-const s3Plugin: Plugin | undefined = s3EnvReady
+const s3Plugin: Plugin | undefined = isS3StorageConfigured()
 	? s3Storage({
 			collections: {
 				media: true,

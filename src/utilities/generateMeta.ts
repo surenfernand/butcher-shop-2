@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import type { Page, Product } from '../payload-types'
 
+import { absolutizeMediaSrc } from './absolutizeMediaSrc'
 import { mergeOpenGraph } from './mergeOpenGraph'
 
 export const generateMeta = async (args: {
@@ -20,11 +21,15 @@ export const generateMeta = async (args: {
 
   const pageMeta = 'meta' in doc ? doc.meta : undefined
 
-  const ogImage =
+  const rawImageUrl =
     typeof pageMeta?.image === 'object' &&
     pageMeta.image !== null &&
     'url' in pageMeta.image &&
-    `${process.env.NEXT_PUBLIC_SERVER_URL}${pageMeta.image.url}`
+    typeof pageMeta.image.url === 'string'
+      ? pageMeta.image.url.trim()
+      : ''
+
+  const ogImage = rawImageUrl ? absolutizeMediaSrc(rawImageUrl) : undefined
 
   return {
     description: pageMeta?.description,

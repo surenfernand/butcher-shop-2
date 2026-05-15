@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@/utilities/cn'
+import { absolutizeMediaSrc } from '@/utilities/absolutizeMediaSrc'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
 import Image from 'next/image'
 import React, { useEffect, useRef } from 'react'
@@ -26,14 +27,14 @@ export const Video: React.FC<MediaProps> = (props) => {
   if (resource && typeof resource === 'object') {
     const { filename, url } = resource
     let src: string | undefined
-    if (url?.startsWith('http://') || url?.startsWith('https://')) {
-      src = url
-    } else if (url?.trim()) {
-      const base = process.env.NEXT_PUBLIC_SERVER_URL || ''
-      src = `${base.replace(/\/$/, '')}${url.startsWith('/') ? url : `/${url}`}`
+    if (url?.trim()) {
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        src = url
+      } else {
+        src = absolutizeMediaSrc(url)
+      }
     } else if (filename) {
-      const base = process.env.NEXT_PUBLIC_SERVER_URL || ''
-      src = `${base.replace(/\/$/, '')}/media/${filename}`
+      src = absolutizeMediaSrc(`/api/media/file/${encodeURIComponent(filename)}`)
     }
 
     if (!src?.trim()) {
