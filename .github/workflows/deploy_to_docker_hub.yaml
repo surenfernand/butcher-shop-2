@@ -55,8 +55,8 @@ jobs:
           # platforms: linux/amd64,linux/arm64 # commented out linux/amd64 to speed up the build process since we only need ARM images for ARM servers. If you want to support both architectures, uncomment this line.
           platforms: linux/amd64
           tags: |
-            ${{ secrets.DH_REGISTRY }}/butchers1:${{ env.TAG }}
-            ${{ secrets.DH_REGISTRY }}/butchers1:latest
+            ${{ secrets.DH_REGISTRY }}/butchers2:${{ env.TAG }}
+            ${{ secrets.DH_REGISTRY }}/butchers2:latest
           build-args: |
             NEXT_PUBLIC_SERVER_URL=${{ vars.NEXT_PUBLIC_SERVER_URL }}
             NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ vars.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
