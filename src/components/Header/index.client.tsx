@@ -33,16 +33,18 @@ export function HeaderClient({ header }: Props) {
 
           <div className="flex min-w-0 flex-1 items-center md:max-w-[200px]">
             <Link href="/" className="flex min-w-0 items-center">
-              {header.logo && typeof header.logo === 'object' ? (
+              {/* {header.logo && typeof header.logo === 'object' ? (
                 <Media
                   resource={header.logo}
                   imgClassName="h-12 w-auto max-w-[200px] object-contain object-left md:h-14"
                 />
               ) : (
-                <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#e65c43]">
-                  The Butcher's Craft
-                </span>
-              )}
+          
+              )} */}
+
+              <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#e65c43]">
+                The Butcher's Craft
+              </span>
             </Link>
           </div>
 
