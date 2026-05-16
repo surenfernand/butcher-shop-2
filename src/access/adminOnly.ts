@@ -1,9 +1,9 @@
 import type { Access } from 'payload'
 
-import { isAdminPrincipal } from '@/access/utilities'
+import { checkRole } from '@/access/utilities'
 
 export const adminOnly: Access = ({ req: { user } }) => {
-  if (user) return isAdminPrincipal(user)
+  if (user) return checkRole(['admin'], user)
 
   return false
 }

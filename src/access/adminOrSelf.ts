@@ -1,6 +1,6 @@
 import type { Access } from 'payload'
 
-import { isAdminPrincipal } from '@/access/utilities'
+import { checkRole } from '@/access/utilities'
 
 /**
  * The ID of the document matches that of the user or the user is an admin.
@@ -8,11 +8,17 @@ import { isAdminPrincipal } from '@/access/utilities'
  * Useful to allow users to manage their own account, but not others.
  */
 export const adminOrSelf: Access = ({ req: { user } }) => {
-  if (!user) return false
-  if (isAdminPrincipal(user)) return true
-  return {
-    id: {
-      equals: user.id,
-    },
+  if (user) {
+    if (checkRole(['admin'], user)) {
+      return true
+    }
+
+    return {
+      id: {
+        equals: user.id,
+      },
+    }
   }
+
+  return false
 }

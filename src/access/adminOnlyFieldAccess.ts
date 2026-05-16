@@ -1,9 +1,9 @@
 import type { FieldAccess } from 'payload'
 
-import { isAdminPrincipal } from '@/access/utilities'
+import { checkRole } from '@/access/utilities'
 
 export const adminOnlyFieldAccess: FieldAccess = ({ req: { user } }) => {
-  if (user) return isAdminPrincipal(user)
+  if (user) return checkRole(['admin'], user)
 
   return false
 }

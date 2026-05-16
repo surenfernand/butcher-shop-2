@@ -1,29 +1,26 @@
 import type { CollectionConfig } from 'payload'
 
 import { adminOnly } from '@/access/adminOnly'
-import { adminOnlyFieldAccessUsers } from '@/access/adminOnlyFieldAccessUsers'
+import { adminOnlyFieldAccess } from '@/access/adminOnlyFieldAccess'
 import { publicAccess } from '@/access/publicAccess'
 import { adminOrSelf } from '@/access/adminOrSelf'
-import { adminOrSelfOrBootstrapAdminRole } from '@/access/adminOrSelfOrBootstrapAdminRole'
-import { rolesFieldBootstrapOrAdmin } from '@/access/rolesFieldBootstrapOrAdmin'
-import { isAdminPrincipal } from '@/access/utilities'
+import { checkRole } from '@/access/utilities'
 
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    admin: ({ req: { user } }) => isAdminPrincipal(user),
+    admin: ({ req: { user } }) => checkRole(['admin'], user),
     create: publicAccess,
     delete: adminOnly,
     read: adminOrSelf,
     unlock: adminOnly,
-    update: adminOrSelfOrBootstrapAdminRole,
+    update: adminOrSelf,
   },
   admin: {
-    group: 'Users', 
-    defaultColumns: ['email', 'name', 'roles'],
-    // For auth collections Payload only skips `useAsTitle` validation when it is `email`.
+    group: 'Users',
+    defaultColumns: ['name', 'email', 'roles'],
     useAsTitle: 'email',
   },
   auth: {
@@ -33,18 +30,14 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
-      label: 'Name',
-      admin: {
-        description: 'Shown in the admin sidebar and account UI when set.',
-      },
     },
     {
       name: 'roles',
       type: 'select',
       access: {
-        create: rolesFieldBootstrapOrAdmin,
-        read: adminOnlyFieldAccessUsers,
-        update: rolesFieldBootstrapOrAdmin,
+        create: adminOnlyFieldAccess,
+        read: adminOnlyFieldAccess,
+        update: adminOnlyFieldAccess,
       },
       defaultValue: ['customer'],
       hasMany: true,
