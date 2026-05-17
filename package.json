@@ -9,7 +9,8 @@
     "@/*": "./src/*"
   },
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "build": "next build",
+    "build:local": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && npm run build && npm run start",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
@@ -18,10 +19,11 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "lint:fix": "cross-env NODE_OPTIONS=--no-deprecation eslint . --fix",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
+    "migrate": "payload migrate",
     "migrate:page-blocks": "tsx scripts/apply-page-blocks-migration.mts",
     "reinstall": "cross-env NODE_OPTIONS=--no-deprecation rm -rf node_modules && rm -f package-lock.json && npm install",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "start": "next start",
+    "start:prod": "npm run migrate && npm run start",
     "stripe-webhooks": "stripe listen --forward-to localhost:3000/api/payments/stripe/webhooks",
     "test": "npm run test:int && npm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",

@@ -1,0 +1,13 @@
+# https://render.com/docs/blueprint-spec
+# Connect this repo as a Blueprint, or mirror these settings in the Render dashboard.
+services:
+  - type: web
+    name: butcher-shop-2
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
+      - key: NODE_OPTIONS
+        value: --no-deprecation --max-old-space-size=8000

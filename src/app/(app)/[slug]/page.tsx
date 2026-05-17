@@ -72,6 +72,11 @@ function isLayoutEmpty(layout: Page['layout'] | null | undefined): boolean {
   return !layout || !Array.isArray(layout) || layout.length === 0
 }
 
+/** Browsers and bots request these via catch-all; they are not CMS pages. */
+function isStaticAssetSlug(slug: string): boolean {
+  return /\.(ico|png|jpe?g|gif|svg|webp|txt|xml|json|js|css|map|woff2?|ttf)$/i.test(slug)
+}
+
 /** CMS page exists but has no blocks — use seed/static layout so the page is not blank. */
 function mergeStaticLayoutIfEmpty(page: Page | null, slug: string): Page | null {
   if (!page) return null
@@ -92,6 +97,10 @@ function mergeStaticLayoutIfEmpty(page: Page | null, slug: string): Page | null 
 export default async function Page({ params, searchParams }: Args) {
   const { slug = 'home' } = await params
   const resolvedSearchParams = await searchParams
+
+  if (isStaticAssetSlug(slug)) {
+    notFound()
+  }
 
   const url = '/' + slug
 
@@ -138,6 +147,10 @@ export default async function Page({ params, searchParams }: Args) {
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { slug = 'home' } = await params
+
+  if (isStaticAssetSlug(slug)) {
+    return {}
+  }
 
   let page = await queryPageBySlug({
     slug,
