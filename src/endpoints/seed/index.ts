@@ -42,7 +42,7 @@ const colorVariantOptions = [
   { label: 'White', value: 'white' },
 ]
 
-const globals: GlobalSlug[] = ['header', 'footer']
+const globals: GlobalSlug[] = ['header', 'footer', 'newsletter-promo']
 
 const baseAddressUSData: Transaction['billingAddress'] = {
   title: 'Dr.',
@@ -621,7 +621,33 @@ export const seed = async ({
       context: {
         disableRevalidate: true,
       },
-    })
+    }),
+    payload.updateGlobal({
+      slug: 'newsletter-promo',
+      data: {
+        enabled: true,
+        heading: 'Mastery In Your Inbox.',
+        description:
+          'Join our inner circle for exclusive access to vintage reserves, masterclass invites, and seasonal provenance reports.',
+        emailPlaceholder: 'YOUR EMAIL ADDRESS',
+        submitButtonLabel: 'SUBSCRIBE TO CRAFT',
+        successMessage: "Thank you — you're on the list.",
+        imageAlt: "Butcher's cleaver and sharpening steel on a wooden surface",
+        grayscaleImage: true,
+        sectionBackground: '#141414',
+        headingColor: '#f8f6f3',
+        bodyTextColor: '#e3ded9',
+        inputTextColor: '#f6f3ef',
+        placement: {
+          showOnHome: true,
+          insertAfterBlocks: ['infoSection', 'aboutStory'],
+        },
+      },
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+    }),
   ])
 
   payload.logger.info('Seeded database successfully!')

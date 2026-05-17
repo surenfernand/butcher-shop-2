@@ -27,6 +27,7 @@ import { Flavors } from './collections/ProductCategories/Flavors'
 import { MeatTypes } from './collections/ProductCategories/MeatTypes'
 import { Qualities } from './collections/ProductCategories/Qualities'
 import { CartSettings } from './globals/CartSettings'
+import { NewsletterPromo } from './globals/NewsletterPromo'
 import { ShopLuxuryPage } from './globals/ShopLuxuryPage'
 import { plugins } from './plugins'
 
@@ -102,7 +103,7 @@ export default buildConfig({
   }),
   //email: nodemailerAdapter(),
   endpoints: [],
-  globals: [Header, Footer, ShopPage, ShopLuxuryPage, CartSettings],
+  globals: [Header, Footer, ShopPage, ShopLuxuryPage, CartSettings, NewsletterPromo],
   // S3 (when configured) lives in `./plugins` only — avoids duplicate plugins and empty-env crashes on hosts like Render.
   plugins,
   secret: process.env.PAYLOAD_SECRET || '',

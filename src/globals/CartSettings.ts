@@ -1,5 +1,5 @@
 import type { GlobalConfig } from 'payload'
-import { adminOnly } from '@/access/adminOnly'
+import { adminOnly } from '@/utilities/access'
 
 export const CartSettings: GlobalConfig = {
   slug: 'cart-settings',

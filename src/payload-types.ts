@@ -150,6 +150,7 @@ export interface Config {
     'shop-page': ShopPage;
     'shop-luxury-page': ShopLuxuryPage;
     'cart-settings': CartSetting;
+    'newsletter-promo': NewsletterPromo;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -157,6 +158,7 @@ export interface Config {
     'shop-page': ShopPageSelect<false> | ShopPageSelect<true>;
     'shop-luxury-page': ShopLuxuryPageSelect<false> | ShopLuxuryPageSelect<true>;
     'cart-settings': CartSettingsSelect<false> | CartSettingsSelect<true>;
+    'newsletter-promo': NewsletterPromoSelect<false> | NewsletterPromoSelect<true>;
   };
   locale: null;
   widgets: {
@@ -208,9 +210,6 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  /**
-   * Shown in the admin sidebar and account UI when set.
-   */
   name?: string | null;
   roles?: ('admin' | 'customer')[] | null;
   orders?: {
@@ -3068,6 +3067,46 @@ export interface CartSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-promo".
+ */
+export interface NewsletterPromo {
+  id: number;
+  /**
+   * Show the newsletter promo section on the storefront.
+   */
+  enabled?: boolean | null;
+  heading: string;
+  description: string;
+  emailPlaceholder?: string | null;
+  submitButtonLabel?: string | null;
+  successMessage?: string | null;
+  /**
+   * Right-side promo image. Falls back to the default cleaver image if empty.
+   */
+  image?: (number | null) | Media;
+  imageAlt?: string | null;
+  grayscaleImage?: boolean | null;
+  sectionBackground?: string | null;
+  headingColor?: string | null;
+  bodyTextColor?: string | null;
+  inputTextColor?: string | null;
+  placement?: {
+    /**
+     * Display this section on the home page.
+     */
+    showOnHome?: boolean | null;
+    /**
+     * The promo is inserted after the first matching block on the home page layout.
+     */
+    insertAfterBlocks?:
+      | ('infoSection' | 'aboutStory' | 'featuredCuts' | 'homeTestimonialShowcase' | 'artisansPromise' | 'carousel')[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3190,6 +3229,34 @@ export interface CartSettingsSelect<T extends boolean = true> {
   confirmButtonLabel?: T;
   extendButtonLabel?: T;
   footerText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-promo_select".
+ */
+export interface NewsletterPromoSelect<T extends boolean = true> {
+  enabled?: T;
+  heading?: T;
+  description?: T;
+  emailPlaceholder?: T;
+  submitButtonLabel?: T;
+  successMessage?: T;
+  image?: T;
+  imageAlt?: T;
+  grayscaleImage?: T;
+  sectionBackground?: T;
+  headingColor?: T;
+  bodyTextColor?: T;
+  inputTextColor?: T;
+  placement?:
+    | T
+    | {
+        showOnHome?: T;
+        insertAfterBlocks?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

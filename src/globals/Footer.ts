@@ -1,7 +1,7 @@
 // src/globals/Footer.ts
 
 import type { GlobalConfig } from 'payload'
-import { adminOnly } from '@/access/adminOnly'
+import { adminOnly } from '@/utilities/access'
 import { link } from '@/fields/link'
 
 export const Footer: GlobalConfig = {

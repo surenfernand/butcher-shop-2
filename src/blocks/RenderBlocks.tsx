@@ -18,7 +18,7 @@ import React, { Fragment } from 'react'
 import { ProductGridBlock } from '@/blocks/ProductGrid/Component'
 import type { ComponentType } from 'react'
 import { MonthlyMenuPromo } from '@/components/home/MonthlyMenuPromo'
-
+import { getCachedGlobal } from '@/utilities/getGlobals'
 
 import type { Page } from '../payload-types'
 import { ContactPageBlock } from './ContactPage/Component'
@@ -53,22 +53,34 @@ const blockComponents: Record<string, ComponentType<any>> = {
   homeTestimonialShowcase: HomeTestimonialShowcaseBlock,
 }
 
-
-
 type SearchParams = { [key: string]: string | string[] | undefined }
 
-export const RenderBlocks: React.FC<{
+export async function RenderBlocks(props: {
   blocks: Page['layout'][0][]
   searchParams?: SearchParams
   slug?: string
-}> = (props) => {
+}) {
   const { blocks, searchParams, slug } = props
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
   if (hasBlocks) {
-    const promoAnchorTypes = new Set(['infoSection', 'aboutStory'])
-    const firstPromoAnchorIndex = blocks.findIndex((b) => b.blockType && promoAnchorTypes.has(b.blockType))
+    const newsletterPromo =
+      slug === 'home' ? await getCachedGlobal('newsletter-promo', 1)() : null
+
+    const promoEnabled = Boolean(
+      newsletterPromo?.enabled && newsletterPromo?.placement?.showOnHome !== false,
+    )
+
+    const anchorTypes = new Set(
+      newsletterPromo?.placement?.insertAfterBlocks?.length
+        ? newsletterPromo.placement.insertAfterBlocks
+        : ['infoSection', 'aboutStory'],
+    )
+
+    const firstPromoAnchorIndex = blocks.findIndex(
+      (b) => b.blockType && anchorTypes.has(b.blockType),
+    )
 
     return (
       <Fragment>
@@ -76,13 +88,14 @@ export const RenderBlocks: React.FC<{
           const { blockName, blockType } = block
 
           if (blockType && blockType in blockComponents) {
-         
-
             const Block = blockComponents[blockType]
 
             if (Block) {
               const insertPromoAfter =
-                slug === 'home' && firstPromoAnchorIndex !== -1 && index === firstPromoAnchorIndex
+                slug === 'home' &&
+                promoEnabled &&
+                firstPromoAnchorIndex !== -1 &&
+                index === firstPromoAnchorIndex
 
               return (
                 <div className="" key={index}>
@@ -93,7 +106,7 @@ export const RenderBlocks: React.FC<{
                     searchParams={searchParams}
                     {...block}
                   />
-                  {insertPromoAfter ? <MonthlyMenuPromo /> : null}
+                  {insertPromoAfter ? <MonthlyMenuPromo data={newsletterPromo} /> : null}
                 </div>
               )
             }
@@ -107,3 +120,4 @@ export const RenderBlocks: React.FC<{
 
   return null
 }
+

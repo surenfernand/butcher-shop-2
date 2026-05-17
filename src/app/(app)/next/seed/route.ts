@@ -3,7 +3,7 @@ import { seed } from '@/endpoints/seed'
 import config from '@payload-config'
 import { headers } from 'next/headers'
 
-import { checkRole } from '@/access/utilities'
+import { checkRole } from '@/utilities/access'
 
 export const maxDuration = 300 // This function can run for a maximum of 300 seconds
 

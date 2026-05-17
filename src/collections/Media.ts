@@ -5,7 +5,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-import { adminOnly } from '@/access/adminOnly'
+import { adminOnly } from '@/utilities/access'
 import { deployHostUsesEphemeralDisk, isS3StorageConfigured } from '@/utilities/isS3StorageConfigured'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
 
@@ -63,6 +63,21 @@ export const Media: CollectionConfig = {
           rawUrl.startsWith('/') &&
           noS3 &&
           deployHostUsesEphemeralDisk() &&
+          process.env.MEDIA_KEEP_LOCAL_URLS !== 'true'
+        ) {
+          applyUnsplash()
+        }
+
+        // S3 enabled but DB still has `/api/media/file/...` rows whose objects were never
+        // uploaded to the bucket (common after enabling S3 on an existing project).
+        const placeholderForStaleLocalUrls =
+          process.env.MEDIA_USE_PLACEHOLDER_ON_LOCAL_URLS === 'true' ||
+          (process.env.NODE_ENV === 'development' && isS3StorageConfigured())
+
+        if (
+          rawUrl &&
+          rawUrl.startsWith('/api/media/file/') &&
+          placeholderForStaleLocalUrls &&
           process.env.MEDIA_KEEP_LOCAL_URLS !== 'true'
         ) {
           applyUnsplash()

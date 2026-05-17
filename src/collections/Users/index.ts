@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
-import { adminOnly } from '@/access/adminOnly'
-import { adminOnlyFieldAccess } from '@/access/adminOnlyFieldAccess'
-import { publicAccess } from '@/access/publicAccess'
-import { adminOrSelf } from '@/access/adminOrSelf'
-import { checkRole } from '@/access/utilities'
+import {
+  adminOnly,
+  adminOnlyFieldAccess,
+  adminOrSelf,
+  checkRole,
+  publicAccess,
+} from '@/utilities/access'
 
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 

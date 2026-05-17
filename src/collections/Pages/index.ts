@@ -11,7 +11,7 @@ import { ContactCards } from '@/blocks/ContactCards/config'
 import { VisitSection } from '@/blocks/VisitSection/config'
 import { SocialLinks } from '@/blocks/SocialLinks/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { adminOnly } from '@/access/adminOnly'
+import { adminOnly } from '@/utilities/access'
 import { Archive } from '@/blocks/ArchiveBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
@@ -20,7 +20,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { ProductGrid } from '@/blocks/ProductGrid/config'
 import { hero } from '@/fields/hero'
 import { slugField } from 'payload'
-import { adminOrPublishedStatus } from '@/access/adminOrPublishedStatus'
+import { adminOrPublishedStatus } from '@/utilities/access'
 import {
   MetaDescriptionField,
   MetaImageField,

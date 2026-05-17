@@ -4,10 +4,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-model pages_v {
+model pages_v { 
   id                                         Int                                        @id @default(dbgenerated("nextval('_pages_v_id_seq'::regclass)"))
   parent_id                                  Int?
   version_title                              String?                                    @db.VarChar

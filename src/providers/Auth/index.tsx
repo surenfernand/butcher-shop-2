@@ -2,6 +2,7 @@
 
 import type { User } from '@/payload-types'
 
+import { getClientSideURL } from '@/utilities/getURL'
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 // eslint-disable-next-line no-unused-vars
@@ -118,7 +119,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/me`, {
+        const res = await fetch(`${getClientSideURL()}/api/users/me`, {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
@@ -129,13 +130,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (res.ok) {
           const { user: meUser } = await res.json()
           setUser(meUser || null)
-          setStatus(meUser ? 'loggedIn' : undefined)
-        } else {
-          throw new Error('An error occurred while fetching your account.')
+          setStatus(meUser ? 'loggedIn' : 'loggedOut')
+          return
         }
-      } catch (e) {
+
+        if (res.status === 401) {
+          setUser(null)
+          setStatus('loggedOut')
+          return
+        }
+
         setUser(null)
-        throw new Error('An error occurred while fetching your account.')
+        setStatus(undefined)
+      } catch {
+        // API route may still be compiling on first load — treat as logged out, don't crash
+        setUser(null)
+        setStatus(undefined)
       }
     }
 
