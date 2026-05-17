@@ -1,6 +1,6 @@
 import type { DefaultDocumentIDType } from 'payload'
 import type { Media } from '@/payload-types'
-import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -27,7 +27,7 @@ export const AboutStoryBlock: React.FC<Props> = ({
 }) => {
   const media = typeof image === 'object' && image ? image : null
   const displaySrc =
-    media?.url?.trim() || placeholderImageUrl(title || 'about-story', 'story')
+    resolveMediaDisplayUrl(media?.url, title || 'about-story', 'story')
 
   return (
     <section className={['mx-auto max-w-[1280px] px-8 py-20', className].filter(Boolean).join(' ')}>

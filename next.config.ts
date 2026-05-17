@@ -9,6 +9,17 @@ import { redirects } from './redirects'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
+function customS3RemotePatterns(): { protocol: 'https'; hostname: string; pathname: string }[] {
+  const endpoint = process.env.S3_ENDPOINT?.trim()
+  if (!endpoint) return []
+  try {
+    const { hostname } = new URL(endpoint)
+    return [{ protocol: 'https', hostname, pathname: '/**' }]
+  } catch {
+    return []
+  }
+}
+
 const nextConfig: NextConfig = {
   env: {
     // Inlined for client bundles; plugin sign-up falls back when unset. Prefer matching how you open the site (localhost vs 127.0.0.1).
@@ -40,6 +51,7 @@ const nextConfig: NextConfig = {
         hostname: 'images.pexels.com',
         pathname: '/**',
       },
+      ...customS3RemotePatterns(),
       ...(process.env.S3_BUCKET && process.env.S3_REGION
         ? [
             {

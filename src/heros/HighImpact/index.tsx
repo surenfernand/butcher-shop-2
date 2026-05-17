@@ -4,6 +4,7 @@ import type { Header, Page } from '@/payload-types'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import { cn } from '@/utilities/cn'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
@@ -52,7 +53,11 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
   const isVideo = media && typeof media === 'object' && media.mimeType?.startsWith('video')
 
-  const imageSrc = mediaUrl || placeholderImageUrl(pageSlug || 'high-impact-hero', 'hero')
+  const imageSrc = resolveMediaDisplayUrl(
+    mediaUrl,
+    pageSlug || 'high-impact-hero',
+    'hero',
+  )
   const imageAlt =
     (media && typeof media === 'object' && media.alt) || 'Premium marbled steak on a dark surface'
 

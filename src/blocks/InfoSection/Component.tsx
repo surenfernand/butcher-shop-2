@@ -1,5 +1,5 @@
 import type { InfoSectionBlock as InfoSectionBlockProps, Media } from '@/payload-types'
-import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { DefaultDocumentIDType } from 'payload'
@@ -21,8 +21,7 @@ export const InfoSectionBlock: React.FC<Props> = ({
   className,
 }) => {
   const media = image as Media | undefined
-  const displaySrc =
-    media?.url?.trim() || placeholderImageUrl(title || 'info-section', 'info')
+  const displaySrc = resolveMediaDisplayUrl(media?.url, title || 'info-section', 'info')
 
   return (
     <section className={['py-20', className].filter(Boolean).join(' ')}>

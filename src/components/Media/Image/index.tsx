@@ -4,6 +4,7 @@ import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/cn'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import NextImage from 'next/image'
 import React from 'react'
 
@@ -35,22 +36,6 @@ export const Image: React.FC<MediaProps> = (props) => {
   let alt = altFromProps
   let resolvedSrc: StaticImageData | string = srcFromProps || ''
 
-  if (!resolvedSrc && resource && typeof resource === 'object') {
-    const {
-      alt: altFromResource,
-      filename: fullFilename,
-      height: fullHeight,
-      url,
-      width: fullWidth,
-    } = resource
-
-    width = widthFromProps ?? fullWidth
-    height = heightFromProps ?? fullHeight
-    alt = altFromResource
-
-    resolvedSrc = url?.startsWith('http') ? url : url || ''
-  }
-
   const seed =
     (typeof alt === 'string' && alt) ||
     (resource &&
@@ -60,6 +45,21 @@ export const Image: React.FC<MediaProps> = (props) => {
     resource.id !== undefined &&
     String(resource.id)) ||
     'media'
+
+  if (!resolvedSrc && resource && typeof resource === 'object') {
+    const {
+      alt: altFromResource,
+      height: fullHeight,
+      url,
+      width: fullWidth,
+    } = resource
+
+    width = widthFromProps ?? fullWidth
+    height = heightFromProps ?? fullHeight
+    alt = altFromResource
+
+    resolvedSrc = resolveMediaDisplayUrl(url, seed, 'meat')
+  }
 
   let usedPlaceholder = false
   if (typeof resolvedSrc === 'string' && !resolvedSrc.trim()) {

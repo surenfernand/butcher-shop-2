@@ -43,41 +43,37 @@ export const Media: CollectionConfig = {
         if (mime.startsWith('video/')) return doc
 
         const rawUrl = 'url' in doc && typeof doc.url === 'string' ? doc.url.trim() : ''
-        const noS3 = !isS3StorageConfigured()
         const seed = placeholderSeed(doc)
 
         const applyUnsplash = () => {
           ;(doc as { url?: string }).url = placeholderImageUrl(seed, 'meat')
         }
 
-        // Missing URL while not on S3 — e.g. draft / partial CMS rows
-        if (!rawUrl && noS3) {
+        const isLocalMediaApi =
+          rawUrl.startsWith('/api/media/file/') || rawUrl.startsWith('/api/media/')
+
+        // Missing URL — partial CMS rows
+        if (!rawUrl && !isS3StorageConfigured()) {
           applyUnsplash()
           return doc
         }
 
-        // On Render/Vercel/Railway prod without S3, `/api/media/...` usually 404s
-        // (ephemeral disk). Swap to stable online images so the storefront works.
+        // On Render/Vercel: local disk paths 404 (files never deployed or not in S3 yet).
         if (
-          rawUrl &&
-          rawUrl.startsWith('/') &&
-          noS3 &&
+          isLocalMediaApi &&
           deployHostUsesEphemeralDisk() &&
           process.env.MEDIA_KEEP_LOCAL_URLS !== 'true'
         ) {
           applyUnsplash()
+          return doc
         }
 
-        // S3 enabled but DB still has `/api/media/file/...` rows whose objects were never
-        // uploaded to the bucket (common after enabling S3 on an existing project).
-        const placeholderForStaleLocalUrls =
-          process.env.MEDIA_USE_PLACEHOLDER_ON_LOCAL_URLS === 'true' ||
-          (process.env.NODE_ENV === 'development' && isS3StorageConfigured())
-
+        // S3 enabled locally but DB still has `/api/media/file/...` (not migrated to bucket).
         if (
-          rawUrl &&
-          rawUrl.startsWith('/api/media/file/') &&
-          placeholderForStaleLocalUrls &&
+          isLocalMediaApi &&
+          isS3StorageConfigured() &&
+          (process.env.MEDIA_USE_PLACEHOLDER_ON_LOCAL_URLS === 'true' ||
+            process.env.NODE_ENV === 'development') &&
           process.env.MEDIA_KEEP_LOCAL_URLS !== 'true'
         ) {
           applyUnsplash()

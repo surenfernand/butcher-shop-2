@@ -1,6 +1,7 @@
 'use client'
 
 import type { Media, NewsletterPromo } from '@/payload-types'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -33,9 +34,11 @@ export const MonthlyMenuPromoClient: React.FC<Props> = ({ promo }) => {
   } = promo
 
   const media = toMedia(image)
-  const imageSrc = media?.url?.trim() || DEFAULT_IMAGE
   const imageAltText =
     imageAlt?.trim() || media?.alt?.trim() || "Butcher's cleaver and sharpening steel on a wooden surface"
+  const imageSrc = media?.url?.trim()
+    ? resolveMediaDisplayUrl(media.url, imageAltText, 'meat')
+    : DEFAULT_IMAGE
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

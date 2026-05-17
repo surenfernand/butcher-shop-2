@@ -11,3 +11,5 @@ services:
         value: 22.11.0
       - key: NODE_OPTIONS
         value: --no-deprecation --max-old-space-size=8000
+      # Neon/libpq SSL warning — append to DATABASE_URL if not already present:
+      # ?sslmode=require&uselibpqcompat=true

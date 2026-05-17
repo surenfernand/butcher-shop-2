@@ -2,6 +2,7 @@
 
 import type { Media } from '@/payload-types'
 import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import Image from 'next/image'
 import React, { useMemo, useState } from 'react'
@@ -27,7 +28,7 @@ const toMedia = (value?: Upload) =>
 
 const mediaUrl = (value?: Upload) => {
   const media = toMedia(value)
-  return media?.url?.trim() || ''
+  return resolveMediaDisplayUrl(media?.url, 'testimonial-media', 'portrait')
 }
 
 export const HomeTestimonialShowcaseBlock: React.FC<Props> = ({

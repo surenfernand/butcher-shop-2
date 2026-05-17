@@ -1,6 +1,6 @@
 import type { FeaturedCutsBlock as FeaturedCutsBlockProps } from '@/payload-types'
 import type { DefaultDocumentIDType } from 'payload'
-import { placeholderImageUrl } from '@/utilities/placeholderImage'
+import { resolveMediaDisplayUrl } from '@/utilities/resolveMediaDisplayUrl'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -49,7 +49,7 @@ export const FeaturedCutsBlock: React.FC<Props> = ({
             const media =
               typeof item.image === 'object' && item.image !== null ? item.image : undefined
             const displaySrc =
-              media?.url?.trim() || placeholderImageUrl(item.name || `featured-${index}`, 'meat')
+              resolveMediaDisplayUrl(media?.url, item.name || `featured-${index}`, 'meat')
 
             const p = item.product
             const productSlug =
