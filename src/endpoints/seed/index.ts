@@ -156,8 +156,6 @@ export const seed = async ({
       data: {
         name: 'Customer',
         email: 'customer@example.com',
-        emailVerified: true,
-        role: 'customer',
         roles: ['customer'],
       },
     }),

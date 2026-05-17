@@ -29,8 +29,6 @@ export async function seedTestUser(): Promise<void> {
   // Create fresh test user with Payload auth (email + password).
   const data: SeedUserCreate = {
     email: testUser.email,
-    emailVerified: true,
-    role: 'admin',
     roles: ['admin'],
     password: testUser.password,
   }
